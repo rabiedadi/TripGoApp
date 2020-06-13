@@ -19,7 +19,13 @@ import {authReducer} from './store/reducers/auth.reducers';
 import {ToastrModule} from 'ngx-toastr';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faUsers, faBedAlt, faCalendarAlt, faChevronDown } from '@fortawesome/pro-light-svg-icons';
+import {
+    faUsers, faBedAlt, faCalendarAlt, faChevronDown, faWifi, faShuttleVan, faSmokingBan, faBath, faSwimmer,
+    faHatChef, faEnvelopeOpenText, faConciergeBell, faVectorSquare, faWindowFrameOpen, faShower, faLampDesk,
+    faUserTie, faGifts, faPlus, faBookmark as falBookmark } from '@fortawesome/pro-light-svg-icons';
+import { faBadgeCheck } from '@fortawesome/pro-solid-svg-icons';
+import { faMale, faBookmark as fasBookmark, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');

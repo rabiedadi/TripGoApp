@@ -871,7 +871,7 @@
 
   <!-- Tab8 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 "
     id="tab8">
     <!-- Option de paiments ==== -->
     <div class="col-span-4 flex items-center mb-3">
@@ -891,13 +891,15 @@
              class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
              src="assets/icons/arrow-down.png">
       </div>
-      <span class="input-label mt-2">Nous informerons les clients que vous n'acceptez que des espèces</span>
+      <span *ngIf="!payment.cardCharge" class="input-label mt-2">Nous informerons les clients que vous n'acceptez que des espèces</span>
     </div>
-    <div *ngFor="let x of creditCard" class="col-span-4 flex items-center">
-      <mat-checkbox (change)="creditCard_selected($event.checked, x._id)" (focusin)="input_focused($event.target)"
-                    disableRipple></mat-checkbox>
-      <span class="check-box-label ml-4">{{ x.name }}</span>
-    </div>
+    <ng-container *ngIf="payment.cardCharge">
+      <div *ngFor="let x of creditCard" class="col-span-4 flex items-center">
+        <mat-checkbox (change)="creditCard_selected($event.checked, x._id)" (focusin)="input_focused($event.target)"
+                      disableRipple></mat-checkbox>
+        <span class="check-box-label ml-4">{{ x.name }}</span>
+      </div>
+    </ng-container>
     <!-- Commission ==== -->
     <div class="col-span-4 flex items-center mb-3">
       <span class="section-label">Commission</span>

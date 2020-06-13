@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProfileService} from '../services/profile.service';
-import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-verify-email',
