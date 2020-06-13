@@ -106,14 +106,14 @@ module.exports = {
 
 
     getAllExtraBedsFor: function(req, res, next){
-        extraBedForModel.find({language: req.params.language}, null, {sort:{reference: 1 }}, function (err, extraBedsFor) {
+        extraBedForModel.find({language: req.params.language}, null, {sort:{range: 1 }}, function (err, extraBedsFor) {
             if (err){
                 err.status = 400;
                 err.message = 'Bad request';
                 err.path = 'options => getAllExtraBedsFor';
                 next(err);
             }else {
-                res.status(200).json(extraBedsFor);
+                res.status(200).json(extraBedsFor)
             }
         });
     },
@@ -517,9 +517,9 @@ module.exports = {
         breakfastOptionsModel.create({name:"NON, n'est pas inclus dans le prix", language: "FR", reference:"NO, is not included in the price"}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
         breakfastOptionsModel.create({name:"N'est pas disponible", language: "FR", reference:"Is not available"}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
 
-        extraBedForModel.create({name:"Enfant jusqu'à 2 ans dans des berceaux", language:  "FR", reference:"Child up to 2 years old in cradles"}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
-        extraBedForModel.create({name:"Enfants", language:  "FR", reference:"Children"}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
-        extraBedForModel.create({name:"Adults", language:  "FR", reference:"Adults"}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
+        extraBedForModel.create({name:"Enfant jusqu'à 2 ans dans des berceaux", language:  "FR", reference:"Child up to 2 years old in cradles", range: 1}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
+        extraBedForModel.create({name:"Enfants", language:  "FR", reference:"Children", range: 2}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
+        extraBedForModel.create({name:"Adults", language:  "FR", reference:"Adults", range: 3}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
 
         otherEquipmentModel.create({name: "Climatisation", language: "FR", reference:"Air conditioner"}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});
         otherEquipmentModel.create({name: "Ecran TV Plat", language: "FR", reference:"Plasma TV"}, function (err, result) {if (err) console.log(err); else translationModel.create({name: result.reference, trans: result.name, language: result.language}, function (err, result) {});});

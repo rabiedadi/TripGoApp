@@ -16,6 +16,10 @@ const ExtraBedFor = new Schema({
         type: String,
         trim: true,
         required: true
+    },
+    range: {
+        type: Number,
+        required: true
     }
 });
 

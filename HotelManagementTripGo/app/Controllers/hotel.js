@@ -89,6 +89,7 @@ module.exports = {
                 next(resError);
             }else {
                 res.status(200).json(hotels);
+                console.log(hotels)
             }
         });
     },
