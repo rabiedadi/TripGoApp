@@ -1,0 +1,21 @@
+GET*
+http://127.0.0.1:3003/establishment
+
+
+    res
+    [
+        {
+            "globalNote": 5,
+            "offersNumber": 0,
+            "roomsNumber": 0,
+            "_id": "5ea76edae69cf6075cff6cfc",
+            "name": "Ibis",
+            "province": "alger",
+            "starsNumber": 4,
+            "type": "hotel"
+        }
+    ]
+    (globalNote may not exists if the hotel is new)
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10]

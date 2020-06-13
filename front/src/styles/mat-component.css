@@ -1,0 +1,225 @@
+/* date picker */
+::ng-deep .mat-input-element {
+  height: 100%;
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+
+::ng-deep .mat-datepicker-toggle > .mat-focus-indicator {
+  display: none;
+}
+
+::ng-deep .mat-datepicker-content {
+  margin-top: 9px;
+  margin-left: -36px;
+}
+
+::ng-deep .my-mat-datepicker {
+  width: 215px !important;
+  height: inherit !important;
+}
+
+/*::ng-deep .mat-datepicker-content-touch {*/
+/*  margin: unset !important;*/
+/*}*/
+
+/* check-box */
+::ng-deep .mat-checkbox-inner-container {
+  height: 20px !important;
+  width: 20px !important;
+}
+
+::ng-deep .mat-checkbox-background, .mat-checkbox-frame {
+  background-color: white !important;
+  border: 1px solid #5B636D !important;
+  border-radius: 0 !important;
+}
+
+::ng-deep .mat-checkbox-checkmark-path {
+  stroke: #0ABF32 !important;
+}
+
+::ng-deep .mat-checkbox-label {
+  font-family: Montserrat !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  line-height: 17px !important;
+}
+
+::ng-deep .mat-checkbox-layout {
+  align-items: center !important;
+}
+
+/* select option */
+  ::ng-deep .cdk-overlay-pane {
+  transform: none !important;
+}
+
+::ng-deep .mat-select-panel {
+  min-width: 100% !important;
+  /*animation-name: hide-hanging  !important;*/
+  /*animation-duration: 0.4s !important; !* to hide min-with change hanging *!*/
+  border-radius: 0 !important;
+}
+
+@keyframes hide-hanging {
+  0%, 25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+::ng-deep .mat-select-arrow-wrapper {
+  display: none !important;
+}
+
+::ng-deep .mat-select-trigger {
+  width: 100%;
+}
+
+::ng-deep .mat-select-panel,
+::ng-deep .mat-datepicker-content {
+  border-radius: 0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+}
+
+::ng-deep .mat-select-value {
+  max-width: 100% !important;
+}
+
+::ng-deep .mat-input-element::placeholder,
+::ng-deep .mat-input-element,
+::ng-deep .mat-select-placeholder,
+::ng-deep .mat-select-value-text > span {
+  color: #5B636D !important;
+  outline: none;
+}
+
+::ng-deep .mat-option {
+  height: 35px !important;
+  line-height: 35px !important;
+}
+
+::ng-deep .mat-option-text {
+  font-size: 12px !important;
+  color: #5B636D !important;
+}
+/* slide toggle */
+::ng-deep .mat-slide-toggle-bar {
+  height: 19px !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  border: 1px solid #5B636D !important;
+}
+::ng-deep [class^='mat-slide-toggle-thumb'] {
+  height: 15px !important;
+  width: 15px !important;
+}
+::ng-deep .mat-slide-toggle-thumb-container {
+  top: 1px !important;
+  left: 2px !important;
+}
+::ng-deep .mat-slide-toggle-thumb {
+  box-shadow: unset !important;
+  background-color: #5B636D !important;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  border-color: #63B72C;
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #63B72C !important;
+}
+
+/* radio */
+::ng-deep .mat-radio-inner-circle {
+  border-radius: 0 !important;
+  height: 24px !important;
+  width: 24px !important;
+  top: -2px !important;
+  left: -2px !important;
+}
+
+::ng-deep .mat-radio-outer-circle {
+  border: 1px solid #5B636D !important;
+  border-radius: 0 !important;
+  background-color: white;
+}
+
+::ng-deep .mat-radio-inner-circle {
+  background-color: #0ABF32 !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #0ABF32 !important;
+}
+
+/* progress bar */
+::ng-deep .mat-progress-bar-secondary,
+::ng-deep .mat-progress-bar-primary {
+  background-color: #2085D7 !important;
+}
+
+/* spinner */
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #2085D7;
+}
+
+/* menu */
+::ng-deep .mat-menu-panel {
+  min-width: unset !important;
+  border-radius: 0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+}
+
+::ng-deep .mat-menu-item {
+  height: 38px !important;
+  line-height: 38px !important;
+}
+
+/*!* dialog *!*/
+/*::ng-deep .mat-dialog-container{*/
+/*  padding: 0 !important;*/
+/*}*/
+
+/* media queries */
+@media (max-width: 480px) {
+  ::ng-deep .mat-select-extra-options {
+    margin-top: 30px;
+  }
+  /*sm*/
+  ::ng-deep #destination *,
+  ::ng-deep #check-in-out *,
+  ::ng-deep #pers-info * {
+    font-size: 12px !important;
+    color: #5B636D !important;
+  }
+}
+
+@media (min-width: 480px) {
+  /*md*/
+  ::ng-deep .mat-select-extra-options {
+    margin-top: 33px;
+  }
+
+}
+
+@media (min-width: 768px) {
+  /*lg*/
+
+
+}
+
+@media (min-width: 1200px) {
+  /*xl*/
+
+}
+
+@media (min-width: 1920px) {
+  /*2xl*/
+
+}

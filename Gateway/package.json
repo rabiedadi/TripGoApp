@@ -1,0 +1,30 @@
+{
+  "name": "gateway",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app/bin/www"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.1.0",
+    "body-parser": "latest",
+    "cookie-parser": "~1.4.4",
+    "count-lines-in-file": "^1.1.0",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-rate-limit": "^5.1.1",
+    "extract-zip": "^2.0.0",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "messagebird": "^3.4.0",
+    "mongoose": "^5.9.10",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "node-schedule": "^1.3.2",
+    "pug": "2.0.0-beta11",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}

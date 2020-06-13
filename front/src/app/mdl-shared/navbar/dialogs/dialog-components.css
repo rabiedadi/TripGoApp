@@ -1,0 +1,170 @@
+.my-input {
+    flex: 1;
+    border: 0;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+}
+
+.my-input::placeholder {
+    font-size: 14px;
+}
+
+/* ||| */
+.menu-button {
+    position: relative;
+    height: 40px;
+    width: 40px;
+}
+
+.menu-button.active ~ .hidden-nav-closer {
+    display: inherit;
+}
+
+.bar {
+    position: absolute;
+    left: 17%;
+    height: 1px;
+    width: 66%;
+    background-color: #5B636D;
+    -webkit-transition: 0.1s ease-in-out, width 0.15s ease-in-out;
+    transition: 0.1s ease-in-out, width 0.15s ease-in-out;
+}
+
+.bar:nth-child(1) {
+    top: 24%;
+}
+
+.bar:nth-child(2) {
+    top: 47%;
+}
+
+.bar:nth-child(3) {
+    top: 47%;
+}
+
+.bar:nth-child(4) {
+    top: 71%;
+}
+
+.menu-button.active .bar:nth-child(1) {
+    width: 0px;
+}
+
+.menu-button.active .bar:nth-child(2) {
+    -webkit-transform: translateX(-50%) rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.menu-button.active .bar:nth-child(3) {
+    -webkit-transform: translateX(-50%) rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.menu-button.active .bar:nth-child(4) {
+    width: 0px;
+}
+
+/* modals */
+[id^="pop-up-"] {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    color: #5B636D;
+}
+
+/* popup1 */
+.active-location-card {
+    background-color: #1485D7 !important;
+    color: white !important;
+}
+
+.location-card {
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+    border-bottom: 4px solid #1485D7;
+    color: #5B636D;
+    cursor: pointer;
+    padding-bottom: 90%; /* to make width relative to height */
+}
+
+.location-card:hover {
+    box-shadow: 0 3px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.location-card-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #F9F9F9;
+}
+
+.location-card-image-holder {
+    display: flex;
+    align-items: center;
+    height: 45%;
+}
+
+.location-card-heading {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.location-card-content {
+    font-weight: 200;
+    font-size: 0.5rem;
+    line-height: initial;
+}
+
+/* override mat-component css */
+::ng-deep .currency .mat-select-value-text > span {
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+}
+
+/* media queries */
+@media (max-width: 480px) {  /*xs*/
+}
+
+@media (min-width: 480px) {
+    /*md*/
+}
+
+@media (min-width: 768px) {
+    /*lg*/
+    .location-card-content {
+        font-size: 0.75rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    /*xl*/
+    .location-card-wrapper {
+        padding: 1.5rem;
+    }
+
+    .location-card-heading {
+        font-size: 1.125rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .location-card-content {
+        font-size: 0.875rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    /*2xl*/
+    .location-card-heading {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+}

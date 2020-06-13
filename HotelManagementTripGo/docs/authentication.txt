@@ -1,0 +1,66 @@
+POST
+http://127.0.0.1:3000/auth/login
+
+    req
+    {
+        "login": "o.hamidi@esi-sba.dz",
+        "password":"123456789"
+    }
+
+    res (200)
+    {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsRXN0YXRlX2lkIjoiNWU4ZGYyY2RlZjMxNzYzNmJjZDYxMmViIiwiand0aWQiOiI4ZmM0NTEzMC04NzA3LTExZWEtYjkxOC03MTAzOTc5MDgwNDEiLCJpYXQiOjE1ODc4Mjc3MTMsImV4cCI6MTU4ODU0NzcxM30.ptqcdfOxmg_ykj5C8Elucoxe8lkqzMYkgklaIypIMGA",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsRXN0YXRlX2lkIjoiNWU4ZGYyY2RlZjMxNzYzNmJjZDYxMmViIiwiand0aWQiOiI4ZmM0YzY2MC04NzA3LTExZWEtYjkxOC03MTAzOTc5MDgwNDEiLCJpYXQiOjE1ODc4Mjc3MTMsImV4cCI6MTU4NzkxNDExM30.rzuRIc4TXynygnAzuRvYQBH2lJVmTuHrOALyX6SezFs"
+    }
+
+    ************Errors*****************
+    [1, 9, 2]
+
+************************************************************************************************************************
+GET
+http://127.0.0.1:3000/auth/token/refresh
+
+    req
+    {
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWVhYzU3MDA2ZWM5YTkyNTA0ODYxOTZiIiwiaWF0IjoxNTg4MzUyNzgyLCJleHAiOjE1ODg0MzkxODJ9.o-PdfsTDxoamOokgxoMv9h7L7ZQu8ojROBEFfeFE6jw"
+    }
+
+    res (200)
+    {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RpZCI6IjgxNjUwMWIwLTg3MDgtMTFlYS1iOTE4LTcxMDM5NzkwODA0MSIsImlhdCI6MTU4NzgyODExOCwiZXhwIjoxNTg4NTQ4MTE4fQ.xEW3qB2_RLLbRar55QbZ-3Y4HZ2DIc7SoRGA7mAAyu8"
+    }
+
+    ************Errors*****************
+    [1, 4, 3]
+
+
+************************************************************************************************************************
+POST
+http://127.0.0.1:3000/auth/logout
+
+    req
+    {
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWVhYzU3MDA2ZWM5YTkyNTA0ODYxOTZiIiwiaWF0IjoxNTg4MzUyNzgyLCJleHAiOjE1ODg0MzkxODJ9.o-PdfsTDxoamOokgxoMv9h7L7ZQu8ojROBEFfeFE6jw"
+    }
+
+    res (200)
+    {
+        msg:"disconnected"
+    }
+
+    ************Errors*****************
+    [1, 4, 3]
+
+************************************************************************************************************************
+POST* (there is no need of refresh token in body, just the access token in authorization)
+http://127.0.0.1:3000/auth/logoutAll
+
+    res (200)
+    {
+        msg:"disconnected"
+    }
+
+    ************Errors*****************
+    [1, 4, 3]
+
+

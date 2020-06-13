@@ -1,0 +1,58 @@
+::ng-deep app-main-search .mat-select-value-text > span,
+::ng-deep app-main-search .mat-select-placeholder,
+::ng-deep app-main-search .mat-input-element,
+::ng-deep app-main-search .mat-input-element::placeholder {
+  font-size: 14px;
+  font-weight: 500 !important;
+  padding-left: 0.5rem;
+}
+::ng-deep #destination, ::ng-deep #check-in-out, ::ng-deep #pers-info  {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.10);
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #1485D7 !important;
+  color: white !important;
+}
+::ng-deep .check-in-out-date div {
+  background-color: #1485D7;
+  color: #FFF !important;
+}
+::ng-deep .check-in-to-out-date div {
+  border: 1px solid #1485D7;
+  color: #5B636D !important;
+}
+::ng-deep #destination .my-mat-select {
+  margin-top: 33px !important;
+}
+::ng-deep #pers-info .mat-select-trigger {
+  visibility: hidden;
+}
+::ng-deep #pers-info .mat-select {
+  height: 0 !important;
+  margin-top: 2px !important;
+}
+::ng-deep .mat-select-options-plus {
+  margin-top: 0 !important;
+}
+.menu-panel {
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  margin-top: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+  z-index: 10;
+}
+::ng-deep .menu-panel-overlay {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+}
+.disbled-btn {
+  border-color: #5B636D;
+  color: #5B636D;
+  background-color: #F9F9F9;
+}

@@ -1,0 +1,162 @@
+.blue_line {
+  margin-left: 1rem !important;
+  width: 2.5rem;
+  border: 2px solid #1485D7;
+}
+.section-label {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+span[id^="tab-menu"] {
+  font-size: 14px;
+  color: rgba(91, 99, 109, 0.5);
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  position: relative;
+  cursor: pointer;
+}
+span[id^="tab-menu"]:hover {
+  background-color: #F3F3F3;
+}
+span[id^="tab-menu"].active {
+  font-size: 14px;
+  color: #5B636D;
+  font-weight: 500;
+}
+span[id^="tab-menu"] div {
+  width: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transition: width 0.2s;
+  height: 4px;
+  margin-bottom: -2px;
+}
+span[id^="tab-menu"].active div {
+  width: 100%;
+}
+
+.btn-continue {
+  color: #ffffff;
+  height: 3rem;
+  padding: 0 1rem;
+  font-weight: 600;
+  background-color: #1485D7;
+}
+.btn-return {
+  color: #5B636D;
+  height: 3rem;
+  padding: 0 1rem;
+  background-color: white;
+  border: 1px solid #5B636D;
+  border-radius: 2px;
+}
+
+/* Input fields */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  height: 3rem;
+  border: 1px solid #5B636D;
+  overflow: hidden;
+}
+.input-label {
+   font-size: 14px;
+   line-height: 17px;
+   /* display: flex;
+   align-items: center; */
+ }
+.my-input {
+  color: #5B636D !important;
+  padding-left: 1rem !important;
+  font-size: 14px !important;
+  outline: none;
+  flex-grow: 1;
+  align-self: stretch;
+}
+.input-focused {
+  border-color: #1485D7 !important;
+  box-shadow: 0 0 1px #1485D7;
+}
+.input-focused .arrow-rotated {
+  transform: rotate(180deg);
+  transition: transform 0.2s;
+  z-index: 1001;
+  padding: 10px 0;
+  pointer-events: inherit;
+}
+
+/* rooms section */
+.room-card {
+  grid-column: span 4 / span 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.room-ready {
+  border: 1px solid #0ABF32;
+}
+.room-unready {
+  border: 1px solid #FF8A00;
+}
+/* Images section */
+.images-progress {
+  transition: width 0.5s;
+}
+.file-over {
+  box-shadow: 0 0 6px #888
+}
+
+/* Policies section */
+.check-hours-input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #5B636D;
+  font-size: 14px;
+  color: #5B636D;
+}
+.check-hours-input:active {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.selected-check-hours {
+  color: #1485D7;
+  outline: #1485D7;
+  border: 1px solid #1485D7;
+  background-color: #F9F9F9;
+}
+
+/* MATERIAL COMPONENTS CSS */
+::ng-deep .mat-select-panel {
+  margin-top: 38px;
+}
+::ng-deep .mat-select-placeholder,
+::ng-deep .mat-select-value-text > span {
+  padding: 0 1rem !important;
+  font-size: 14px !important;
+}
+@keyframes hide-hanging {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

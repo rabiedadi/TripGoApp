@@ -1,0 +1,400 @@
+GET
+  http://127.0.0.1:3001/hotel/PlatformLanguage
+
+res
+[
+    {
+        "abbreviation": "FR",
+    },
+    {
+        "abbreviation": "EN",
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/bedSize---------------
+
+res
+[
+    {
+        "_id": "5eb80c82e4222b13f0c1f141",
+        "name": "Lit à deux",
+        "language": "FR",
+        "height": 190,
+        "width": 80,
+        "reference": "Double bed",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f140",
+        "name": "Lit simple",
+        "language": "FR",
+        "height": 190,
+        "width": 80,
+        "reference": "Single bed",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET *(option became name)
+http://127.0.0.1:3001/hotel/options/FR/breakfastOption---------------
+
+res
+[
+    {
+        "_id": "5eb80c82e4222b13f0c1f142",
+        "name": "OUI, inclus dans le prix",
+        "language": "FR",
+        "reference": "YES, included in the price",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f143",
+        "name": "NON, n'est pas inclus dans le prix",
+        "language": "FR",
+        "reference": "NO, is not included in the price",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f144",
+        "option": "N'est pas disponible",
+        "language": "FR",
+        "reference": "Is not available",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/extraBedFor
+
+res
+[
+    {
+        "_id": "5eb80c82e4222b13f0c1f147",
+        "name": "Adults",
+        "language": "FR",
+        "reference": "Adults",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f145",
+        "name": "Enfant jusqu'à 2 ans dans des berceaux",
+        "language": "FR",
+        "reference": "Child up to 2 years old in cradles",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f146",
+        "name": "Enfants",
+        "language": "FR",
+        "reference": "Children",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/otherEquipment
+
+res
+[
+    {
+        "_id": "5eb80c82e4222b13f0c1f148",
+        "name": "Climatisation",
+        "language": "FR",
+        "reference": "Air conditioner",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f149",
+        "name": "Ecran TV Plat",
+        "language": "FR",
+        "reference": "Plasma TV",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f14c",
+        "name": "Terrasse",
+        "language": "FR",
+        "reference": "Terrace",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f14a",
+        "name": "Vue sur mer",
+        "language": "FR",
+        "reference": "Seaview",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f14b",
+        "name": "Balcon",
+        "language": "FR",
+        "reference": "Balcony",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f14d",
+        "name": "Lecteur DVD",
+        "language": "FR",
+        "reference": "DVD player",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f14e",
+        "name": "Chaines satellites",
+        "language": "FR",
+        "reference": "Satellite channels",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/parkingOption----------------
+
+res
+[
+    {
+        "_id": "5eb80c82e4222b13f0c1f14f",
+        "name": "Oui, gratuit",
+        "language": "FR",
+        "reference": "Yes, free",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f151",
+        "name": "Non, n'est pas disponible",
+        "language": "FR",
+        "reference": "No, is not available",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80c82e4222b13f0c1f150",
+        "name": "Oui, (n'est pas gratuit)",
+        "language": "FR",
+        "reference": "Yes, (is not free)",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/paymentTime--------------
+
+res
+[
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa1",
+        "name": "A l'arrivé",
+        "language": "FR",
+        "reference": "On arrival",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa2",
+        "name": "Lors de la réservation",
+        "language": "FR",
+        "reference": "When booking",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/roomCustomName-------------
+
+res
+[
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa3",
+        "name": "Chambre moderne",
+        "language": "FR",
+        "reference": "Modern bedroom",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa4",
+        "name": "Chambre de luxe",
+        "language": "FR",
+        "reference": "Deluxe suite",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/roomName------------
+
+res
+[
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa5",
+        "name": "Chambre à coucher",
+        "language": "FR",
+        "reference": "Bedroom",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa6",
+        "name": "Suite d'hôtel",
+        "language": "FR",
+        "reference": "Hotel suite",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/roomType-------------
+
+res
+[
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa7",
+        "name": "Simple",
+        "language": "FR",
+        "reference": "Simple",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa8",
+        "name": "Duplexe",
+        "language": "FR",
+        "reference": "Duplex",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/service-------------------
+
+res
+[
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaa9",
+        "name": "Wifi gratuit",
+        "language": "FR",
+        "reference": "Free WIFI",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaac",
+        "name": "Reception 24/24",
+        "language": "FR",
+        "reference": "Reception 24/24",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaad",
+        "name": "Sauna",
+        "language": "FR",
+        "reference": "Sauna",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaab",
+        "name": "Service de chambre",
+        "language": "FR",
+        "reference": "Room service",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaaa",
+        "name": "Restaurant",
+        "language": "FR",
+        "reference": "Restaurant",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaae",
+        "name": "Sale de sport",
+        "language": "FR",
+        "reference": "Gym",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffaaf",
+        "name": "Transport aéroport",
+        "language": "FR",
+        "reference": "Airport transportation",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffab0",
+        "name": "Climatisation",
+        "language": "FR",
+        "reference": "Air conditioner",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffab1",
+        "name": "Piscine",
+        "language": "FR",
+        "reference": "Swimming pool",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffab2",
+        "name": "Chambre fumeurs",
+        "language": "FR",
+        "reference": "Smoking room",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffab3",
+        "name": "Chambre non fumeurs",
+        "language": "FR",
+        "reference": "Non smoking room",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/FR/speakingLanguage------------
+
+res
+[
+    {
+        "_id": "5eb80ec3da2afc40cc7ffab4",
+        "name": "Arabe",
+        "language": "FR",
+        "reference": "Arabic",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffab5",
+        "name": "Français",
+        "language": "FR",
+        "reference": "French",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffab6",
+        "name": "Anglais",
+        "language": "FR",
+        "reference": "English",
+        "__v": 0
+    }
+]
+*******************************************************************
+GET
+http://127.0.0.1:3001/hotel/options/creditCard-------------------
+
+res
+[
+    {
+        "_id": "5eb80ec3da2afc40cc7ffadf",
+        "name": "Visa Card",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffae1",
+        "name": "Diners club",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffae2",
+        "name": "American express",
+        "__v": 0
+    },
+    {
+        "_id": "5eb80ec3da2afc40cc7ffae0",
+        "name": "Master Card",
+        "__v": 0
+    }
+]

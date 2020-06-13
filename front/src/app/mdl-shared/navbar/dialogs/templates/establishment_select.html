@@ -1,0 +1,62 @@
+
+    <div id="pop-up-1">
+        <div class="relative w-full h-full flex items-center justify-center">
+            <div class="absolute top-0 right-0">
+                <div (click)="closeDialog()" class="menu-button active cursor-pointer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+            <div class="w-3/4 lg:px-4 flex flex-col items-start">
+                <div class="flex flex-row items-end mb-2">
+                    <svg-icon src="{{ 'assets/svg/tripgo-logo.svg' }}" [svgStyle]="{ 'width.px':120 }"></svg-icon>
+                </div>
+                <span
+                        class="text-xs">Je certifie avoir pris connaissance des termes et conditions d’utilisation de la plateforme</span>
+                <div class="block w-full grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-4 mt-8">
+                    <!-- appartement -->
+                    <div [mat-dialog-close]="'apartment'" class="location-card" matRipple>
+                        <div class="location-card-wrapper">
+                            <div class="location-card-image-holder">
+                                <img alt="home" src="assets/svg/establishment/building.svg" style="height: 45%;">
+                            </div>
+                            <span class="location-card-heading">Appartement</span>
+                            <span class="location-card-content">Je certifie avoir pris connaissance des termes et conditions</span>
+                        </div>
+                    </div>
+                    <!-- maison -->
+                    <div [mat-dialog-close]="'house'" class="location-card" matRipple>
+                        <div class="location-card-wrapper">
+                            <div class="location-card-image-holder">
+                                <img alt="home" src="assets/svg/establishment/house.svg" style="height: 45%;">
+                            </div>
+                            <span class="location-card-heading">Maisons</span>
+                            <span class="location-card-content">Je certifie avoir pris connaissance des termes et conditions</span>
+                        </div>
+                    </div>
+                    <!-- hotels -->
+                    <div [mat-dialog-close]="'hotel'" class="location-card" matRipple>
+                        <div class="location-card-wrapper  active-location-card">
+                            <div class="location-card-image-holder">
+                                <img alt="home" src="assets/svg/establishment/hotel.svg" style="height: 45%;">
+                            </div>
+                            <span class="location-card-heading">Hotels</span>
+                            <span class="location-card-content">Je certifie avoir pris connaissance des termes et conditions</span>
+                        </div>
+                    </div>
+                    <!-- autre -->
+                    <div [mat-dialog-close]="'other'" class="location-card" matRipple>
+                        <div class="location-card-wrapper">
+                            <div class="location-card-image-holder">
+                                <img alt="home" src="assets/svg/establishment/caravan.svg" style="height: 45%;">
+                            </div>
+                            <span class="location-card-heading">Autre endroit</span>
+                            <span class="location-card-content">Je certifie avoir pris connaissance des termes et conditions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

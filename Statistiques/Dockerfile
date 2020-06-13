@@ -1,0 +1,19 @@
+FROM node:8
+
+#Create API directory
+WORKDIR /usr/src/API
+
+# Install app dependencies
+COPY package*.json ./
+RUN npm install
+
+#building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . .
+
+EXPOSE 3002
+
+
+CMD [ "npm", "start" ]

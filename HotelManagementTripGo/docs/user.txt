@@ -1,0 +1,88 @@
+GET
+http://127.0.0.1:3000/user
+
+    res (200)
+    {
+        "_id": "5ea464731204f21d7033008e",
+        "fullName": "Hamidi Oussama",
+        "email": "o.hamidi@esi-sba.dz",
+        "emailConfirmed": false
+    }
+
+    ************Errors*****************
+    [1, 4, 3]
+
+************************************************************************************************************************
+PUT
+http://127.0.0.1:3000/user
+
+    req
+    {
+        "fullName": "Hamidi Oussama",
+        "email": "o.hamidi@esi-sba.dz"
+        "phone": "213550197395"
+    }
+    (you can add image)
+
+    res (200)
+    {
+        "_id": "5ea464731204f21d7033008e",
+        "fullName": "Hamidi",
+        "email": "o.hamidi@esi-sba.dz",
+        "phone": "213550197395",
+        "emailConfirmed": false,
+        "image": "5ea464731204f21d7033008e.jpg"
+    }
+    (if image not exit, make the default image+)
+    (ip_adr:3000 + image )
+
+    ************Errors*****************
+    [1, 4, 3, 11, 12, 13]
+
+************************************************************************************************************************
+PUT
+http://127.0.0.1:3000/user/password
+
+    req
+    {
+        "old_password": "123456789",
+        "new_password": "987654321"
+    }
+
+    res (200)
+    {
+        "message": "Password updated successfully"
+    }
+
+    ************Errors*****************
+    [1, 4, 3, 9, 5, 14]
+
+************************************************************************************************************************
+POST
+http://127.0.0.1:3000/user/sendVerificationEmail
+
+    res 200
+    {
+        "msg": "email sent"
+    }
+    the link sent to email is in this form :http://51.91.79.72/:token
+
+    ************Errors*****************
+    [1, 4, 3, 9, 6, 15]
+
+************************************************************************************************************************
+POST
+http://127.0.0.1:3000/user/verifyEmail
+    req
+    {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWVhYzU3MDA2ZWM5YTkyNTA0ODYxOTZiIiwiaWF0IjoxNTg4MzU4MTI1LCJleHAiOjE1ODkwNzgxMjV9.HOF9DGrPsqy63ehTqLydGt7Qom5HismiEcPdTs27LKM"
+    }
+
+    res 200
+    {
+        "emailConfirmed": true,
+        "_id": "5eac57006ec9a9250486196b"
+    }
+
+    ************Errors*****************
+    [1, 4, 3, 9, 7]

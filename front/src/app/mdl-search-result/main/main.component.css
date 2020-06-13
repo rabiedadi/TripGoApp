@@ -1,0 +1,183 @@
+::ng-deep .mat-select-placeholder,
+::ng-deep .mat-select-value-text > span {
+  padding-left: 1rem ;
+  font-size: 12px ;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #494D51;
+  background-color: #F9F9F9;
+  border-bottom: 1px solid rgba(73, 77, 81, 0.2);
+}
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  height: 2.5rem;
+  border: 1px solid rgba(73, 77, 81, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.my-input::placeholder {
+  color: #5B636D;
+  font-weight: 500;
+}
+.my-input {
+  color: #5B636D;
+  padding: 0 1rem !important;
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  height: 100%; width: 100%;
+}
+
+.arrow-down {
+  position: absolute;
+  right: 0;
+  width: 0.7rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.tab-label-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(73, 77, 81, 0.2);
+}
+.tab-label-wrapper{
+  height: 60px;
+  overflow: visible;
+  position: relative;
+}
+.tab-label {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-weight: 500;
+  color: #494D51;
+  font-size: 12px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+.tab-label:hover {
+  background-color: #F5F5F5;
+}
+.tab-label-indicator {
+  position: absolute;
+  bottom: 0;
+  background-color: #1485D7;
+  height: 4px; width: 0;
+  margin-bottom: -2px;
+  transition: width 0.1s;
+}
+.active .tab-label-indicator,
+.active .label-indicator {
+  width: 100%;
+}
+/* sort by section style ============================================================================================ */
+.label-wrapper {
+  padding: 14px 18px;
+  position: relative;
+  cursor: pointer;
+}
+.label-indicator {
+  position: absolute;
+  bottom: 0; left: 0;
+  background-color: #1485D7;
+  height: 4px; width: 0;
+}
+/* hotel card info section style ==================================================================================== */
+.info-card {
+  background-color: white;
+  overflow: hidden;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid rgba(73, 77, 81, 0.25);
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+}
+.note-badge {
+  position: absolute;
+  top: 0; right: 0;
+  height: 50px; width: 70px;
+  border-radius: 0 0 0 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+/*lightbox gallery*/
+::ng-deep lightbox{
+  max-width: unset !important; max-height: unset !important;
+  height: 100vh !important; width: 100vw !important;
+  box-shadow: unset !important;
+}
+::ng-deep lightbox gallery{
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+::ng-deep .g-counter {
+  background-color: #0000 !important;
+  font-weight: 500;
+  letter-spacing: 3px;
+  padding: 5px !important;
+}
+::ng-deep .g-box {
+  justify-content: center;
+}
+::ng-deep .g-box gallery-slider {
+  height: 90% !important;
+  flex: unset !important;
+}
+::ng-deep gallery-thumbs gallery-thumb {
+  padding: 0 5px 10px 5px !important;
+}
+::ng-deep gallery-thumbs gallery-image {
+  border: 2px solid white;
+  border-radius: 3px;
+}
+
+agm-map {
+  height: 100%;
+}
+/* media queries */
+@media (max-width: 480px) { /*xs*/
+  .note-badge {
+    height: 40px; width: 65px;
+  }
+  .note-badge > span {
+    font-size: 12px;
+  }
+}
+@media (min-width: 480px) { /*sm*/
+  .info-card > div:nth-child(1) {
+    order: 2;
+  }
+  .info-card > div:nth-child(2) {
+    order: 1;
+  }
+  .info-card > div:nth-child(3) {
+    order: 3;
+    border-left: 1px solid rgba(73, 77, 81, 0.25);
+  }
+}
+@media (min-width: 768px) { /*md*/
+  .sort-by {
+    display: none;
+  }
+  .tab-label {
+    font-size: 14px;
+    padding: 0 30px;
+  }
+}
+@media (min-width: 1024px) { /*xl*/
+}
+@media (min-width: 1200px) { /*xl*/
+}
+@media (min-width: 1920px) { /*2xl*/
+}

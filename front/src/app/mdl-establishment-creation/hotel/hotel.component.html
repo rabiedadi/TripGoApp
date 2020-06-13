@@ -1,0 +1,951 @@
+<div class="text-my-gray-3" style="min-width: 1024px;"> <!-- wide screens only =========== -->
+  <!-- Header ====================================================================================================== -->
+  <header class="h-16 2xl:h-24 w-full px-16 lg:px-24 2xl:px-32 flex justify-between items-center">
+    <div class="cursor-pointer" routerLink="/">
+      <svg-icon src="{{ 'assets/svg/tripgo-logo.svg' }}" [svgStyle]="{ 'width.px':90 }"></svg-icon>
+    </div>
+    <div class="flex items-center">
+      <span class="lg:text-sm flex items-center">
+        <img alt="home" class="h-5 w-5 mx-2" src="assets/icons/home.png">
+        <span>Mes etablissements</span>
+      </span>
+      <div class="h-10 w-10 mx-8 my-boredr border-my-blue-1">
+        <img alt="avatar" class="h-full w-full" src="assets/images/Rectangle 20.png">
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub header ================================================================================================== -->
+  <div class="h-24 2xl:h-32 w-full px-16 lg:px-24 2xl:px-32 flex items-center bg-my-blue-1">
+    <div class="h-16 w-16 2xl:w-24 2xl:h-24 my-border">
+      <img alt="avatar" class="h-full w-full" src="assets/images/avatar.png">
+    </div>
+    <div class="h-full ml-4 flex flex-col justify-center">
+      <span class="text-white text-2xl font-bold ">{{ basicInfo.data.name || ('hotel_creation.establishment_name' | translate) }}</span>
+      <div class="flex items-end text-white">
+        <ng-container *ngIf="basicInfo.data.starsNumber != 0">
+          <svg-icon *ngFor="let x of ' '.repeat(basicInfo.data.starsNumber-1).split(' ')"
+                    [svgStyle]="{ 'width.px':16, 'fill': '#FFFFFF' }" class="mr-1"
+                    src="{{ 'assets/svg/star_filled.svg' }}"></svg-icon>
+        </ng-container>
+        <ng-container *ngIf="basicInfo.data.starsNumber != 5">
+          <svg-icon *ngFor="let x of ' '.repeat(5-basicInfo.data.starsNumber-1).split(' ')"
+                    [svgStyle]="{ 'width.px':16, 'fill': '#FFFFFF' }" class="mr-1"
+                    src="{{ 'assets/svg/star.svg' }}"></svg-icon>
+        </ng-container>
+
+        <i class="text-xs block leading-none font-thin">{{ '0'+basicInfo.data.starsNumber || '00' }} Etoiles</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs menu =================================================================================================== -->
+  <div class="w-full px-16 lg:px-24 2xl:px-32 bg-my-gray-1 shadow-xs ">
+    <div class="w-4/5 2xl:w-3/4 flex">
+      <span (click)="tab_navigator(1)" id="tab-menu-1" class="active" translate>hotel_creation.basic_info<div class="bg-my-blue-1"></div></span>
+      <span (click)="tab_navigator(2)" id="tab-menu-2">{{'hotel_creation.room&price.room&price' | translate}}<div class="bg-my-blue-1"></div></span>
+      <span (click)="tab_navigator(3)" id="tab-menu-3" style="flex-grow: 0"><div class="bg-my-blue-1"></div></span>
+      <span (click)="tab_navigator(4)" id="tab-menu-4">{{'hotel_creation.inst&serv.inst&serv' | translate}}<div class="bg-my-blue-1"></div></span>
+      <span (click)="tab_navigator(5)" id="tab-menu-5">{{'hotel_creation.equipment.equipment' | translate}}<div class="bg-my-blue-1"></div></span>
+      <span (click)="tab_navigator(6)" id="tab-menu-6">{{'hotel_creation.photos.photos' | translate}}<div class="bg-my-blue-1"></div></span>
+      <span (click)="tab_navigator(7)" id="tab-menu-7">{{'hotel_creation.policies.policies' | translate}}<div class="bg-my-blue-1"></div></span>
+      <span (click)="tab_navigator(8)" id="tab-menu-8">{{'hotel_creation.payment.payment' | translate}}<div class="bg-my-blue-1"></div></span>
+    </div>
+  </div>
+
+  <!-- Tab1 ======================================================================================================== -->
+  <div
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10"
+    id="tab1">
+    <!-- Bienvenue ==== -->
+    <div class="col-span-4 flex items-center mb-3">
+      <span class="section-label" style="font-weight: 200;">{{'other.greeting' | translate}}</span>
+      <span class="section-label ml-2">{{ authState.user?.fullName || '' }}</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-wrapper col-span-2">
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
+                src="{{ 'assets/svg/hotel.svg' }}"></svg-icon>
+      <input (focus)="input_focused($event.target)" [(ngModel)]="basicInfo.data.name" class="my-input"
+             placeholder="Nom de votre etablissement"
+             type="text"><!--// INPUT //-->
+    </div>
+    <div class="input-wrapper col-span-2">
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
+                src="{{ 'assets/svg/star.svg' }}"></svg-icon>
+      <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                  [(ngModel)]="basicInfo.data.starsNumber"
+                  disableOptionCentering panelClass="my-mat-select"
+                  placeholder="Nbr d'etoils..."><!--// INPUT //-->
+        <mat-option *ngFor="let x of ' '.repeat(4).split(' '); let i = index" [value]="i+1">
+          <div class="flex items-center">
+            <i class="mr-2 text-xs leading-none font-thin">{{i + 1}} Etoile(s)</i>
+            <svg-icon *ngFor="let x of ' '.repeat(i).split(' ')" [svgStyle]="{ 'width.px':12, 'fill': '#5B636D' }"
+                      src="{{ 'assets/svg/star_filled.svg' }}"></svg-icon>
+          </div>
+        </mat-option>
+      </mat-select>
+      <img (click)="arrow_down_clicked()" alt="arrow-down"
+           class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+           src="assets/icons/arrow-down.png">
+    </div>
+    <div class="input-wrapper col-span-2">
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
+                src="{{ 'assets/svg/address.svg' }}"></svg-icon>
+      <input #adresse (focus)="input_focused($event.target)" [(ngModel)]="basicInfo.data.address"
+             class="my-input h-full" placeholder="Address"
+             spellcheck="false" type="text"><!--// INPUT //-->
+    </div>
+    <div class="input-wrapper col-span-1">
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
+                src="{{ 'assets/svg/wilaya.svg' }}"></svg-icon>
+      <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                  [(ngModel)]="basicInfo.data.city"
+                  disableOptionCentering panelClass="my-mat-select" placeholder="Wilaya">
+        <!--// INPUT //-->
+        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+      </mat-select>
+      <img (click)="arrow_down_clicked()" alt="arrow-down"
+           class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+           src="assets/icons/arrow-down.png">
+    </div>
+    <div class="input-wrapper col-span-1">
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
+                src="{{ 'assets/svg/direction.svg' }}"></svg-icon>
+      <input (focus)="input_focused($event.target)" [(ngModel)]="basicInfo.data.province" class="my-input"
+             placeholder="Ville"
+             type="text"><!--// INPUT //-->
+    </div>
+    <!-- Contact ==== -->
+    <div class="col-span-4 flex items-center mt-4 mb-3">
+      <span class="section-label">Contact</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-wrapper col-span-2">
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2" src="{{ 'assets/svg/phone.svg' }}"></svg-icon>
+      <input (focus)="input_focused($event.target)"
+             [ngModel]="phoneNumber | phone" class="my-input"
+             (input)="phone_number_watcher($event.target);"
+             placeholder="Numero de telephone"
+             type="tel"><!--// INPUT //-->
+      <button (click)="send_confirmation_code()"
+              class="input-label flex items-center px-4 h-full font-medium hover:text-my-blue-1"
+              style="min-width: fit-content; background-color: #F9F9F9">Envoyer le code</button>
+    </div>
+    <div class="input-wrapper col-span-2">
+      <svg-icon [svgStyle]="{ 'width.px':18, 'fill': '#FF8A00' }" class="mx-2"
+                src="{{ 'assets/svg/shield-check.svg' }}"></svg-icon>
+      <span class="input-label flex items-center px-4 h-full"
+            style="min-width: fit-content;">code de confermation</span>
+      <div class="border-l border-my-gray-3 h-6"></div>
+      <div class="flex-grow h-full flex items-center">
+        <input (focus)="input_focused($event.target)" (input)="entering_conf_number($event.target)" class="my-input"
+               id="confirmation_code_input" style="letter-spacing: 5px;" type="text" placeholder="30 seconds" [disabled]="numberConfId === null">
+        <!--// INPUT //-->
+      </div>
+    </div>
+    <div class="input-wrapper col-span-2">
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
+                src="{{ 'assets/svg/mail.svg' }}"></svg-icon>
+      <input (focus)="input_focused($event.target)" [(ngModel)]="basicInfo.data.email" class="my-input"
+             placeholder="Email"
+             type="email"><!--// INPUT //-->
+    </div>
+    <!-- continue button ==== -->
+    <div class="col-span-4"></div>
+    <button (click)="send_Data(1)" class="col-span-1 btn-continue" matRipple type="submit">Continuer</button>
+    <div *ngIf="savingInfo" class="col-span-1 flex items-center">
+      <span class="text-xs mr-2">sauvegarde d'information</span>
+      <mat-progress-spinner class="my-auto" diameter="20" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+
+  <!-- Tab2 ======================================================================================================== -->
+  <div
+    class="grid grid-cols-4 gap-2 row-gap-4 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    id="tab2">
+    <!-- Chambres ==== -->
+    <div class="col-span-4 flex flex-col">
+      <div class="flex items-center">
+        <span class="section-label">Chambres</span>
+        <div class="blue_line"></div>
+      </div>
+      <span (click)="tab_navigator(1)" class="font-light text-sm mt-2 cursor-pointer hover:text-my-blue-1">Revenir aux infos basics</span>
+    </div>
+    <div class="input_container col-span-2">
+      <span class="input-label mb-2">Type de chambre</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="rooms[roomIndex].data.roomType"
+                    disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner..."><!--// INPUT //-->
+          <mat-option *ngFor="let x of roomType" [value]="x.reference">{{x.name}}</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="input_container col-span-2">
+      <span class="input-label mb-2">Combien de chambre de type est disponible</span>
+      <div class="input-wrapper w-full">
+        <input (focus)="input_focused($event.target)" [(ngModel)]="rooms[roomIndex].data.available" class="my-input"
+               min="0" placeholder="nombre de chambres" type="number">
+      </div>
+    </div>
+    <div class="input_container col-span-2">
+      <span class="input-label mb-2">Nom de la chambre</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="rooms[roomIndex].data.roomName"
+                    disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of roomName" [value]="x.reference">{{x.name}}</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="input_container col-span-2">
+      <span class="input-label mb-2">Nom personalisee (Non requit)</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="rooms[roomIndex].data.roomCustomName"
+                    disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of roomCustomName" [value]="x.reference">{{x.name}}</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="input_container col-span-2">
+      <span class="input-label mb-2">Fumeur ?</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="rooms[roomIndex].data.smoking"
+                    disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option [value]="true">Oui</mat-option>
+          <mat-option [value]="false">Non</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="input_container col-span-2">
+      <span class="input-label mb-2">Surface de la chambre</span>
+      <div class="input-wrapper w-full">
+        <span class="input-label flex items-center px-4 h-full bg-my-gray-1"
+              style="min-width: fit-content;">Métre carré</span>
+        <div class="flex-grow h-full flex items-center">
+          <input (focus)="input_focused($event.target)" [(ngModel)]="rooms[roomIndex].data.area" class="my-input"
+                 min="0" placeholder="Surface" type="number">
+        </div>
+      </div>
+    </div>
+    <div class="input_container col-span-1">
+      <span class="input-label mb-2">Nombre de chambres</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="rooms[roomIndex].data.roomCount"
+                    disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}}chambre(s)
+          </mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="input_container col-span-1">
+      <span class="input-label mb-2">Nombre de Sales de bain</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="rooms[roomIndex].data.bathRoomCount"
+                    disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}} sale(s) de bain
+          </mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="input_container col-span-1">
+      <span class="input-label mb-2">Nombre de Salons</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="rooms[roomIndex].data.livingRoomCount"
+                    disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}} Salon(s)</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <!-- Format du lit ==== -->
+    <div class="col-span-4 flex items-center mt-4 mb-3">
+      <span class="section-label">Format du lit</span>
+      <div class="blue_line"></div>
+    </div>
+    <div *ngFor="let bed of rooms[roomIndex].data.beds; let i = index" class="col-span-4 flex items-center"
+         style="justify-content: stretch;">
+      <div class="input_container flex-grow">
+        <div class="input-wrapper w-full">
+          <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                      [(ngModel)]="rooms[roomIndex].data.beds[i].bedSize" disableOptionCentering
+                      panelClass="my-mat-select" placeholder="Selectionner...">
+            <mat-option *ngFor="let x of bedSize" [value]="x.reference">{{x.name}}</mat-option>
+          </mat-select>
+          <img (click)="arrow_down_clicked()"
+               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+               src="assets/icons/arrow-down.png">
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <span class="text-lg px-3">x</span>
+      </div>
+      <div class="input_container flex-grow">
+        <div class="input-wrapper w-full">
+          <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                      [(ngModel)]="rooms[roomIndex].data.beds[i].bedCount" disableOptionCentering
+                      panelClass="my-mat-select" placeholder="Selectionner...">
+            <mat-option [value]="1">1 lit</mat-option>
+            <mat-option *ngFor="let x of ' '.repeat(9).split(' '); let i = index" [value]="i+2">{{ i + 2 }}lits
+            </mat-option>
+          </mat-select>
+          <img (click)="arrow_down_clicked()"
+               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+               src="assets/icons/arrow-down.png">
+        </div>
+      </div>
+    </div>
+    <div (click)="add_bed()" class="col-span-4 flex items-center cursor-pointer">
+      <svg-icon [svgStyle]="{ 'width.px':15, 'fill': '#5B636D' }" class="mr-3"
+                src="{{ 'assets/svg/add.svg' }}"></svg-icon>
+      <span class="input-label">Ajouter un lit</span>
+    </div>
+    <div class="input_container col-span-2 mr-3">
+      <span class="input-label mb-2">Combien de personnes peuvent dormir dans cette chambre</span>
+      <div class="input-wrapper w-full">
+        <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-3"
+                  src="{{ 'assets/svg/users.svg' }}"></svg-icon>
+        <input (focus)="input_focused($event.target)" [(ngModel)]="rooms[roomIndex].data.roomCapacity" class="my-input"
+               min="0" placeholder="2" type="number">
+      </div>
+    </div>
+    <!-- Prix de la chambre ==== -->
+    <div class="col-span-4 flex items-center mt-4 mb-3">
+      <span class="section-label">Prix de la Chambre</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-wrapper col-span-2 mr-3">
+      <span class="input-label flex items-center px-4 h-full bg-my-gray-1" style="min-width: fit-content;">Prix en DZD / nuit</span>
+      <div class="flex-grow h-full flex items-center">
+        <input (focus)="input_focused($event.target)" [(ngModel)]="rooms[roomIndex].data.price" class="my-input"
+               min="0" placeholder="Prix ..." type="number">
+      </div>
+    </div>
+    <!-- continue button ==== -->
+    <div class="col-span-4"></div>
+    <button (click)="send_Data(2)" class="col-span-1 btn-continue" matRipple>Continuer</button>
+    <div *ngIf="savingInfo" class="col-span-1 flex items-center">
+      <span class="text-xs mr-2">sauvegarde d'information</span>
+      <mat-progress-spinner class="my-auto" diameter="20" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+
+  <!-- Tab3 ======================================================================================================== -->
+  <div
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    id="tab3">
+    <!-- Chambre & prix ==== -->
+    <div class="col-span-4 flex items-center my-4">
+      <span class="section-label">Chambres & Prix</span>
+      <div class="blue_line"></div>
+    </div>
+    <div *ngFor="let room of rooms; let i = index" class="room-card h-20 2xl:h-24" [ngClass]="(room.is_ready())?'room-ready':'room-unready'">
+      <span class="font-bold">Chambre double delux</span>
+      <span>Nombre : <span class="font-bold"> {{ room.data.available }} </span></span>
+      <span class="flex">
+        <svg-icon (click)="edit_room(i)" [svgStyle]="{ 'height.px':18, 'fill': '#5B636D' }" class="mr-1 cursor-pointer"
+                  src="{{ 'assets/svg/edit.svg' }}"></svg-icon>
+        <svg-icon (click)="delete_room(i)" [svgStyle]="{ 'height.px':18, 'fill': '#5B636D' }" class="cursor-pointer"
+                  src="{{ 'assets/svg/trash.svg' }}"></svg-icon>
+      </span>
+    </div>
+    <!-- Contunue and return buttons ==== -->
+    <div class="col-span-4 my-4 flex justify-end">
+      <button (click)="add_room()" class="btn-return mr-2" matRipple>Ajouter une chambre</button>
+      <button (click)="send_Data(3)" class="btn-continue" matRipple>Continuer</button>
+    </div>
+    <div *ngIf="savingInfo" class="col-span-4 flex items-center justify-end">
+      <span class="text-xs mr-2">sauvegarde d'information</span>
+      <mat-progress-spinner class="my-auto" diameter="20" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+
+  <!-- Tab4 ======================================================================================================== -->
+  <div
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    id="tab4">
+    <!-- Important chez le client ==== -->
+    <div class="col-span-4 flex items-center mb-3">
+      <span class="section-label">Important chez le client</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">Avez vous un parking ?</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="instServices.data.parking" disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of parkingOption" [value]="x.reference">{{x.name}}</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">Petit déjeuné</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="instServices.data.breakfast" disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of breakfastOption" [value]="x.reference">{{x.name}}</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <!-- Langues parlées ==== -->
+    <div class="col-span-4 flex items-center mt-4 mb-3">
+      <span class="section-label">Langues parlées</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-container col-span-3">
+      <span class="input-label mb-2">Choisir une langue</span>
+      <div *ngFor="let lang of instServices.data.speakingLanguages; let i = index"
+           class="w-full grid grid-cols-3 gap-2 flex items-center mb-2">
+        <div class="input-wrapper col-span-2 input-label px-4">{{ get_lang_name_by_ref(lang) }}</div>
+        <svg-icon [svgStyle]="{ 'height.px':18, 'fill': '#E80B0B' }" class="cursor-pointer"
+                  src="{{ 'assets/svg/trash.svg' }}"></svg-icon>
+      </div>
+    </div>
+    <div *ngIf="speakingLanguage && instServices.data.speakingLanguages.length < speakingLanguage.length"
+         class="input-wrapper col-span-2">
+      <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                  (valueChange)="lang_selected($event)" disableOptionCentering panelClass="my-mat-select"
+                  placeholder="Ajouter une langue ...">
+        <ng-container *ngFor="let x of speakingLanguage">
+          <mat-option *ngIf="instServices.data.speakingLanguages.indexOf(x.reference) == -1"
+                      [value]="x.reference">{{x.name}}</mat-option>
+        </ng-container>
+      </mat-select>
+      <img (click)="arrow_down_clicked()" alt="arrow-down"
+           class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+           src="assets/icons/arrow-down.png">
+    </div>
+    <!-- <div class="col-span-4 flex items-center" (click)="add_lang()">
+      <img src="assets/icons/add.png" class="mr-2" alt="add">
+      <span class="text-xs cursor-pointer">Ajouter une langue</span>
+    </div> -->
+    <!-- Services ==== -->
+    <div class="col-span-4 flex items-center mt-4 mb-3">
+      <span class="section-label">Services</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="col-span-4 grid grid-cols-3 gap-2 row-gap-3">
+      <div *ngFor="let x of service" class="my-1 col-span-1 flex items-center">
+        <mat-checkbox (change)="service_selected($event.checked, x.reference)" (focusin)="input_focused($event.target)"
+                      disableRipple></mat-checkbox>
+        <span class="check-box-label ml-4">{{ x.name }}</span>
+      </div>
+    </div>
+    <!-- continue button ==== -->
+    <div class="col-span-4"></div>
+    <button (click)="send_Data(4)" class="col-span-1 btn-continue" matRipple>Continuer</button>
+    <div *ngIf="savingInfo" class="col-span-1 flex items-center">
+      <span class="text-xs mr-2">sauvegarde d'information</span>
+      <mat-progress-spinner class="my-auto" diameter="20" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+
+  <!-- Tab5 ======================================================================================================== -->
+  <div
+    class="grid grid-cols-6 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    id="tab5">
+    <!-- Lits supplémentaires ==== -->
+    <div class="col-span-6 flex items-center mb-3">
+      <span class="section-label">Lits supplémentaires</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="col-span-3 flex">
+      <mat-radio-group class="w-full">
+        <div class="grid grid-cols-3 gap-4 row-gap-1 w-full">
+          <div class="col-span-3">
+            <span class="input-label">Pouvez-vous fournir des lits supplémentaires?</span>
+          </div>
+          <div class="my-1 col-span-1 flex items-center bg-my-gray-1 p-2 py-4">
+            <mat-radio-button #extra_bed [value]=true checked disableRipple>Oui</mat-radio-button>
+          </div>
+          <div class="my-1 col-span-1 flex items-center bg-my-gray-1 p-2 pr-0">
+            <mat-radio-button [value]=false disableRipple>Non</mat-radio-button>
+          </div>
+        </div>
+      </mat-radio-group>
+    </div>
+    <div class="col-span-2"></div>
+    <ng-container *ngIf="extra_bed.checked">
+      <div class="col-span-2 h-12 input-label">
+        Le nombre de lits supplémentaires qui peuvent être ajoutés
+      </div>
+      <div class="input-wrapper col-span-1">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="equipment.data.extraBedCount" disableOptionCentering panelClass="my-mat-select">
+          <mat-option *ngFor="let x of ' '.repeat(10).split(' '); let i = index" [value]="i+selectedExtraBed"
+                      value="red">{{ i + selectedExtraBed }} bed(s)
+          </mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+      <div class="col-span-6 mt-3">
+        <span class="input-label">vous pouvez accueillir les personnes suivantes dans des lits d'appoint</span>
+      </div>
+
+      <div class="col-span-6 flex items-center mt-2">
+        <mat-checkbox #enfants2ans (change)="extra_bed_selected(0, extraBedFor[0].reference, $event.checked)"
+                      (focusin)="input_focused($event.target)"
+                      disableRipple></mat-checkbox>
+        <span class="check-box-label ml-4">{{ extraBedFor[0].name }}</span>
+      </div>
+      <div *ngIf="enfants2ans.checked" class="input-wrapper col-span-3 my-2">
+        <!-- <span class="input-label mb-2">Entrez le prix par nuit, par enfant</span> -->
+        <span class="input-label flex items-center px-4 h-full bg-my-gray-1" style="min-width: fit-content;">DZD</span>
+        <div class="flex-grow h-full flex items-center">
+          <input (focus)="input_focused($event.target)" [(ngModel)]="equipment.data.extraBed[0].price" class="my-input"
+                 min="0" placeholder="Entrez le prix par nuit, par enfant" type="number">
+        </div>
+      </div>
+
+      <div class="col-span-6 flex items-center mt-2">
+        <mat-checkbox #enfants
+                      (change)="extra_bed_selected(1, extraBedFor[1].reference, $event.checked)"
+                      (focusin)="input_focused($event.target)"
+                      disableRipple></mat-checkbox>
+        <span class="check-box-label ml-4">{{ extraBedFor[1].name }}</span>
+      </div>
+      <div *ngIf="enfants.checked" class="input-wrapper col-span-3 my-2">
+        <!-- <span class="input-label mb-2"></span> -->
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="freeBedForKids" disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option [value]=false>Oui, gratuit</mat-option>
+          <mat-option [value]=true>Payant</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+      <div *ngIf="enfants.checked && freeBedForKids" class="input-wrapper col-span-3 my-2">
+        <!-- <span class="input-label mb-2">Entrez le prix par nuit, par enfant</span> -->
+        <span class="input-label flex items-center px-4 h-full bg-my-gray-1" style="min-width: fit-content;">DZD</span>
+        <div class="flex-grow h-full flex items-center">
+          <input (focus)="input_focused($event.target)" [(ngModel)]="equipment.data.extraBed[1].price" class="my-input"
+                 min="0" placeholder="Entrez le prix par nuit, par enfant" type="number">
+        </div>
+      </div>
+
+      <div class="col-span-6 flex items-center mt-2">
+        <mat-checkbox #adults
+                      (change)="extra_bed_selected(2, extraBedFor[2].reference, $event.checked)"
+                      (focusin)="input_focused($event.target)"
+                      disableRipple></mat-checkbox>
+        <span class="check-box-label ml-4">{{ extraBedFor[2].name }}</span>
+      </div>
+      <div *ngIf="adults.checked" class="input-wrapper col-span-3 my-2">
+        <!-- <span class="input-label mb-2">Entrez le prix par nuit, par adulte</span> -->
+        <span class="input-label flex items-center  px-4 h-full bg-my-gray-1" style="min-width: fit-content;">DZD</span>
+        <div class="flex-grow h-full flex items-center">
+          <input (focus)="input_focused($event.target)" [(ngModel)]="equipment.data.extraBed[2].price" class="my-input"
+                 min="0" placeholder="Entrez le prix par nuit, par adult" type="number">
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Autre equipements ==== -->
+    <div class="col-span-6">
+      <div class="flex items-center mt-4 mb-3">
+        <span class="section-label">Autres équipements</span>
+        <div class="blue_line"></div>
+      </div>
+      <!-- -------------------------------------------------------- ==== -->
+      <div *ngFor="let x of otherEquipment" class="w-1/3 flex items-center my-4">
+        <mat-checkbox (change)="otherEquipment_selected($event.checked, x.reference)"
+                      (focusin)="input_focused($event.target)"
+                      disableRipple></mat-checkbox>
+        <span class="check-box-label ml-4">{{ x.name }}</span>
+      </div>
+    </div>
+    <!-- continue button ==== -->
+    <button (click)="send_Data(5)" class="col-span-2 btn-continue" matRipple>Continuer</button>
+    <div *ngIf="savingInfo" class="col-span-2 flex items-center">
+      <span class="text-xs mr-2">sauvegarde d'information</span>
+      <mat-progress-spinner class="my-auto" diameter="20" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+
+  <!-- Tab6 ======================================================================================================== -->
+  <div
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    id="tab6">
+    <!-- Galerie des photos ==== -->
+    <div class="col-span-4 flex items-center">
+      <span class="section-label">Galerie photos</span>
+      <div class="blue_line"></div>
+    </div>
+    <div (fileDropped)="onFileDropped($event)" appDragDrop
+         class="col-span-4 border-4 border-dashed border-my-gray-3 flex flex-col items-center p-10">
+      <svg-icon [svgStyle]="{ 'width.px':80, 'fill': '#5B636D' }" class="mb-5"
+                src="{{ 'assets/svg/photos.svg' }}"></svg-icon>
+      <span class="font-thin text-xs m-1">Ajouter au moins 1 photo</span>
+      <span class="font-bold text-sm m-1">faites glisser et déposez votre photo ici</span>
+      <span class="relative px-5 py-2 mt-2 bg-my-blue-1 hover:bg-my-blue-2 text-white text-xs font-semibold flex text-center items-center cursor-pointer">
+        Ajouter une photo
+        <input (change)="fileBrowseHandler($event.target.files)"
+               class="opacity-0 absolute top-0 bottom-0 w-full h-full cursor-pointer" multiple
+               type="file">
+      </span>
+    </div>
+    <div *ngIf="savingInfo" class="col-span-4 h-1 bg-gray-400">
+      <div class="images-progress h-full bg-my-blue-1" style="width: 0;"></div>
+    </div>
+    <div *ngFor="let img of editedImages; let i = index" class="col-span-1">
+      <div class="relative w-full" style="padding-bottom: 100%;">
+        <img [src]="img.imageSRC" alt="" class="absolute top-0 h-full object-cover">
+      </div>
+      <span (click)="deleteFile(i)" class="w-full bg-my-gray-3 flex items-center justify-center py-2 cursor-pointer">
+        <svg-icon [svgStyle]="{ 'width.px':15, 'fill': '#FFFFFF' }" class="mr-2"
+                  src="{{ 'assets/svg/trash.svg' }}"></svg-icon>
+        <span class="text-xs font-thin text-white">Supprimer</span>
+      </span>
+    </div>
+    <!-- continue button ==== -->
+    <div class="col-span-4"></div>
+    <button (click)="send_Data(6)" class="col-span-1 btn-continue" matRipple>Continuer</button>
+  </div>
+
+  <!-- Tab7 ======================================================================================================== -->
+  <div
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    id="tab7">
+    <!-- Annulation ==== -->
+    <div class="col-span-4 flex items-center mb-3">
+      <span class="section-label">Annulation</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">{{'hotel_creation.policies.nbr_days' | translate}}?</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="policy.data.policy.cancelingDays" disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of ' '.repeat(9).split(' '); let i= index" [value]=i>{{ i }} Jour(s)</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">ou les clients paieront 100% ?</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="policy.data.policy.paymentTime" disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option *ngFor="let x of paymentTime" [value]="x.reference">{{x.name}}</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div *ngIf="policy.data.policy.cancelingDays && policy.data.policy.paymentTime"
+         class="col-span-4 h-16 flex items-center bg-my-gray-1 shadow-xs cursor-pointer hover:shadow" matRipple>
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-3"
+                src="{{ 'assets/svg/bell.svg' }}"></svg-icon>
+      <div class="flex flex-col justify-center">
+        <span class="text-xs font-bold">{{'hotel_creation.policies.hint' | translate:{'nbr_days':policy.data.policy.cancelingDays, 'where_to_pay': getSelectedPaymentTimeValue()} }}</span>
+        <span class="text-xs font-thin">{{'hotel_creation.policies.can_edit' | translate}}</span>
+      </div>
+    </div>
+    <!-- Check in ==== -->
+    <div class="col-span-4 flex items-center mt-4 mb-3">
+      <span class="section-label">Check in</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">De</span>
+      <div class="w-full h-12 bg-white grid grid-cols-5 gap-2">
+        <div class="col-span-1">
+          <button (click)="select_check('checkIn', 'from', 1, $event.target.value)" class="check-hours-input"
+                  id="checkInfrom1"
+                  value="09">09:00
+          </button>
+        </div>
+        <div class="col-span-1">
+          <button (click)="select_check('checkIn', 'from', 2, $event.target.value)" class="check-hours-input"
+                  id="checkInfrom2"
+                  value="10">10:00
+          </button>
+        </div>
+        <div class="col-span-1">
+          <button (click)="select_check('checkIn', 'from', 3, $event.target.value)" class="check-hours-input"
+                  id="checkInfrom3"
+                  value="11">11:00
+          </button>
+        </div>
+        <div class="input-wrapper col-span-2">
+          <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                      (selectionChange)="select_check('checkIn', 'from', 1, $event.value)"
+                      disableOptionCentering panelClass="my-mat-select"
+                      placeholder="Autre...">
+            <ng-container *ngFor="let hour of checkHours">
+              <mat-option [value]="hour.value">{{hour.text}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <img (click)="arrow_down_clicked()"
+               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+               src="assets/icons/arrow-down.png">
+        </div>
+      </div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">A</span>
+      <div class="w-full h-12 bg-white grid grid-cols-5 gap-2">
+        <div class="col-span-1">
+          <button (click)="select_check('checkIn', 'to', 1, $event.target.value)" class="check-hours-input" disabled
+                  id="checkInto1" value="10">10:00
+          </button>
+        </div>
+        <div class="col-span-1">
+          <button (click)="select_check('checkIn', 'to', 2, $event.target.value)" class="check-hours-input" disabled
+                  id="checkInto2" value="11">11:00
+          </button>
+        </div>
+        <div class="col-span-1">
+          <button (click)="select_check('checkIn', 'to', 3, $event.target.value)" class="check-hours-input" disabled
+                  id="checkInto3" value="12">12:00
+          </button>
+        </div>
+        <span class="input-wrapper col-span-2">
+          <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                      (selectionChange)="select_check('checkIn', 'to', 1, $event.value)"
+                      disableOptionCentering panelClass="my-mat-select"
+                      placeholder="Autre...">
+            <ng-container *ngFor="let hour of checkHours">
+              <mat-option *ngIf="policy.data.checkIn.from && hour.value > policy.data.checkIn.from"
+                          [value]="hour.value">{{hour.text}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <img (click)="arrow_down_clicked()"
+               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+               src="assets/icons/arrow-down.png">
+        </span>
+      </div>
+    </div>
+    <!-- Check out ==== -->
+    <div class="col-span-4 flex items-center mt-4 mb-3">
+      <span class="section-label">Check out</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">De</span>
+      <div class="w-full h-12 bg-white grid grid-cols-5 gap-2">
+        <div class="col-span-1">
+          <button (click)="select_check('checkOut', 'from', 1, $event.target.value)" class="check-hours-input"
+                  id="checkOutfrom1"
+                  value="09">09:00
+          </button>
+        </div>
+        <div class="col-span-1">
+          <button (click)="select_check('checkOut', 'from', 2, $event.target.value)" class="check-hours-input"
+                  id="checkOutfrom2"
+                  value="10">10:00
+          </button>
+        </div>
+        <div class="col-span-1">
+          <button (click)="select_check('checkOut', 'from', 3, $event.target.value)" class="check-hours-input"
+                  id="checkOutfrom3"
+                  value="11">11:00
+          </button>
+        </div>
+        <div class="input-wrapper col-span-2">
+          <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                      (selectionChange)="select_check('checkOut', 'from', 1, $event.value)"
+                      disableOptionCentering panelClass="my-mat-select"
+                      placeholder="Autre...">
+            <ng-container *ngFor="let hour of checkHours">
+              <mat-option [value]="hour.value">{{hour.text}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <img (click)="arrow_down_clicked()"
+               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+               src="assets/icons/arrow-down.png">
+        </div>
+      </div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">A</span>
+      <div class="w-full h-12 bg-white grid grid-cols-5 gap-2">
+        <div class="col-span-1">
+          <button (click)="select_check('checkOut', 'to', 1, $event.target.value)" class="check-hours-input" disabled
+                  id="checkOutto1" value="10">10:00
+          </button>
+        </div>
+        <div class="col-span-1">
+          <button (click)="select_check('checkOut', 'to', 2, $event.target.value)" class="check-hours-input" disabled
+                  id="checkOutto2" value="11">11:00
+          </button>
+        </div>
+        <div class="col-span-1">
+          <button (click)="select_check('checkOut', 'to', 3, $event.target.value)" class="check-hours-input" disabled
+                  id="checkOutto3" value="12">12:00
+          </button>
+        </div>
+        <div class="input-wrapper col-span-2">
+          <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                      (selectionChange)="select_check('checkOut', 'to', 1, $event.value)"
+                      disableOptionCentering panelClass="my-mat-select"
+                      placeholder="Autre...">
+            <ng-container *ngFor="let hour of checkHours">
+              <mat-option *ngIf="policy.data.checkOut.from && hour.value > policy.data.checkOut.from"
+                          [value]="hour.value">{{hour.text}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <img (click)="arrow_down_clicked()"
+               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+               src="assets/icons/arrow-down.png">
+        </div>
+      </div>
+    </div>
+    <!-- Animaux ==== -->
+    <div class="col-span-4 flex items-center mt-4 mb-3">
+      <span class="section-label">Animaux</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">Accepter vous les animaux ?</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="policy.data.animals" disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option [value]=true>Oui c'est permis</mat-option>
+          <mat-option [value]=false>Non sont interdit</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <!-- continue button ==== -->
+    <div class="col-span-4"></div>
+    <button (click)="send_Data(7)" class="col-span-1 btn-continue" matRipple>Continuer</button>
+    <div *ngIf="savingInfo" class="col-span-1 flex items-center">
+      <span class="text-xs mr-2">sauvegarde d'information</span>
+      <mat-progress-spinner class="my-auto" diameter="20" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+
+  <!-- Tab8 ======================================================================================================== -->
+  <div
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    id="tab8">
+    <!-- Option de paiments ==== -->
+    <div class="col-span-4 flex items-center mb-3">
+      <span class="section-label">Option de paiments</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="input-container col-span-2">
+      <span class="input-label mb-2">Pouvez-vous débiter les cartes de crédit sur place?</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="payment.cardCharge" disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option [value]="true">Oui</mat-option>
+          <mat-option [value]="false">Non</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+      <span class="input-label mt-2">Nous informerons les clients que vous n'acceptez que des espèces</span>
+    </div>
+    <div *ngFor="let x of creditCard" class="col-span-4 flex items-center">
+      <mat-checkbox (change)="creditCard_selected($event.checked, x._id)" (focusin)="input_focused($event.target)"
+                    disableRipple></mat-checkbox>
+      <span class="check-box-label ml-4">{{ x.name }}</span>
+    </div>
+    <!-- Commission ==== -->
+    <div class="col-span-4 flex items-center mb-3">
+      <span class="section-label">Commission</span>
+      <div class="blue_line"></div>
+    </div>
+    <div class="col-span-4 h-16 flex items-center bg-my-gray-1 shadow-xs cursor-pointer hover:shadow" matRipple>
+      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-3"
+                src="{{ 'assets/svg/file.svg' }}"></svg-icon>
+      <span class="input-label font-bold">{{'hotel_creation.payment.send_invoice' | translate}}</span>
+      <span class="text-2xl font-bold px-3" style="color: #0ABF32;">17%</span>
+    </div>
+    <div class="input-container col-span-2">
+      <span
+        class="input-label mb-2">Quel nom doit être inscrit sur la facture (par exemple, nom légal / de la société)?</span>
+      <div class="input-wrapper w-full">
+        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+                    [(ngModel)]="payment.data.invoiceName" disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner...">
+          <mat-option [value]="111">votre nom</mat-option>
+          <mat-option [value]="222">nom d'hotel</mat-option>
+          <mat-option [value]="333">votre adress</mat-option>
+        </mat-select>
+        <img (click)="arrow_down_clicked()" alt="arrow-down"
+             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
+             src="assets/icons/arrow-down.png">
+      </div>
+    </div>
+    <div class="col-span-4"></div>
+    <div class="col-span-4 flex">
+      <span class="input-label font-bold">Pour terminer votre inscription, cochez les cases ci-dessous:</span>
+    </div>
+    <div class="col-span-4">
+      <div class="w-full flex items-center my-3">
+        <mat-checkbox (focusin)="input_focused($event.target)" disableRipple></mat-checkbox>
+        <span class="check-box-label ml-4">Text to be placed here</span>
+      </div>
+      <div class="w-full flex items-center my-3">
+        <mat-checkbox (focusin)="input_focused($event.target)" disableRipple></mat-checkbox>
+        <span class="check-box-label ml-4">Text to be placed here</span>
+      </div>
+    </div>
+    <!-- continue button ==== -->
+    <div class="col-span-4"></div>
+    <button (click)="send_Data(8)" class="col-span-2 btn-continue" matRipple>Terminer l'inscription</button>
+    <div *ngIf="savingInfo" class="col-span-1 flex items-center">
+      <span class="text-xs mr-2">sauvegarde d'information</span>
+      <mat-progress-spinner class="my-auto" diameter="20" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+</div>
+

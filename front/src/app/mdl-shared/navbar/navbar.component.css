@@ -1,0 +1,147 @@
+::ng-deep .cdk-overlay-pane {
+  max-width: unset !important;
+}
+/* hidden nav */
+#hidden-nav-wrapper {
+  height: calc(100vh);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(100%);
+  overflow-x: hidden;
+  box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.10);
+  border-top: 1px solid rgb(219, 219, 220);
+  z-index: 40;
+}
+
+#hidden-nav {
+  height: 100%;
+  width: 270px;
+  background-color: white;
+  transition: 0.15s ease-in-out;
+  margin-right: -270px;
+}
+
+.hidden-nav-closer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(100%);
+  width: 100vw;
+  height: calc(100vh);
+  background-color: rgba(0, 0, 0, 0.15);
+  z-index: 40;
+  display: none;
+}
+
+.clicked-hidden-nav {
+  margin-right: 0 !important;
+}
+
+.hidden-nav-item {
+  position: relative;
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  border-bottom: 1px solid #E9E9E9;
+  padding: 15px 10px;
+}
+
+.hidden-nav-item-select {
+  position: relative;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(91, 99, 109, 0.5);
+}
+
+.hidden-nav-item-select span {
+  padding: 5px 8px 0 8px;
+}
+
+.hidden-nav-item-select span:last-child {
+  padding-bottom: 5px;
+}
+
+/* ||| */
+.menu-button {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  margin: 10px 16px;
+}
+
+.menu-button.active ~ .hidden-nav-closer {
+  display: inherit;
+}
+
+.bar {
+  position: absolute;
+  left: 17%;
+  height: 1px;
+  width: 66%;
+  background-color: #5B636D;
+  -webkit-transition: 0.1s ease-in-out, width 0.15s ease-in-out;
+  transition: 0.1s ease-in-out, width 0.15s ease-in-out;
+}
+
+.bar:nth-child(1) {
+  top: 24%;
+}
+
+.bar:nth-child(2) {
+  top: 47%;
+}
+
+.bar:nth-child(3) {
+  top: 47%;
+}
+
+.bar:nth-child(4) {
+  top: 71%;
+}
+
+.menu-button.active .bar:nth-child(1) {
+  width: 0px;
+}
+
+.menu-button.active .bar:nth-child(2) {
+  -webkit-transform: translateX(-50%) rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.menu-button.active .bar:nth-child(3) {
+  -webkit-transform: translateX(-50%) rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.menu-button.active .bar:nth-child(4) {
+  width: 0px;
+}
+
+/* override mat-component css */
+::ng-deep .currency .mat-select-value-text > span {
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+}
+
+/* media queries */
+@media (max-width: 480px) {  /*xs*/
+}
+
+@media (min-width: 480px) {
+  /*md*/
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 1920px) {
+  /*2xl*/
+
+  ::ng-deep .currency .mat-select-value-text > span {
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+  }
+}

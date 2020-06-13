@@ -1,0 +1,66 @@
+<div id="pop-up-2">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <div class="absolute top-0 right-0">
+            <div (click)="closeDialog()" class="menu-button active cursor-pointer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+        <form (ngSubmit)="onRegisterSubmit()" [formGroup]="registerForm">
+            <div class="flex flex-col items-start p-10 w-screen" style="max-width: 500px;">
+                <div class="flex items-end cursor-pointer mb-2" routerLink="/">
+                    <svg-icon class="mx-3" src="{{ 'assets/svg/tripgo-logo.svg' }}"
+                              [svgStyle]="{ 'width.px':120 }"></svg-icon>
+                </div>
+                <span class="text-gray-600 text-sm font-thin mb-2">Je certifie avoir pris connaissance des termes et conditions d’utilisation de la plateforme</span>
+                <div class="w-full h-10 md:h-12 flex items-center border border-my-gray-3">
+                    <svg-icon class="mx-3" src="{{ 'assets/svg/user.svg' }}"
+                              [svgStyle]="{ 'width.px':20, 'fill':'#5B636D' }"></svg-icon>
+                    <label class="flex items-stretch h-full w-full">
+                        <input class="my-input pr-3" formControlName="fullName"
+                               placeholder="Votre nom complet" type="text">
+                    </label>
+                </div>
+                <span *ngIf="submitted && registerForm['controls'].fullName.errors"
+                      class="mt-2 w-full py-1 px-3 bg-red-200 text-red-700 text-xs font-medium rounded-sm">Ce champ est requis</span>
+                <div class="w-full h-10 md:h-12 flex items-center border border-my-gray-3 mt-3">
+                    <svg-icon class="mx-3" src="{{ 'assets/svg/mail.svg' }}"
+                              [svgStyle]="{ 'width.px':20, 'fill':'#5B636D' }"></svg-icon>
+                    <label class="flex items-stretch h-full w-full">
+                        <input class="my-input pr-3" formControlName="email"
+                               placeholder="Adresse email"
+                               type="email" name="email" autocomplete="email" >
+                    </label>
+                </div>
+                <span *ngIf="submitted && registerForm['controls'].email.errors"
+                      class="mt-2 w-full py-1 px-3 bg-red-200 text-red-700 text-xs font-medium rounded-sm">Email not valid</span>
+                <div class="w-full h-10 md:h-12 flex items-center border border-my-gray-3 mt-3">
+                    <svg-icon class="mx-3" src="{{ 'assets/svg/lock.svg' }}"
+                              [svgStyle]="{ 'width.px':20, 'fill':'#5B636D' }"></svg-icon>
+                    <label class="flex items-stretch h-full w-full">
+                        <input class="my-input pr-3" formControlName="password" placeholder="Password"
+                               type="password" autocomplete="current-passwor">
+                    </label>
+                </div>
+                <span *ngIf="submitted && registerForm['controls'].password.errors"
+                      class="mt-2 w-full py-1 px-3 bg-red-200 text-red-700 text-xs font-medium rounded-sm">mot de passe doit étre au min de 8 charactéres</span>
+                <div class="w-full mt-3 flex items-start overflow-hidden">
+                    <mat-checkbox disableRipple formControlName="conditions" required></mat-checkbox>
+                    <span class="ml-3 text-sm">Je certifie avoir pris connaissance des <span
+                            class="text-sm font-semibold">termes et conditions</span> d’utilisation de la plateforme</span>
+                </div>
+                <span *ngIf="submitted && registerForm['controls'].conditions.errors"
+                      class="w-full py-1 px-3 bg-red-200 text-red-700 text-xs font-medium rounded-sm">vous devez accepter les terms et conditions</span>
+
+                <button class="w-full h-10 md:h-12 bg-my-blue-1 text-white font-semibold 2xl:text-lg mt-4"
+                        type="submit">
+                    Continuer
+                </button>
+                <span *ngIf="errorCode"
+                        class="mt-4 w-full py-2 px-3 bg-red-200 text-red-700 text-sm font-medium rounded-sm border font-medium">{{'errors.' + errorCode | translate}}</span>
+            </div>
+        </form>
+    </div>
+</div>

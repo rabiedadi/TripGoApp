@@ -1,0 +1,5 @@
+@import "../styles/mat-component.css";
+::ng-deep .fixed-body {
+  height: 100vh !important;
+  overflow: hidden !important;
+}

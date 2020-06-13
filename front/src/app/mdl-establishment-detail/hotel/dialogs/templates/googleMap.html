@@ -1,0 +1,14 @@
+<div style="height: calc(100% + 48px); margin: -24px">
+  <agm-map #map style="height: 100%" (mapClick)="mapClicked(map)"
+           [latitude]="coordination[0]" [longitude]="coordination[1]" [zoom]="zoom" >
+    <agm-marker [latitude]="hotelCoordination[0]" [longitude]="hotelCoordination[1]" class="h-8 bg-my-gray-3"
+                (markerClick)="markerClicked(infoWindow, map)">
+      <agm-info-window #infoWindow>
+      <span class="text-my-blue-1 font-semibold">
+        Royal Hotel
+      </span>
+        <span class="text-my-gray-3 font-medium">Ce n'est qu'un exemple</span>
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</div>

@@ -1,0 +1,36 @@
+<div>
+  <h1 mat-dialog-title>Edit your profile info</h1>
+  <form>
+    <div mat-dialog-content>
+      <div class="flex flex-col">
+        <span class="text-xs text-my-gray-4 leading-none font-medium">Full name:</span>
+        <input [(ngModel)]="fullName" spellcheck="false" name="fullName" autocomplete="off"
+               class="h-10 border border-my-gray-3 w-full text-xs text-my-gray-4 px-4 mt-2"
+               placeholder="Full name" type="text">
+        <span class="relative w-full h-10 bg-my-blue-1 flex items-center justify-center mt-4 cursor-pointer">
+          <span class="text-white text-xs font-medium px-4">Ajouter une photo</span>
+          <input (change)="prepareProfilePicture($event.target.files[0])"
+                 class="opacity-0 absolute top-0 left-0 h-full w-full cursor-pointer" name="image" type="file" accept=".png, .jpg, .jpeg">
+      </span>
+        <div class="w-full mt-2">
+          <div *ngIf="editedImage.imageSRC" class="relative w-full" style="padding-bottom: 100%;">
+            <img [src]="editedImage.imageSRC" alt="" class="absolute top-0 h-full object-cover">
+          </div>
+        </div>
+        <span class="text-xs text-red-700 bg-red-200 py-1 px-4 font-medium mt-2" *ngIf="errorMessage">{{ errorMessage }}</span>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <div class="flex justify-between w-full pt-4">
+        <button *ngIf="!uploading"
+                class="h-10 bg-my-blue-1 text-white text-sm font-medium px-12"
+                (click)="saveProfileInfo()" name="submit" type="submit">Save</button>
+        <button *ngIf="uploading"
+                class="h-10 bg-my-blue-1 text-white text-sm font-medium px-12"
+                name="uploading" disabled>Saving...</button>
+        <button class="h-10 bg-my-gray-3 text-white text-sm font-medium px-4"
+                (click)="closeDialog()" name="dismiss">Dismiss</button>
+      </div>
+    </div>
+  </form>
+</div>

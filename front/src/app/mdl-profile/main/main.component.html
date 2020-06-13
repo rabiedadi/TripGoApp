@@ -1,0 +1,159 @@
+<app-navbar #navBar></app-navbar>
+
+<div class="flex items-center justify-center w-full bg-my-blue-2">
+  <div class="w-full xl:w-3/4 2xl:w-3/5 py-6 px-4 md:px-12 lg:px-24 xl:px-0">
+    <app-main-search></app-main-search>
+  </div>
+</div>
+<div class="relative w-full grid grid-cols-3 xl:w-3/4 2xl:w-3/5 px-4 md:px-12 lg:px-24 xl:px-0 mx-auto text-my-gray-3">
+  <!-- Tabs MENU =================================================================================================== -->
+  <div #tab_menu class="tabs-menu sm:col-span-1 flex flex-col sm:border-l border-r border-my-gray-2 min-h-screen bg-white">
+    <div (click)="tab_selected(6); tab_menu.classList.remove('expanded-tabs-menu')"
+         class="flex items-center py-3 sm:pl-8 sm:py-10">
+      <img [src]="profilePicSrc"  class="w-10 m-1 sm:m-0 sm:w-1/4 rounded-full cursor-pointer">
+      <div class="flex flex-col ml-5 text-my-gray-4">
+        <span class="font-bold leading-none">{{ authState.user?.fullName || '' }}</span>
+        <span class="text-sm leading-none mt-1">{{ authState.user?.email || '' }}</span>
+      </div>
+    </div>
+    <div (click)="tab_selected(0); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+      <div class="tab-indicator"></div>
+      <img class="mx-4 sm:ml-8" src="assets/icons/profile/building.png">{{'profile.my_establishments' | translate}}
+    </div>
+    <div (click)="tab_selected(1); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+      <div class="tab-indicator"></div>
+      <img class="mx-4 sm:ml-8" src="assets/icons/profile/bed.png">{{'profile.my_reservations' | translate}}
+    </div>
+    <div (click)="tab_selected(2); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+      <div class="tab-indicator"></div>
+      <img class="mx-4 sm:ml-8" src="assets/icons/profile/mail.png">{{'profile.inbox' | translate}}
+      <span class="badge">8</span>
+    </div>
+    <div (click)="tab_selected(3); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+      <div class="tab-indicator"></div>
+      <img class="mx-4 sm:ml-8" src="assets/icons/profile/comment.png">{{'profile.comments' | translate}}
+    </div>
+    <div (click)="tab_selected(4); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+      <div class="tab-indicator"></div>
+      <img class="mx-4 sm:ml-8" src="assets/icons/profile/vip.png">{{'profile.trip_go_vip' | translate}}
+    </div>
+    <div class="tab-label">
+      <div class="tab-indicator"></div>
+      <div (click)="tab_selected(5); tab_menu.classList.add('expanded-tabs-menu')" class="tab-label-content" matRipple>
+        <img class="mx-4 sm:ml-8" src="assets/icons/profile/people.png">{{'profile.profile' | translate}}
+      </div>
+      <div class="hidden-tab-label transform hidden">
+        <div (click)="tab_selected(6); tab_menu.classList.remove('expanded-tabs-menu')"
+             class="flex items-center h-8 ml-12 flex-grow">
+          <img class="mx-4" src="assets/icons/profile/ellipse.png">
+          <span class="text-xs">{{'profile.information' | translate}}</span>
+        </div>
+        <div (click)="tab_selected(7); tab_menu.classList.remove('expanded-tabs-menu')"
+             class="flex items-center h-8 ml-12 flex-grow">
+          <img class="mx-4" src="assets/icons/profile/ellipse.png">
+          <span class="text-xs">{{'profile.payment_methods' | translate}}</span>
+        </div>
+      </div>
+    </div>
+    <span (click)="tab_menu.classList.toggle('expanded-tabs-menu')"
+          class="tab-label mt-16 font-bold text-sm pl-3 text-my-blue-2">
+      <=>
+    </span>
+  </div>
+  <!-- Tab0 ======================================================================================================== -->
+  <div class="tab-0 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12">
+    <div class="mb-3 sm:mb-6 flex flex-col items-start sm:items-center sm:flex-row justify-between">
+      <input class="search-input w-full sm:w-2/4" placeholder="Rechercher"
+             type="search">
+      <span (click)="navBar.openDialog1()"
+            class="text-sm font-bold text-my-blue-1 cursor-pointer mt-2 sm:mt-0">{{'nav_bar.add_establishment' | translate}}</span>
+    </div>
+    <div *ngFor="let estab of establishments$ | async" class="info-card flex sm:h-32" routerLink="/detail/hotel">
+      <img alt="wallpaper" class="h-full w-32 object-cover" src="assets/images/wallpaper1.png">
+      <div class="flex flex-col flex-grow p-4 sm:px-8 sm:py-6" matRipple>
+        <span class="flex items-center">
+          <span class="font-bold text-sm leading-none mr-2 text-my-gray-4">{{ estab.name }}</span>
+          <img *ngFor="let x of ' '.repeat(estab.starsNumber - 1).split(' ')"
+               class="h-2" src="assets/icons/star-gold.png" style="margin-left: 1px">
+        </span>
+        <span class="text-xs leading-none mt-3">{{ estab.province }} - 84 chambres</span>
+        <span class="text-xs leading-none mt-2">
+          <span class="font-medium">Offres :</span> {{ estab.offersNumber }} -
+          <span class="font-bold text-my-blue-2 cursor-pointer">{{'profile.offer_creation' | translate}}</span>
+        </span>
+      </div>
+      <div class="note-badge bg-my-blue-1" routerLink="/detail/hotel  ">
+        <span class="font-bold text-sm leading-none">8.9</span>
+        <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
+      </div>
+    </div>
+  </div>
+  <!-- Tab1 ======================================================================================================== -->
+  <div class="tab-1 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
+  <!-- Tab2 ======================================================================================================== -->
+  <div class="tab-2 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden">
+    <div class="mb-3 sm:mb-6 flex flex-col items-start sm:items-center sm:flex-row justify-between">
+      <input class="search-input w-full sm:w-2/4" placeholder="Rechercher"
+             type="search">
+      <div class="flex items-center mt-2 sm:mt-0 ml-auto">
+        <span class="text-sm font-medium mr-5 sm:mr-2">Disponible</span>
+        <mat-slide-toggle disableRipple></mat-slide-toggle>
+      </div>
+    </div>
+  </div>
+  <!-- Tab3 ======================================================================================================== -->
+  <div class="tab-3 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
+  <!-- Tab4 ======================================================================================================== -->
+  <div class="tab-4 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
+  <!-- Tab6 ======================================================================================================== -->
+  <div class="tab-6 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden">
+    <div class="info-card">
+      <div class="info-card-content justify-between">
+        <div class="flex flex-grow items-center">
+          <img [src]="profilePicSrc" class="rounded-full mr-5" style="width: 56px">
+          <div class="flex flex-col text-my-gray-4">
+            <span class="font-bold text-xs leading-none">Name</span>
+            <span class="text-sm leading-none mt-2">{{ authState.user?.fullName || '' }}</span>
+          </div>
+        </div>
+        <span (click)="openProfileInfoDialog()" class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-content justify-between">
+        <div class="flex flex-col text-my-gray-4">
+          <span class="font-bold text-xs leading-none">Email</span>
+          <span class="text-sm leading-none mt-2">{{ authState.user?.email || '' }}</span>
+          <div *ngIf="!authState.user?.emailConfirmed"
+               class="relative flex items-center px-5 py-2 mt-3 bg-my-gray-1">
+            <span [innerHTML]="'profile.verify_email' | translate | safe:'html'" class="verify-email" (click)="sendEmailVerification()"></span>
+            <div class="absolute left-0 h-full w-1" style="background-color: #FF8A00"></div>
+          </div>
+        </div>
+        <span (click)="openEditEmailDialog()" class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-content justify-between">
+        <div class="flex flex-col text-my-gray-4">
+          <span class="font-bold text-xs leading-none">{{'other.phone' | translate}}</span>
+          <span class="text-sm leading-none mt-2 text-my-gray-3">{{ authState.user?.phone || '.........' | phone }}</span>
+        </div>
+        <span (click)="openEditPhoneDialog()" class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-content justify-between">
+        <div class="flex flex-col text-my-gray-4">
+          <span class="font-bold text-xs leading-none">{{'other.password' | translate}}</span>
+          <div class="flex mt-3">
+            <div *ngFor="let x of ' '.repeat(8).split(' ')" class="h-1 w-1 bg-my-gray-2 rounded-full mr-1"></div>
+          </div>
+        </div>
+        <span (click)="openEditPasswordDialog()" class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
+      </div>
+    </div>
+  </div>
+  <!-- Tab7 ======================================================================================================== -->
+  <div class="tab-7 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
+</div>

@@ -1,0 +1,24 @@
+<div>
+  <h1 mat-dialog-title>Edit your Phone number</h1>
+  <form ngNativeValidate #form>
+    <div mat-dialog-content>
+      <div class="flex flex-col">
+        <span class="text-xs text-my-gray-4 leading-none font-medium">Your Phone number</span>
+        <input [ngModel]="phone | phone"
+               (ngModelChange)="phone = $event"
+               spellcheck="false" autocomplete="on" name="phone-number"
+               class="h-10 border border-my-gray-3 w-full text-xs text-my-gray-4 px-4 mt-2"
+               placeholder="Phone number" type="tel" maxlength="12" minlength="12" required="required">
+        <span class="text-xs text-red-700 bg-red-200 py-1 px-4 font-medium mt-2" *ngIf="errorMessage">{{ errorMessage }}</span>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <div class="flex justify-between w-full pt-4">
+        <button class="h-10 bg-my-blue-1 text-white text-sm font-medium px-12"
+                (click)="form.checkValidity() ? savePhoneNumber() : null" type="submit" name="submit">Save</button>
+        <button class="h-10 bg-my-gray-3 text-white text-sm font-medium px-4"
+                (click)="closeDialog()" name="dismiss">Dismiss</button>
+      </div>
+    </div>
+  </form>
+</div>

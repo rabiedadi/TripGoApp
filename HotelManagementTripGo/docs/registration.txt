@@ -1,0 +1,468 @@
+POST
+http://127.0.0.1:3001/hotel/options/initiate
+******************************************************************
+POST
+http://127.0.0.1:3000/auth/signUp
+
+    req
+    {
+        "fullName": "Hamidi Oussama",
+        "password": "123456789",
+        "email": "o.hamidi@esi-sba.dz"
+    }
+
+    res
+    {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWU3Zjk4MmJhNDZmZTEwZmU0ZmRiMjZjIiwicmVhbEVzdGF0ZV9pZCI6IjVlN2Y5ODJiMWIzNDYwNDFlODNmZWM1NiIsImp3dGlkIjoiNzA0NzUwNTAtNzEyMi0xMWVhLWE1OGUtZDVjNTI4NzEwYjAwIiwiaWF0IjoxNTg1NDIwMzMxLCJleHAiOjE1ODYxNDAzMzF9.MjgFpriW__m1kBz0oy4CpwpfJpe2EZhMD1h8yy3Xvck",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWU3Zjk4MmJhNDZmZTEwZmU0ZmRiMjZjIiwicmVhbEVzdGF0ZV9pZCI6IjVlN2Y5ODJiMWIzNDYwNDFlODNmZWM1NiIsImp3dGlkIjoiNzA0N2VjOTAtNzEyMi0xMWVhLWE1OGUtZDVjNTI4NzEwYjAwIiwiaWF0IjoxNTg1NDIwMzMxLCJleHAiOjE1ODU1MDY3MzF9.3Lvf1uxJZmnFMNDBMzwmfIwYazj_5wnXkMuUDVhHPeI"
+    }
+
+    ************Errors*****************
+    [1, 9, 11, 8]
+
+*******************************************************************
+POST
+  http://localhost:3003/utility/sendSMS
+req
+{
+    "phone":"213550197395"
+}
+res
+{
+    "_id": "d87b765e64a24878a4441dc50b81ed12",
+    "recipient": 213550197395,
+    "status": "sent"
+}
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10, 16]
+
+*******************************************************************
+GET*
+http://localhost:3003/utility/checkConfirmationCode/ea71bc8b193a4605a760f9d7e33e66ff?token=120218
+
+    res 200
+    {
+        "status": "verified",
+        "hotel_id": "5eb360c48d99051f4802482c"
+    }
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10, 17]
+
+*******************************************************************
+POST* (response structure changed)
+      (dont send phone in body)
+http://127.0.0.1:3003/hotel/5e7f982b1b346041e83fec56
+
+    req
+    {
+        "name": "Ibis",
+        "starsNumber": "4",
+        "address": "bab zouar",
+        "city": "alger",
+        "province": "alger",
+        "email": "o.hamidi@esi-sba.dz"
+    }
+
+    res 200
+    {
+        "services": [],
+        "speakingLanguages": [],
+        "otherEquipment": [],
+        "images": [],
+        "creditCards": [],
+        "rooms": [],
+        "offersNumber": 0,
+        "creationStep": 1, *
+        "_id": "5eb3656c41810b3ff00e148e",
+        "phone": "213550197395",
+        "userGroup_id": "5eb3656c1ca488062c095f78",
+        "__v": 0,
+        "address": "bab zouar",
+        "city": "alger",
+        "email": "o.hamidi@esi-sba.dz",
+        "name": "Ibis",
+        "province": "alger",
+        "starsNumber": 4
+    }
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10, 19]
+
+
+*******************************************************************
+POST
+http://127.0.0.1:3003/hotel/room/5e7f982b1b346041e83fec56  (id of hotel)
+
+    req
+    [{
+        "roomType":"Simple",
+        "available": 10,
+        "roomName": "Bedroom",
+        "roomCustomName": "Modern bedroom",
+        "smoking": true,
+        "area": 20,
+        "roomCount": "2",
+        "bathRoomCount": "1",
+        "livingRoomCount": "1",
+        "beds": [{
+            "bedSize":"Single bed",
+            "bedCount":2
+        }],
+        "roomCapacity": "4",
+        "price": 1500
+    }]
+
+    res
+    [
+        {
+            "_id": "5eb813bcfcd89531586b640c",
+            "roomType": "Simple",
+            "available": 10,
+            "roomName": "Bedroom",
+            "roomCustomName": "Modern bedroom",
+            "smoking": true,
+            "area": 20,
+            "roomCount": 2,
+            "bathRoomCount": 1,
+            "livingRoomCount": 1,
+            "beds": [
+                {
+                    "_id": "5eb813bcfcd89531586b640d",
+                    "bedSize": "Single bed",
+                    "bedCount": 2
+                }
+            ],
+            "roomCapacity": 4,
+            "price": 1500,
+            "hotel": "5eb8135882c8e62ba074cd4b",
+            "__v": 0
+        }
+    ]
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10, 11]
+
+*******************************************************************
+PUT
+http://127.0.0.1:3003/hotel/instSer/5e7f982b1b346041e83fec56
+
+    req
+        {
+            "services": ["Free WIFI", "Restaurant", "Restaurant"],
+            "speakingLanguages": ["Arabic", "French"],
+            "parking": "Yes, free",
+            "breakfast": "YES, included in the price"
+        }
+
+    res
+    {
+        "services": [
+            "Free WIFI",
+            "Restaurant",
+            "Restaurant"
+        ],
+        "speakingLanguages": [
+            "Arabic",
+            "French"
+        ],
+        "otherEquipment": [],
+        "images": [],
+        "creditCards": [],
+        "rooms": [
+            "5eb813bcfcd89531586b640c"
+        ],
+        "offersNumber": 0,
+        "creationStep": 3,
+        "_id": "5eb8135882c8e62ba074cd4b",
+        "phone": "213550197395",
+        "userGroup_id": "5eb8135877e5054b401918b2",
+        "__v": 0,
+        "address": "bab zouar",
+        "city": "alger",
+        "email": "o.hamidi@esi-sba.dz",
+        "name": "Ibis",
+        "province": "alger",
+        "starsNumber": 4,
+        "breakfast": "YES, included in the price",
+        "parking": "Yes, free"
+    }
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10]
+
+*******************************************************************
+PUT
+http://127.0.0.1:3003/hotel/Equipment/5e7f982b1b346041e83fec56
+
+    req
+    {
+        "extraBedCount": 3,
+        "extraBed": [{
+            "for": "Child up to 2 years old in cradles",
+            "price": 200
+        }],
+        "otherEquipment": ["Sea view", "Terrace"]
+    }
+
+    res
+    {
+        "extraBed": [
+            {
+                "for": "Child up to 2 years old in cradles",
+                "price": 200
+            }
+        ],
+        "services": [
+            "Free WIFI",
+            "Restaurant",
+            "Restaurant"
+        ],
+        "speakingLanguages": [
+            "Arabic",
+            "French"
+        ],
+        "otherEquipment": [
+            "Sea view",
+            "Terrace"
+        ],
+        "images": [],
+        "creditCards": [],
+        "rooms": [
+            "5eb813bcfcd89531586b640c"
+        ],
+        "offersNumber": 0,
+        "creationStep": 4,
+        "_id": "5eb8135882c8e62ba074cd4b",
+        "phone": "213550197395",
+        "userGroup_id": "5eb8135877e5054b401918b2",
+        "__v": 0,
+        "address": "bab zouar",
+        "city": "alger",
+        "email": "o.hamidi@esi-sba.dz",
+        "name": "Ibis",
+        "province": "alger",
+        "starsNumber": 4,
+        "breakfast": "YES, included in the price",
+        "parking": "Yes, free",
+        "extraBedCount": 3
+    }
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10]
+
+*******************************************************************
+PUT
+http://127.0.0.1:3003/hotel/images/5e7f982b1b346041e83fec56
+
+    req
+      form-data => images (zip)
+    res
+    {
+        "extraBed": [
+            {
+                "for": "Child up to 2 years old in cradles",
+                "price": 200
+            }
+        ],
+        "services": [
+            "Free WIFI",
+            "Restaurant",
+            "Restaurant"
+        ],
+        "speakingLanguages": [
+            "Arabic",
+            "French"
+        ],
+        "otherEquipment": [
+            "Sea view",
+            "Terrace"
+        ],
+        "images": [
+            "20200115_045831.jpg",
+            "20200115_045835.jpg"
+        ],
+        "creditCards": [],
+        "rooms": [
+            "5eb813bcfcd89531586b640c"
+        ],
+        "offersNumber": 0,
+        "creationStep": 5,
+        "_id": "5eb8135882c8e62ba074cd4b",
+        "phone": "213550197395",
+        "userGroup_id": "5eb8135877e5054b401918b2",
+        "__v": 0,
+        "address": "bab zouar",
+        "city": "alger",
+        "email": "o.hamidi@esi-sba.dz",
+        "name": "Ibis",
+        "province": "alger",
+        "starsNumber": 4,
+        "breakfast": "YES, included in the price",
+        "parking": "Yes, free",
+        "extraBedCount": 3
+    }
+
+    ************Errors*****************
+    [1, 3, 4, 10, 12, 13]
+
+*******************************************************************
+PUT
+http://127.0.0.1:3003/hotel/policy/5e7f982b1b346041e83fec56
+
+    req
+    {
+        "policy": {
+            "cancelingDays": 2,
+            "paymentTime":"On arrival"
+
+        },
+        "checkIn":{
+            "from":12,
+            "to":15
+        },
+        "checkOut":{
+            "from":10,
+            "to":12
+        },
+        "animals": false
+    }
+
+    res
+    {
+        "extraBed": [
+            {
+                "for": "Child up to 2 years old in cradles",
+                "price": 200
+            }
+        ],
+        "policy": {
+            "cancelingDays": 2,
+            "paymentTime": "On arrival"
+        },
+        "checkIn": {
+            "from": 12,
+            "to": 15
+        },
+        "checkOut": {
+            "from": 10,
+            "to": 12
+        },
+        "services": [
+            "Free WIFI",
+            "Restaurant",
+            "Restaurant"
+        ],
+        "speakingLanguages": [
+            "Arabic",
+            "French"
+        ],
+        "otherEquipment": [
+            "Sea view",
+            "Terrace"
+        ],
+        "images": [
+            "20200115_045831.jpg",
+            "20200115_045835.jpg"
+        ],
+        "creditCards": [],
+        "rooms": [
+            "5eb813bcfcd89531586b640c"
+        ],
+        "offersNumber": 0,
+        "creationStep": 6,
+        "_id": "5eb8135882c8e62ba074cd4b",
+        "phone": "213550197395",
+        "userGroup_id": "5eb8135877e5054b401918b2",
+        "__v": 0,
+        "address": "bab zouar",
+        "city": "alger",
+        "email": "o.hamidi@esi-sba.dz",
+        "name": "Ibis",
+        "province": "alger",
+        "starsNumber": 4,
+        "breakfast": "YES, included in the price",
+        "parking": "Yes, free",
+        "extraBedCount": 3,
+        "animals": false
+    }
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10]
+
+***************************************************************
+PUT*
+  http://127.0.0.1:3003/hotel/payment/5e7f982b1b346041e83fec56
+
+req
+{
+    "creditCards": ["Visa Card", "Master Card"], (send the name not the id of the credit card)
+    "invoiceName":"Sidahmed Saghouani"
+}
+
+res
+{
+    "extraBed": [
+        {
+            "for": "Child up to 2 years old in cradles",
+            "price": 200
+        }
+    ],
+    "policy": {
+        "cancelingDays": 2,
+        "paymentTime": "On arrival"
+    },
+    "checkIn": {
+        "from": 12,
+        "to": 15
+    },
+    "checkOut": {
+        "from": 10,
+        "to": 12
+    },
+    "services": [
+        "Free WIFI",
+        "Restaurant",
+        "Restaurant"
+    ],
+    "speakingLanguages": [
+        "Arabic",
+        "French"
+    ],
+    "otherEquipment": [
+        "Sea view",
+        "Terrace"
+    ],
+    "images": [
+        "20200115_045831.jpg",
+        "20200115_045835.jpg"
+    ],
+    "creditCards": [
+        "Visa Card",
+        "Master Card"
+    ],
+    "rooms": [
+        "5eb813bcfcd89531586b640c"
+    ],
+    "offersNumber": 0,
+    "creationStep": 7,
+    "_id": "5eb8135882c8e62ba074cd4b",
+    "phone": "213550197395",
+    "userGroup_id": "5eb8135877e5054b401918b2",
+    "__v": 0,
+    "address": "bab zouar",
+    "city": "alger",
+    "email": "o.hamidi@esi-sba.dz",
+    "name": "Ibis",
+    "province": "alger",
+    "starsNumber": 4,
+    "breakfast": "YES, included in the price",
+    "parking": "Yes, free",
+    "extraBedCount": 3,
+    "animals": false,
+    "invoiceName": "Sidahmed Saghouani"
+}
+
+    ************Errors*****************
+    [1, 3, 4, 9, 10]

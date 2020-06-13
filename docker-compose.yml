@@ -1,0 +1,77 @@
+version: '3'
+
+services:
+  client:
+    build: ./front/
+    container_name: client
+    restart: on-failure
+    ports:
+      - "8080:80"   
+    networks:
+      - backend
+    depends_on:
+      - mongo
+
+  authentication:
+    build: ./AuthenticationTripGo/
+    container_name: authentication
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+    depends_on:
+      - mongo
+  
+  management:
+    build: ./HotelManagementTripGo/
+    container_name: management
+    restart: on-failure
+    ports:
+      - "3001:3001"
+    networks:
+      - backend
+    depends_on:
+      - mongo
+      
+  gateway:
+    build: ./Gateway/
+    container_name: gateway
+    restart: on-failure
+    ports:
+      - "3003:3003"
+    networks:
+      - backend
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    networks:
+      - backend
+    ports:
+      - "27017:27017"
+
+  web-server:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      # if need to add https using certbot
+      # - ./data/certbot/conf:/etc/letsencrypt
+    networks:
+      - backend
+    depends_on:
+      - mongo
+      - authentication
+      - client
+
+networks:
+  backend:
+
+volumes:
+  db:
+

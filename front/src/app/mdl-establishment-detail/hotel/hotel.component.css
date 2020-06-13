@@ -1,0 +1,140 @@
+::ng-deep #destination *,
+::ng-deep #check-in-out *,
+::ng-deep #pers-info * {
+  font-size: 14px;
+  color: #5B636D;
+  font-family: 'Montserrat' !important;
+  font-style: normal !important;
+}
+agm-map {
+  height: 100%;
+}
+.box .percent svg {
+  position: relative;
+  height: 46px;
+  width: 46px;
+}
+.box .percent svg circle {
+  fill: none;
+  stroke: #0ABF32;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform: translate(3px, 3px);
+  stroke-dashoffset: calc(-130 + (125 * 90) / 100);
+  stroke-dasharray: 125;
+}
+.percent {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.number {
+  position: absolute;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+}
+.slash {
+   top: 50%;
+   width: 100%;
+   transform: rotate(5.71deg);
+ }
+.service-note {
+  width: 33.33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* comment */
+.comment {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(91, 99, 109, 0.2);
+}
+.comment .content {
+  font-weight: 300;
+  text-align: center;
+}
+.comment .author {
+  text-align: center;
+}
+
+/* media queries */
+@media (max-width: 480px) { /*xs*/
+  .service-note {
+    flex-direction: column;
+  }
+  .service-note svg {
+    width: 25px;
+    margin-bottom: 0.375rem;
+  }
+  .service-note .note {
+    font-size: 10px;
+    margin-top: 0.25rem;
+    line-height: 1;
+  }
+  .service svg {
+    width: 25px;
+    margin-bottom: 0.375rem;
+  }
+  .comment .content {
+    font-size: 11px;
+    padding: 0 2rem;
+    max-height: 48px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .comment .author {
+    font-size: 9px;
+    margin-top: 0.25rem;
+  }
+}
+@media (min-width: 480px) { /*sm*/
+
+}
+@media (min-width: 768px) { /*md*/
+  .service-note {
+    flex-direction: row;
+    margin: 10px 0;
+  }
+  .service-note svg {
+    width: 30px;
+    margin-right: 1rem;
+  }
+  .service-note .note {
+    font-size: 12px;
+    margin-top: 0.5rem;
+    line-height: 1;
+  }
+  .comment .content {
+    font-size: 12px;
+    padding: 0 3rem;
+  }
+  .comment .author {
+    font-size: 10px;
+    margin-top: 0.5rem;
+  }
+}
+@media (min-width: 1024px) { /*xl*/
+  .service-note {
+    flex-direction: row;
+    margin: 20px 0;
+  }
+}
+@media (min-width: 1200px) { /*xl*/
+  .comment .content {
+    font-size: 12px;
+    padding: 0 6rem;
+  }
+}
+@media (min-width: 1920px) { /*2xl*/
+}

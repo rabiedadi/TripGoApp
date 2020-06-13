@@ -1,0 +1,100 @@
+-unknown error
+{
+    "status": 500,
+    "message": "Unexpected ERROR",
+    "code": 1,
+}
+
+-email or password ar not correct
+{
+    "status": 401,
+    "message": "Incorrect email or password",
+    "code": 2,
+}
+
+-invalid token
+{
+    "status": 401,
+    "message": "Invalid Token",
+    "code": 3,
+}
+
+-token not exist
+{
+    "status": 400,
+    "message": "token is required",
+    "code": 4,
+}
+
+-new password equal old password
+{
+    "status": 400,
+    "message": "new password cannot be the old",
+    "code": 5,
+}
+
+-cannot send mail
+{
+    "status": 500,
+    "message": "failure sending mail",
+    "code": 6,
+}
+
+-verification link expired
+{
+    "status": 403,
+    "message": "verification link expired",
+    "code": 7,
+}
+
+-email already exist
+{
+    "status": 409,
+    "message": "email already exist",
+    "code": 8,
+}
+
+-missing required fields
+{
+    "status": 400,
+    "message": "Data validation Error",
+    "code": 9,
+}
+
+-attempt make unauthorized data
+{
+    "status": 401,
+    "message": "unauthorized modification",
+    "code": 11,
+}
+
+-image size more then 1MO
+{
+    "name": "MulterError",
+    "message": "File too large",
+    "code": 12,
+}
+
+-extension image is not in (jpg, jpeg, png)
+{
+    "status": 422,
+    "message": "invalid file format",
+    "code": 13,
+}
+
+-old password is incorrect
+{
+    "status": 400,
+    "message": "old password is incorrect",
+    "code": 14,
+}
+
+-email already verified
+{
+    "status": 403,
+    "message": "email already verified",
+    "code": 15,
+}
+
+
+
