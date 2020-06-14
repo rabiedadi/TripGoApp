@@ -12,20 +12,26 @@ let resError = {};;;;;
 
 module.exports = {
     createUserIfNotExists:function (req, res, next){
-        console.log(req.user_id)
-        userModel.findOneAndUpdate({_id: req.user_id}, {_id:req.user_id, group: mongoose.Types.ObjectId()}, {upsert: true, new:true, setDefaultsOnInsert: true}, function (err, user) {
+        userModel.findOne({_id: req.user_id}, function (err, user) {
             if(err){
                 resError.status = 500; resError.message = 'Unexpected ERROR'; resError.code = 1;
-                resError.path = 'gatewayAPI, MF, createUserIfNotExists'; resError.err = err;
+                resError.path = 'gatewayAPI, MF, createUserIfNotExists, finding user'; resError.err = err;
                 next(resError);
             }else {
                 if (user){
                     req.body.userGroup_id = user.group;
                     next()
                 }else {
-                    resError.status = 500; resError.message = 'Unexpected ERROR'; resError.code = 1;
-                    resError.path = 'gatewayAPI, MF, createUserIfNotExists, cannot fin user'; resError.err = err;
-                    next(resError);
+                    userModel.create({_id:req.user_id, group: mongoose.Types.ObjectId()}, function (err1, user1) {
+                        if(err){
+                            resError.status = 500; resError.message = 'Unexpected ERROR'; resError.code = 1;
+                            resError.path = 'gatewayAPI, MF, createUserIfNotExists, creating user'; resError.err = err1;
+                            next(resError);
+                        }else{
+                            req.body.userGroup_id = user1.group;
+                            next()
+                        }
+                    })
                 }
             }
         });
