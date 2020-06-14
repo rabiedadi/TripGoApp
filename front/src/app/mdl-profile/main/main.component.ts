@@ -4,11 +4,13 @@ import {AppState} from '../../store/app.states';
 import {Observable, Subject} from 'rxjs';
 import {AuthState} from '../../store/reducers/auth.reducers';
 import {MatDialog} from '@angular/material/dialog';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import * as dialogsComponents from './dialogs/dialogs.components';
 import {ToastrService} from 'ngx-toastr';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ProfileService} from '../services/profile.service';
+import {NavigationEnd, Router, RouterEvent} from "@angular/router";
+import {UserInfo} from "../../store/actions/auth.actions";
 
 
 @Component({
@@ -26,12 +28,14 @@ export class MainComponent implements OnInit, OnDestroy {
               private profileS: ProfileService,
               private dialog: MatDialog,
               private toast: ToastrService,
-              public domSanitizer: DomSanitizer) {
+              public domSanitizer: DomSanitizer,
+              private router: Router) {
     this.authState$ = store.select(state => state.auth);
   }
 
   ngOnInit(): void {
     document.getElementsByClassName('tab-label')[0].classList.add('active-tab-label');
+    this.store.dispatch(new UserInfo());
     this.authState$.pipe(takeUntil(this.destroyed$)).subscribe(state => {
       console.log(state);
       this.authState = state;
