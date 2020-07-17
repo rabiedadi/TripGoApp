@@ -4,7 +4,7 @@ let resError = {};
 
 module.exports = {
     getAllPlatformLanguage: function(req, res, next){
-        platformLanguageModel.find({}, {_id:0}, function (err, platformLanguage) {
+        platformLanguageModel.find({}, function (err, platformLanguage) {
             if (err){
                 resError.status = 500; resError.message = 'Unexpected ERROR'; resError.code = 1;
                 resError.path = 'hotelAPI, platformLanguages, getAllPlatformLanguage'; resError.err = err;
