@@ -16,9 +16,6 @@ const hotelModel = require('../Models/hotel');
 const roomModel = require('../Models/room');
 const userModel = require('../Models/user');
 
-
-
-
 const mongoose = require('mongoose');
 
 module.exports = {
