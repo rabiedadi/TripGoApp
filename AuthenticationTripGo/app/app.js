@@ -9,7 +9,7 @@ const RateLimit = require('express-rate-limit');
 const user = require('./routes/user');
 const auth = require('./routes/auth');
 
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
 const mongoose = require('../config/db');
 const config = require('./routes/config');
 
