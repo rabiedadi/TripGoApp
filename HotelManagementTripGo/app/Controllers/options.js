@@ -567,9 +567,9 @@ module.exports = {
         breakfastOptionsModel.create({name:"NO, is not included in the price", language: "EN", reference:"NO, is not included in the price"}, function (err, result) {if (err) console.log(err)});
         breakfastOptionsModel.create({name:"Is not available", language: "EN", reference:"Is not available"}, function (err, result) {if (err) console.log(err)});
 
-        extraBedForModel.create({name:"Child up to 2 years old in cradles", language:  "EN", reference:"Child up to 2 years old in cradles"}, function (err, result) {if (err) console.log(err)});
-        extraBedForModel.create({name:"Children", language:  "EN", reference:"Children"}, function (err, result) {if (err) console.log(err)});
-        extraBedForModel.create({name:"Adults", language:  "EN", reference:"Adults"}, function (err, result) {if (err) console.log(err)});
+        extraBedForModel.create({name:"Child up to 2 years old in cradles", language:  "EN", reference:"Child up to 2 years old in cradles", range:1}, function (err, result) {if (err) console.log(err)});
+        extraBedForModel.create({name:"Children", language:  "EN", reference:"Children", range:2}, function (err, result) {if (err) console.log(err)});
+        extraBedForModel.create({name:"Adults", language:  "EN", reference:"Adults", range:3}, function (err, result) {if (err) console.log(err)});
 
         otherEquipmentModel.create({name: "Air conditioner", language: "EN", reference:"Air conditioner"}, function (err, result) {if (err) console.log(err)});
         otherEquipmentModel.create({name: "Plasma TV", language: "EN", reference:"Plasma TV"}, function (err, result) {if (err) console.log(err)});

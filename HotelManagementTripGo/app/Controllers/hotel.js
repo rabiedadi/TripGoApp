@@ -112,18 +112,22 @@ module.exports = {
         }
     },
 
-    getProfile:function (req, res, next) {
-        //aggregate with offers and translate if the language is not english
-        hotelModel.findOne({_id: mongoose.Types.ObjectId(req.params.id)}, function (err, hotel) {
+    search:function (req, res, next) {
+        hotelModel.find({$or : [{wilaya : req.query.location }
+                , {address : req.query.location }
+                , {city : req.query.location }]}, function (err, hotels) {
             if(err){
                 resError.status = 500; resError.message = 'Unexpected ERROR'; resError.code = 1;
                 resError.path = 'hotelAPI, hotel, getProfile'; resError.err = err;
                 next(resError);
             }else {
-                res.status(200).json(hotel);
+                req.hotels = hotels;
+                next();
             }
         });
     },
 
-
+    sendSearchRequest: function (req, res, next) {
+        res.status(200).json(req.hotels);
+    }
 };

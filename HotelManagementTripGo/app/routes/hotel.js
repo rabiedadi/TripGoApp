@@ -3,6 +3,7 @@ const router = express.Router();
 const hotel = require('../Controllers/hotel');
 const room = require('../Controllers/room');
 const auth = require('../Controllers/auth');
+const offer = require('../Controllers/offer');
 const platformLanguages = require('../Controllers/platformLanguage');
 const hotelValidation = require('../validation/hotel');
 const roomValidation = require('../validation/room');
@@ -19,6 +20,6 @@ router.put('/policy/:realEstate_id',auth.verifyToken, hotelValidation.policy, ho
 router.put('/payment/:realEstate_id',auth.verifyToken, hotelValidation.payment, hotel.insertHotelInfo, hotel.incrementCreationStep);
 
 router.get('/:userGroup_id',auth.verifyToken, hotel.getAllForUser);
-router.get('/:language/profile/:id',auth.verifyToken, hotel.getProfile);
+router.get('/:language/search',auth.verifyToken, hotel.search, offer.getOffersOfHotel, hotel.sendSearchRequest);
 
 module.exports = router;

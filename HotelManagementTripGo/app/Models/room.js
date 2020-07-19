@@ -58,7 +58,8 @@ const Room = new Schema({
     hotel: {
         type: Schema.ObjectId,
         required: true
-    }
+    },
+
 });
 
 module.exports = mongoose.model('Room', Room);
