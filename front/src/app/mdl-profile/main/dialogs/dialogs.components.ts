@@ -200,9 +200,134 @@ export class EditPasswordDialogComponent implements OnDestroy {
   }
 }
 
+@Component({
+  selector: 'app-dialog-add-offer',
+  templateUrl: 'templates/add-offer-dialog.html' })
+export class AddOfferDialogComponent implements OnDestroy {
+  constructor(public dialogRef: MatDialogRef<AddOfferDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: { state$: Observable<AuthState>}) { }
+  destroyed$ = new Subject<boolean>();
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+}
+
+@Component({
+  selector: 'app-dialog-survey',
+  templateUrl: 'templates/survey-dialog.html',
+  styleUrls: ['./templates/survey-dialog.css']})
+export class SurveyDialogComponent implements OnDestroy {
+  constructor(public dialogRef: MatDialogRef<SurveyDialogComponent>,
+              private store: Store<AppState>,
+              @Inject(MAT_DIALOG_DATA) public data: { state$: Observable<AuthState>}) {
+    this.selectedSurvey = this.survey.find(s => s.title === this.selectedSurveyTitle);
+  }
+  destroyed$ = new Subject<boolean>();
+  selectedSurveyTitle = 'tourismeOuTravail';
+  selectedSurvey: any;
+  selectedChoice = null;
+  survey = [
+    {
+      title: 'tourismeOuTravail',
+      status: 'active',
+      type: 'choice',
+      message: 'Votre hôtel se trouve dans un lieu touristique ou bien milieu des affaires',
+      choices: [
+        { choice: 'Touristique', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQEau_0oYvigJPoA42adWlfCQMIUuLmItzT6g&usqp=CAU', nextTitle: 'villeOuNature' },
+        { choice: 'affaires', img: 'https://www.paymentsense.com/uk/blog/wp-content/uploads/2019/01/best-cities-to-start-a-business-2019-e1547472524143.jpg', nextTitle: 'aaa' }
+      ]
+    }, {
+      title: 'villeOuNature',
+      type: 'choice',
+      message: 'Votre hôtel se trouve dans une zone urbaine ou naturelle ?',
+      choices: [
+        { choice: 'Urbaine', img: 'https://webunwto.s3.eu-west-1.amazonaws.com/styles/slider/s3/2020-07/200730-travel-restrictions_0.jpg?itok=NBYof7bK',
+          nextTitle: 'anciennesOuModernes' },
+        { choice: 'naturelle', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRd9TWK0IelS1K76nuSeclkKJYqYkJF-_CxZg&usqp=CAU',
+          nextTitle: 'natureType' }
+      ]
+    }, {
+      title: 'aaa',
+      type: 'simpleChoice',
+      message: 'disposez-vous des chauffeurs pour vos clients ?',
+      choices: [
+        { choice: 'Oui', img: 'https://webunwto.s3.eu-west-1.amazonaws.com/styles/slider/s3/2020-07/200730-travel-restrictions_0.jpg?itok=NBYof7bK',
+          nextTitle: 'anciennesOuModernes' },
+        { choice: 'Non', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRd9TWK0IelS1K76nuSeclkKJYqYkJF-_CxZg&usqp=CAU',
+          nextTitle: 'natureType' }
+      ]
+    }, {
+      title: 'natureType',
+      type: 'selectWithIMGs',
+      message: '',
+      choices: [
+        { choice: 'Mer', img: '', nextTitle: '' },
+        { choice: 'Sahara', img: '', nextTitle: '' },
+        { choice: 'Desert', img: '', nextTitle: '' }
+      ],
+      nextTitle: ''
+    }
+  ];
+  closeDialog() {
+    this.dialogRef.close();
+  }
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
+  preselecteChoice(choiceNb: number, value: number) {
+    const surveyProgressContainer1 =
+        document.getElementsByClassName('survey-progerss-container')[choiceNb] as HTMLElement;
+    const surveyProgressContainer2 =
+        document.getElementsByClassName('survey-progerss-container')[Math.abs(choiceNb - 1)] as HTMLElement;
+    for (let i = 0; i < 5; i++) {
+      (surveyProgressContainer2.children[i] as HTMLElement).style.backgroundColor = 'rgba(91,99,109,1)';
+    }
+    for (let i = 0; i < 5; i++) {
+      (surveyProgressContainer1.children[i] as HTMLElement).style.backgroundColor = 'rgba(91,99,109,1)';
+    }
+    this.selectedChoice = choiceNb;
+    for (let i = 0; i < value; i++) {
+      (surveyProgressContainer1.children[i] as HTMLElement).style.backgroundColor = 'rgba(20, 133, 215, 1)';
+    }
+  }
+
+  nextSurvey() {
+    const s = this.survey.find(_ => _.title === this.selectedSurveyTitle);
+    if (s.type === 'choice') {
+      console.log(s.choices[this.selectedChoice].nextTitle);
+      this.selectedSurveyTitle = s.choices[this.selectedChoice].nextTitle;
+    } else {
+      this.selectedSurveyTitle = s.nextTitle;
+    }
+    if (this.selectedSurveyTitle === '') {
+      this.closeDialog();
+    }
+    this.selectedSurvey = this.survey.find(_ => _.title === this.selectedSurveyTitle);
+  }
+
+  selectedSimpleChoice($event) {
+    Array.from(document.getElementsByClassName('survey-card')).forEach(e => {
+      (e as HTMLElement).style.backgroundColor = 'rgba(91, 99, 109, 1)';
+    });
+    console.log($event.target);
+    $event.stopPropagation();
+    const item = $event.target as HTMLElement;
+    item.style.backgroundColor = 'rgba(20, 133, 215, 1)';
+  }
+}
+
 export const AllDialogsComponents = [
   ProfileInfoDialogComponent,
   EditPasswordDialogComponent,
   EditPhoneDialogComponent,
-  EditEmailDialogComponent
+  EditEmailDialogComponent,
+  AddOfferDialogComponent,
+  SurveyDialogComponent
 ];

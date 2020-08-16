@@ -59,6 +59,7 @@ agm-map {
   flex-direction: column;
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(91, 99, 109, 0.2);
+  flex: 0 0 100%;
 }
 .comment .content {
   font-weight: 300;
@@ -67,7 +68,40 @@ agm-map {
 .comment .author {
   text-align: center;
 }
+/* Slide */
+.slide-wrapper {
+  position: relative;
+  width: 100%;
+}
+.slide-container {
+  display: flex;
+  overflow: scroll;
+}
+.slide-container::-webkit-scrollbar {
+  display: none;
+}
+.slide-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  position: absolute;
+  top: 25%;
+  height: 30px;
+  width: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 2px #666;
+  cursor: pointer;
+}
+#slideNext {
+  right: 12px;
+  display: flex;
+}
 
+#slideBack  {
+  left: 12px;
+  display: flex;
+}
 /* media queries */
 @media (max-width: 480px) { /*xs*/
   .service-note {

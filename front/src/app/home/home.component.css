@@ -2,6 +2,9 @@
   background-position: center;
   height: 300px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
 .content-bg {
@@ -20,6 +23,61 @@
   font-weight: 700;
 }
 
+/* slide */
+#slide-container::-webkit-scrollbar {
+  display: none;
+}
+#slide-container {
+  overflow: scroll;
+}
+.slide-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  position: absolute;
+  top: 40%;
+  height: 40px;
+  width: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 2px #666;
+  display: none;
+  cursor: pointer;
+}
+.slide-btn:hover {
+  box-shadow: 0 0 2px #444;
+}
+
+/* hotel card*/
+
+.hotel-card-wrapper {
+  flex: 0 0 33.33%;
+
+}
+.hotel-card-container {
+  width: calc(100% - 10px);
+  margin: 10px 5px;
+  box-shadow: 0 0 3px #AAA;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.hotel-card-image {
+  width: 100%;
+  padding-bottom: 80%;
+  overflow: hidden;
+
+}
+.hotel-card-image img {
+  height: 100%;
+  object-fit: cover;
+  transition: height 0.5s;
+}
+.hotel-card-image img:hover {
+  height: 105%;
+}
+
 /* media queries */
 @media (max-width: 480px) { /*sm*/
   .main-heading {
@@ -33,7 +91,22 @@
 
 }
 @media (min-width: 768px) { /*lg*/
+  .slide-btn {
+    width: 40px;
+  }
+  #slideNext {
+    right: -20px;
+    display: flex;
+  }
 
+  #slideBack  {
+    left: -20px;
+    display: flex;
+  }
+
+  .hotel-card-wrapper {
+    flex: 0 0 25%;
+  }
 }
 @media (min-width: 1200px) { /*xl*/
   .content-bg {

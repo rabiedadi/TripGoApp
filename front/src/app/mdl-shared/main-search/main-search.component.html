@@ -1,55 +1,49 @@
 <div
   class="grid grid-cols-8 gap-2 row-gap-2 text-my-gray-3 w-full">
   <!-- Destination ==== -->
-  <div class="col-span-8 md:col-span-4 lg:col-span-2 h-10 grid grid-cols-7 gap-0 flex items-center bg-white"
+  <div class="col-span-8 md:col-span-4 lg:col-span-2 h-10 flex items-center bg-white" (click)="destination.open()"
        id="destination">
-    <div class="clo-span-1 flex items-center justify-center cursor-pointer">
-      <svg-icon class="mx-3" src="{{ 'assets/svg/bed.svg' }}" [svgStyle]="{ 'width.px':20, 'fill': 'rgba(91, 99, 109, 0.7)' }"></svg-icon>
-    </div>
-    <div class="col-span-6">
-      <mat-select disableOptionCentering panelClass="mat-select-options mat-select-extra-options"
+      <fa-icon class="mx-3" [icon]="['fal', 'bed-alt']" style="font-size: 1.33em; color: rgba(91, 99, 109, 0.7);"></fa-icon><br>
+      <mat-select (selectionChange)="picker1.open()" #destination disableOptionCentering panelClass="mat-select-options mat-select-extra-options"
                   placeholder="Destination">
         <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
       </mat-select>
-    </div>
   </div>
   <!-- Date ==== -->
   <div class="col-span-8 md:col-span-4 lg:col-span-2 h-10 flex items-center bg-white" id="check-in-out">
-    <div class="w-full h-full grid grid-cols-7 gap-0 flex items-center py-2">
-      <div class="clo-span-1 flex items-center justify-center cursor-pointer" (click)="picker1.open()">
-        <svg-icon class="mx-3" src="{{ 'assets/svg/calendar.svg' }}" [svgStyle]="{ 'width.px':20, 'fill': 'rgba(91, 99, 109, 0.7)' }"></svg-icon>
-      </div>
-      <label class="col-span-3 h-full  flex items-center  border-r">
-        <input (dateChange)="date1Selected($event); picker2.open()" (focus)="picker1.open()"
-               [matDatepicker]="picker1" [min]="minDate1" class="text-center outline-none w-full" matInput
-               placeholder="{{ 'other.checkin' | translate }}">
-        <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker1 [touchUi]="lgScreen ? true : null" panelClass="my-mat-datepicker"></mat-datepicker>
-      </label>
-      <label class="col-span-3 h-full flex items-center">
-        <input (dateChange)="date2Selected($event);" (focus)="picker2.open()" [matDatepicker]="picker2" [min]="minDate2"
-               class="text-center outline-none w-full"
-               matInput placeholder="{{ 'other.checkout' | translate }}">
+    <div class="w-full h-full flex items-center py-2">
+      <fa-icon class="mx-3" [icon]="['fal', 'calendar-alt']" size="lg" style="color: rgba(91, 99, 109, 0.7);"></fa-icon>
+      <div class="grid grid-cols-2 gap-0">
+        <label class="col-span-1 h-full  flex items-center  border-r">
+          <input (dateChange)="date1Selected($event); picker2.open()" (focus)="picker1.open()"
+                 [matDatepicker]="picker1" [min]="minDate1" class="text-center outline-none w-full" matInput
+                 placeholder="{{ 'other.checkin' | translate }}">
+          <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #picker1 [touchUi]="xsScreen ? true : null" panelClass="my-mat-datepicker"></mat-datepicker>
+        </label>
+        <label class="col-span-1 h-full flex items-center">
+          <input (dateChange)="date2Selected($event);" (focus)="picker2.open()" [matDatepicker]="picker2" [min]="minDate2"
+                 class="text-center outline-none w-full"
+                 matInput placeholder="{{ 'other.checkout' | translate }}">
 
-        <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker2 [dateClass]="dateClass" [touchUi]="lgScreen ? true : null"
-                        panelClass="my-mat-datepicker"></mat-datepicker>
-      </label>
+          <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #picker2 [dateClass]="dateClass" [touchUi]="xsScreen ? true : null"
+                          panelClass="my-mat-datepicker"></mat-datepicker>
+        </label>
+      </div>
     </div>
   </div>
   <!-- pers info ==== -->
   <div (click)="showPersInfoPanel()"
        class="relative col-span-8 md:col-span-6 lg:col-span-3 h-10 bg-white cursor-pointer" id="pers-info">
-    <div class="flex items-center grid grid-cols-8 h-10">
-      <div class="clo-span-1 flex items-center justify-center cursor-pointer">
-        <svg-icon class="mx-3" src="{{ 'assets/svg/users.svg' }}" [svgStyle]="{ 'width.px':20, 'fill': 'rgba(91, 99, 109, 0.7)' }"></svg-icon>
-      </div>
-      <div class="col-span-6 flex">
+    <div class="flex items-center h-10">
+      <fa-icon class="mx-3" [icon]="['fal', 'users']" size="1x" style="color: rgba(91, 99, 109, 0.7);"></fa-icon><br>
+      <div class="flex flex-grow">
         <span class="text-sm font-medium flex-grow text-center">{{ personalInfo.adults }} {{'other.adult' | translate | plural:personalInfo.adults }}</span>
         <span class="text-sm font-medium flex-grow text-center">{{ personalInfo.children }} {{'other.child' | translate | plural:personalInfo.children }}</span>
         <span class="text-sm font-medium flex-grow text-center">{{ personalInfo.rooms }} {{'other.room' | translate | plural:personalInfo.rooms }}</span>
       </div>
-      <img alt="arrow-down" class="col-span-1 m-auto w-3 cursor-pointer" src="assets/icons/arrow-down.png">
+      <fa-icon class="mx-4" [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D;"></fa-icon><br>
     </div>
     <div #persInfoPanel (click)="$event.stopPropagation()" class="menu-panel hidden">
       <div class="flex flex-col px-4 py-1">

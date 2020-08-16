@@ -6,10 +6,10 @@ import {BuildingComponent} from './building/building.component';
 import {OtherComponent} from './other/other.component';
 
 const routes: Routes = [
-  { path: 'hotel', component: HotelComponent },
-  { path: 'house', component: HouseComponent },
-  { path: 'building', component: BuildingComponent },
-  { path: 'other', component: OtherComponent }
+  { path: 'hotel/:id', component: HotelComponent },
+  { path: 'house/:id', component: HouseComponent },
+  { path: 'building/:id', component: BuildingComponent },
+  { path: 'other/:id', component: OtherComponent }
 ];
 
 @NgModule({

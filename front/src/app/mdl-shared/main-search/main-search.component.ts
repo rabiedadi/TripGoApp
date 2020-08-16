@@ -9,7 +9,7 @@ import {SharedService} from '../shared.service';
 export class MainSearchComponent implements OnInit {
 
   constructor(private sharedS: SharedService) {}
-  lgScreen = false;
+  xsScreen = false;
   states = this.sharedS.states;
   minDate1: Date;
   minDate2: Date;
@@ -18,9 +18,8 @@ export class MainSearchComponent implements OnInit {
   personalInfo: {adults: number, children: number, rooms: number} = {adults: 2, children: 0, rooms: 1};
 
   ngOnInit(): void {
-    if (window.screen.width < 768) { // phones and small tabs
-      this.lgScreen = true;
-    }
+    this.xsScreen = window.matchMedia('only screen and (max-width: 760px)').matches;
+
     this.minDate1 = new Date();
     this.minDate1.setDate(this.minDate1.getDate() + 1);
   }

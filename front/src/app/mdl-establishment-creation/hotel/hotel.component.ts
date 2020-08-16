@@ -17,6 +17,7 @@ import {Store} from '@ngrx/store';
 import {AuthState} from '../../store/reducers/auth.reducers';
 import {AppState} from '../../store/app.states';
 import {ToastrService} from 'ngx-toastr';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-hotel-creation',
@@ -33,7 +34,8 @@ export class HotelComponent implements OnInit, OnDestroy {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private store: Store<AppState>,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private route: ActivatedRoute
   ) {
     translate.setDefaultLang(sharedS.currentLang);
     this.authState$ = store.select(state => state.auth);
@@ -112,6 +114,7 @@ export class HotelComponent implements OnInit, OnDestroy {
           }
         });
       });
+      console.log(this.route.snapshot.paramMap.get('id'));
     });
   }
   ngOnDestroy(): void {
@@ -240,7 +243,7 @@ export class HotelComponent implements OnInit, OnDestroy {
     this.tab_navigator(2);
   }
   delete_room(index) {
-    console.log(index)
+    console.log(index);
     if (this.rooms.length > 1) {
       this.rooms.splice(index, 1);
     }
@@ -339,14 +342,14 @@ export class HotelComponent implements OnInit, OnDestroy {
     this.images.forEach(image => {
       this.zipFile.file(image.name, image, {base64: true});
     });
-    await this.zipFile.generateAsync({type: 'blob'}).then(_zip => {
-      imagesFormData.append('images', _zip, 'images.zip');
+    await this.zipFile.generateAsync({type: 'blob'}).then(zip => {
+      imagesFormData.append('images', zip, 'images.zip');
     });
     return imagesFormData;
   }
 
   // TAB6 policies management ============================================================================================================ >
-  getSelectedPaymentTimeValue() : string {
+  getSelectedPaymentTimeValue(): string {
     try {
       return this.paymentTime.find(item => item.reference === this.policy.data.policy.paymentTime).name;
     } catch (e) {
@@ -423,8 +426,8 @@ export class HotelComponent implements OnInit, OnDestroy {
       case 2:
         this.savingInfo = false;
         // if (this.rooms[this.roomIndex].is_ready()) {
-          this.tabProgress++;
-          this.tab_navigator(index + 1);
+        this.tabProgress++;
+        this.tab_navigator(index + 1);
         // } else {
         //   this.toast.warning('Vous avez manqué certains champs à remplir.', '', { positionClass: 'toast-top-center', timeOut: 2000 });
         // }
@@ -434,7 +437,7 @@ export class HotelComponent implements OnInit, OnDestroy {
           const rooms = Array();
           let ready = true;
           this.rooms.forEach(room => {
-            rooms.push(room.data)
+            rooms.push(room.data);
             ready = ready && room.is_ready();
           });
           if (ready) {
@@ -487,7 +490,7 @@ export class HotelComponent implements OnInit, OnDestroy {
         break;
       }
       case 6: {
-        if (this.images.length === 0) { alert('Ajoutez au moins une photos'); this.savingInfo = false; return }
+        if (this.images.length === 0) { alert('Ajoutez au moins une photos'); this.savingInfo = false; return; }
         this.getImagesData().then((fd) => {
           const progress = document.getElementsByClassName('images-progress')[0] as HTMLElement;
           this.loaderS.send_images(fd)

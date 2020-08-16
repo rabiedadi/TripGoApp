@@ -16,6 +16,8 @@ const routes: Routes = [
       .then(mod => mod.SearchResultModule) },
   { path: 'profile', loadChildren: () => import('./mdl-profile/profile.module')
       .then(mod => mod.ProfileModule), canActivate: [AuthGuard] },
+  { path: 'admin', loadChildren: () => import('./mdl-admin/admin.module')
+      .then(mod => mod.AdminModule), canActivate: [AuthGuard] },
   { path: '**', component: ErrorPageComponent }
 ];
 

@@ -1,14 +1,18 @@
 ::ng-deep app-main-search .mat-select-value-text > span,
 ::ng-deep app-main-search .mat-select-placeholder,
 ::ng-deep app-main-search .mat-input-element,
+::ng-deep app-main-search #pers-info span,
 ::ng-deep app-main-search .mat-input-element::placeholder {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500 !important;
   padding-left: 0.5rem;
+  color: #5B636D;
 }
+
 ::ng-deep #destination, ::ng-deep #check-in-out, ::ng-deep #pers-info  {
   box-shadow: 0 1px 3px rgba(0,0,0,0.10);
 }
+
 
 ::ng-deep .mat-calendar-body-selected {
   background-color: #1485D7 !important;
@@ -56,3 +60,31 @@
   color: #5B636D;
   background-color: #F9F9F9;
 }
+
+
+/* media queries */
+@media (max-width: 480px) {
+
+}
+
+@media (min-width: 480px) {  /*md*/
+}
+
+@media (min-width: 768px) {  /*lg*/
+  ::ng-deep app-main-search .mat-select-value-text > span,
+  ::ng-deep app-main-search .mat-select-placeholder,
+  ::ng-deep app-main-search .mat-input-element,
+  ::ng-deep app-main-search #pers-info span,
+  ::ng-deep app-main-search .mat-input-element::placeholder {
+    font-size: 14px;
+    font-weight: 500 !important;
+    padding-left: 0.5rem;
+  }
+}
+
+@media (min-width: 1200px) {  /*xl*/
+}
+
+@media (min-width: 1920px) {  /*2xl*/
+}
+
