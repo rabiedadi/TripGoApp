@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="bg-my-blue-2 w-full h-16 flex">
+    <div (click)="shownComponent = ''" class="h-full flex items-center justify-center flex-grow hover:bg-blue-500 cursor-pointer"><span class="text-white font-semibold">Home</span></div>
+    <div (click)="shownComponent = 'Calendar'" class="h-full flex items-center justify-center flex-grow hover:bg-blue-500 cursor-pointer"><span class="text-white font-semibold">Calendar</span></div>
+    <div (click)="shownComponent = 'Promotions'" class="h-full flex items-center justify-center flex-grow hover:bg-blue-500 cursor-pointer"><span class="text-white font-semibold">Promotions</span></div>
+    <div (click)="shownComponent = 'Reservations'" class="h-full flex items-center justify-center flex-grow hover:bg-blue-500 cursor-pointer"><span class="text-white font-semibold">Reservations</span></div>
+    <div (click)="shownComponent = 'Reviews'" class="h-full flex items-center justify-center flex-grow hover:bg-blue-500 cursor-pointer"><span class="text-white font-semibold">Guest reviews</span></div>
+    <div (click)="shownComponent = 'Finance'" class="h-full flex items-center justify-center flex-grow hover:bg-blue-500 cursor-pointer"><span class="text-white font-semibold">Finance</span></div>
+    <div (click)="shownComponent = 'Analytics'" class="h-full flex items-center justify-center flex-grow hover:bg-blue-500 cursor-pointer"><span class="text-white font-semibold">Analytics</span></div>
+</div>
+<div *ngIf="shownComponent === ''" class="w-full">
+
+</div>
+<app-reservation *ngIf="shownComponent === 'Reservations'"></app-reservation>
+<app-reviews *ngIf="shownComponent === 'Reviews'"></app-reviews>
+<app-calendar *ngIf="shownComponent === 'Calendar'"></app-calendar>
