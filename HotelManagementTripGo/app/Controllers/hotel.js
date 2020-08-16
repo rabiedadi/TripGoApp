@@ -127,6 +127,25 @@ module.exports = {
         });
     },
 
+    getHotelProfile: function(req, res, next) {
+        hotelModel.aggregate().match({_id: mongoose.Types.ObjectId(req.params.id)})/*.unwind({path: "$rooms" })*/
+                                                                .lookup({"from": "rooms",
+                                                                        "localField": "rooms",
+                                                                        "foreignField": "_id",
+                                                                        "as": "roomsDetail"})/*.group({
+            "_id": "$_id",
+            "roomsDetail": { "$push": "$roomsDetail" }
+        })*/.exec( function (err, result) {
+            if(err){
+                resError.status = 500; resError.message = 'Unexpected ERROR'; resError.code = 1;
+                resError.path = 'hotelAPI, hotel, getProfile'; resError.err = err;
+                next(resError);
+            }else {
+                res.status(200).json(result[0])
+            }
+        })
+    },
+
     sendSearchRequest: function (req, res, next) {
         res.status(200).json(req.hotels);
     }

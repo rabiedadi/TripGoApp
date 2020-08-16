@@ -20,6 +20,7 @@ router.put('/policy/:realEstate_id',auth.verifyToken, hotelValidation.policy, ho
 router.put('/payment/:realEstate_id',auth.verifyToken, hotelValidation.payment, hotel.insertHotelInfo, hotel.incrementCreationStep);
 
 router.get('/:userGroup_id',auth.verifyToken, hotel.getAllForUser);
-router.get('/:language/search',auth.verifyToken, hotel.search, offer.getOffersOfHotel, hotel.sendSearchRequest);
+router.get('/profil/:id',auth.verifyToken, hotel.getHotelProfile);
+router.get('/:language/search',auth.verifyToken, hotel.search, hotel.sendSearchRequest);
 
 module.exports = router;

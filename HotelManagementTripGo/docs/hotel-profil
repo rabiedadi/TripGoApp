@@ -1,118 +1,165 @@
 GET
-http://127.0.0.1:3003/hotel/FR/profile/5edfdea8b920270019e9a600
+http://127.0.0.1:3001/hotel/profil/5edfdea8b920270019e9a600
 
     res (200)
     {
-        {
-            "policy": {
-                "cancelingDays": 5,
-                "paymentTime": "On arrival"
+        "_id": "5edfdea8b920270019e9a600",
+        "services": [
+            "Free WIFI",
+            "Restaurant",
+            "Sauna",
+            "Gym",
+            "Air conditioner",
+            "Smoking room"
+        ],
+        "speakingLanguages": [],
+        "otherEquipment": [
+            "Air conditioner",
+            "Sea view",
+            "Terrace",
+            "Satellite channels"
+        ],
+        "images": [
+            "/images/5edfdea8b920270019e9a600/first.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045802.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045803.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045804.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045805.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045806.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045807.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045808.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045809.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045810.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045811.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045812.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045813.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045814.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045815.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045816.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045817.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045818.jpg",
+            "/images/5edfdea8b920270019e9a600/20200115_045819.jpg"
+        ],
+        "creditCards": [
+            "Visa Card",
+            "Master Card"
+        ],
+        "rooms": [
+            "5edfdea8b920270019e9a606",
+            "5edfdea8b920270019e9a607"
+        ],
+        "creationStep": 7,
+        "offersNumber": 0,
+        "roomsNumber": 0,
+        "roomTypeNumber": 0,
+        "name": "Ibis",
+        "starsNumber": 4,
+        "address": "Avenue De Canastel, Route Des Falaises",
+        "city": "Oran",
+        "province": "Oran",
+        "phone": "550505050",
+        "email": "contact@ibis.com",
+        "parking": "Yes, free",
+        "breakfast": "YES, included in the price",
+        "extraBedCount": 1,
+        "extraBed": [
+            {
+                "_id": "5f3943eb30fb6e34289e7fb6",
+                "for": "Child up to 2 years old in cradles",
+                "price": 5000
+            }
+        ],
+        "policy": {
+            "cancelingDays": 5,
+            "paymentTime": "On arrival"
+        },
+        "checkIn": {
+            "from": 9,
+            "to": 15
+        },
+        "checkOut": {
+            "from": 11,
+            "to": 13
+        },
+        "animals": false,
+        "invoiceName": "Ibis",
+        "userGroup_id": "5edfdea8b920270019e9a618",
+        "phoneConfirmed": true,
+        "globalNote": 9,
+        "serviceScore": {
+            "score": 8,
+            "betterThen": 80
+        },
+        "staffScore": {
+            "score": 8,
+            "betterThen": 80
+        },
+        "mailServiceScore": {
+            "score": 8,
+            "betterThen": 80
+        },
+        "locationScore": {
+            "score": 8,
+            "betterThen": 80
+        },
+        "lessExpensiveThan": 80,
+        "comments": [
+            {
+                "_id": "5f3943eb30fb6e34289e7fb7",
+                "fullName": "hamidi oussama",
+                "text": "good hotel"
+            }
+        ],
+        "offer": [],
+        "__v": 0,
+        "roomsDetail": [
+            {
+                "_id": "5edfdea8b920270019e9a606",
+                "roomType": "Simple",
+                "available": 2,
+                "roomName": "Bedroom",
+                "roomCustomName": "Modern bedroom",
+                "smoking": true,
+                "area": 18,
+                "roomCount": 2,
+                "livingRoomCount": 1,
+                "bathRoomCount": 1,
+                "beds": [
+                    {
+                        "_id": "5f3943eb30fb6e34289e7fc8",
+                        "bedSize": "Single bed",
+                        "bedCount": 3
+                    }
+                ],
+                "roomCapacity": 5,
+                "price": 1500,
+                "hotel": "5edfdea8b920270019e9a600",
+                "__v": 0
             },
-            "checkIn": {
-                "from": 9,
-                "to": 15
-            },
-            "checkOut": {
-                "from": 11,
-                "to": 13
-            },
-            "serviceScore": {
-                "score": 8,
-                "betterThen": 80
-            },
-            "staffScore": {
-                "score": 8,
-                "betterThen": 80
-            },
-            "mailServiceScore": {
-                "score": 8,
-                "betterThen": 80
-            },
-            "locationScore": {
-                "score": 8,
-                "betterThen": 80
-            },
-            "services": [
-                "Free WIFI",
-                "Restaurant",
-                "Sauna",
-                "Gym",
-                "Air conditioner",
-                "Smoking room"
-            ],
-            "speakingLanguages": [],
-            "otherEquipment": [
-                "Air conditioner",
-                "Sea view",
-                "Terrace",
-                "Satellite channels"
-            ],
-            "images": [
-                "/images/5edfdea8b920270019e9a600/first.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045802.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045803.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045804.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045805.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045806.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045807.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045808.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045809.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045810.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045811.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045812.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045813.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045814.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045815.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045816.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045817.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045818.jpg",
-                "/images/5edfdea8b920270019e9a600/20200115_045819.jpg"
-            ],
-            "creditCards": [
-                "Visa Card",
-                "Master Card"
-            ],
-            "rooms": [
-                "5edfdea8b920270019e9a606",
-                "5edfdea8b920270019e9a607"
-            ],
-            "creationStep": 7,
-            "offersNumber": 0,
-            "roomsNumber": 0,
-            "roomTypeNumber": 0,
-            "_id": "5edfdea8b920270019e9a600",
-            "name": "Ibis",
-            "starsNumber": 4,
-            "address": "Avenue De Canastel, Route Des Falaises",
-            "city": "Oran",
-            "province": "Oran",
-            "phone": "550505050",
-            "email": "contact@ibis.com",
-            "parking": "Yes, free",
-            "breakfast": "YES, included in the price",
-            "extraBedCount": 1,
-            "extraBed": [
-                {
-                    "_id": "5ee3e0499134bc22484a891c",
-                    "for": "Child up to 2 years old in cradles",
-                    "price": 5000
-                }
-            ],
-            "animals": false,
-            "invoiceName": "Ibis",
-            "userGroup_id": "5edfdea8b920270019e9a618",
-            "phoneConfirmed": true,
-            "globalNote": 9,
-            "lessExpensiveThan": 80,
-            "comments": [
-                {
-                    "_id": "5ee3e0499134bc22484a891d",
-                    "fullName": "hamidi oussama",
-                    "text": "good hotel"
-                }
-            ],
-            "__v": 0
-        }
+            {
+                "_id": "5edfdea8b920270019e9a607",
+                "roomType": "Duplex",
+                "available": 3,
+                "roomName": "Hotel suite",
+                "roomCustomName": "Deluxe suite",
+                "smoking": true,
+                "area": 18,
+                "roomCount": 2,
+                "livingRoomCount": 1,
+                "bathRoomCount": 1,
+                "beds": [
+                    {
+                        "_id": "5f3943eb30fb6e34289e7fca",
+                        "bedSize": "Double bed",
+                        "bedCount": 3
+                    }
+                ],
+                "roomCapacity": 5,
+                "price": 1500,
+                "hotel": "5edfdea8b920270019e9a600",
+                "__v": 0
+            }
+        ]
     }
 
     ************Errors*****************

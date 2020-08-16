@@ -22,16 +22,34 @@ module.exports = {
     },
 
     getOffersOfHotel: function (req, res, next){
-        req.hotels.forEach(hotel => {
-            offerModel.find({hotel: hotel._id}, function (err, offers) {
+        let itemsProcessed = 0;
+        hotels = JSON.parse(JSON.stringify(req.hotels));
+        req.hotels.forEach(function(part, index, theArray) {
+
+
+            offerModel.find({hotel: theArray[index]._id}, function (err, offers) {
                 if (err){
                     resError.status = 500; resError.message = 'Unexpected ERROR'; resError.code = 1;
                     resError.path = 'hotelAPI, offer, getOffersOfHotel'; resError.err = err;
                     next(resError);
                 }else {
-                    hotel.offers = offers;
+                    req.hotels[index].set('offers', offers);
+                    console.log(hotels[index])
+                    console.log(offers)
+                    console.log(hotels[index].offers)
                 }
             })
-        })
+
+            itemsProcessed++;
+            if(itemsProcessed === theArray.length) {
+                next();
+            }
+
+        });
+
+
+
+
+
     }
 };

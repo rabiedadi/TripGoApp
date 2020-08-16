@@ -23,7 +23,7 @@ const Hotel = new Schema({
     animals:            {type: Boolean},
     creditCards:        [String],
     invoiceName:        {type: String},
-    rooms:              [String],
+    rooms:              [Schema.ObjectId],
     userGroup_id:       {type: Schema.ObjectId, required: true},
     creationStep:       {type: Number, default: 0},
     phoneConfirmed:     {type: Boolean},
@@ -40,6 +40,16 @@ const Hotel = new Schema({
     roomTypeNumber:     {type: Number, default : 0},
 
     comments: [{fullName: String, date: Date, text: String}],
+
+    offer:[{
+        room: {
+            type: Schema.ObjectId,
+            required: true
+        },
+        services: [{type: String}],
+        reserved: [{dateIn: Date, dateOut: Date}]
+    }]
+
 });
 
 module.exports = mongoose.model('Hotel', Hotel);
