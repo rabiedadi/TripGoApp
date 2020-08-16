@@ -166,7 +166,7 @@ module.exports = {
 
     getHotelProfile: function (req, res, next) {
         const requestOptions = {
-            uri: HotelURL+"/hotel/"+req.params.language+"/profile/"+req.params.id,
+            uri: HotelURL+"/hotel/profil/"+req.params.id,
             method: req.method,
             headers: {'Content-Type': 'application/json', 'Authorization': req.headers['authorization']}
         };

@@ -37,6 +37,6 @@ router.put('/hotel/policy/:realEstate_id', authController.verifyToken, middleFun
 router.put('/hotel/payment/:realEstate_id', authController.verifyToken, middleFunctionsController.sendRequest);
 
 router.get('/establishment', authController.verifyToken, middleFunctionsController.getRealEstatesForOwner);
-router.get('/hotel/:language/profile/:id', authController.verifyToken, middleFunctionsController.getHotelProfile);
+router.get('/hotel/profil/:id', authController.verifyToken, middleFunctionsController.getHotelProfile);
 
 module.exports = router;
