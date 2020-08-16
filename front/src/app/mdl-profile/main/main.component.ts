@@ -4,13 +4,13 @@ import {AppState} from '../../store/app.states';
 import {Observable, Subject} from 'rxjs';
 import {AuthState} from '../../store/reducers/auth.reducers';
 import {MatDialog} from '@angular/material/dialog';
-import {filter, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import * as dialogsComponents from './dialogs/dialogs.components';
 import {ToastrService} from 'ngx-toastr';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ProfileService} from '../services/profile.service';
-import {NavigationEnd, Router, RouterEvent} from "@angular/router";
-import {UserInfo} from "../../store/actions/auth.actions";
+import {Router} from '@angular/router';
+import {UserInfo} from '../../store/actions/auth.actions';
 
 
 @Component({
@@ -24,12 +24,12 @@ export class MainComponent implements OnInit, OnDestroy {
   authState: AuthState;
   establishments$: Observable<any>;
   profilePicSrc = '';
+  private smallScreen = false;
   constructor(private store: Store<AppState>,
               private profileS: ProfileService,
               private dialog: MatDialog,
               private toast: ToastrService,
-              public domSanitizer: DomSanitizer,
-              private router: Router) {
+              public domSanitizer: DomSanitizer) {
     this.authState$ = store.select(state => state.auth);
   }
 
@@ -44,6 +44,10 @@ export class MainComponent implements OnInit, OnDestroy {
       }
     });
     this.establishments$ = this.profileS.getEstablishments();
+    if (window.screen.width < 768) { // phones and small tabs
+      this.smallScreen = true;
+    }
+    this.openSurveyDialog();
   }
 
   ngOnDestroy() {
@@ -149,6 +153,20 @@ export class MainComponent implements OnInit, OnDestroy {
     this.dialog.open(dialogsComponents.EditPasswordDialogComponent, {
       width: '350px',
       data: {state$: this.authState$, toast: this.toast}
+    });
+  }
+
+  openAddOfferDialog() {
+    this.dialog.open(dialogsComponents.AddOfferDialogComponent, {
+      width: '100%',
+      data: {state$: this.authState$}
+    });
+  }
+
+  openSurveyDialog() {
+    this.dialog.open(dialogsComponents.SurveyDialogComponent, {
+      width: this.smallScreen ? '90%' : '50%',
+      data: {}
     });
   }
 }

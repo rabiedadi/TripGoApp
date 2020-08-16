@@ -1,0 +1,55 @@
+<div>
+    <h1 mat-dialog-title></h1>
+    <br>
+    <hr>
+    <br>
+    <div class="flex flex-col container" mat-dialog-content>
+        <ng-container *ngIf="selectedSurvey.type === 'choice'">
+            <span class="mx-auto text-center text-my-gray-4 font-semibold text-lg"
+            >{{ selectedSurvey.message }}</span>
+            <br>
+            <div class="flex justify-between">
+                <div *ngFor="let choice of selectedSurvey.choices; let i = index"
+                     class="survey-container">
+                    <div class="survey-card">
+                        <div class="w-full relative" style="padding-bottom: 100%">
+                            <img class="absolute w-full h-full object-cover" [src]="choice.img ? choice.img : 'assets/images/hotel/img%20(1).jpg' ">
+                        </div>
+                        <span class="text-center text-my-gray-4 font-medium pt-3">{{ choice.choice }}</span>
+                    </div>
+                    <div class="survey-progerss-container grid grid-cols-5 col-gap-1 mt-5">
+                        <div class="survey-progress-element"(mouseover)="preselecteChoice(i, 1)"></div>
+                        <div class="survey-progress-element"(mouseover)="preselecteChoice(i, 2)"></div>
+                        <div class="survey-progress-element"(mouseover)="preselecteChoice(i, 3)"></div>
+                        <div class="survey-progress-element"(mouseover)="preselecteChoice(i, 4)"></div>
+                        <div class="survey-progress-element"(mouseover)="preselecteChoice(i, 5)"></div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="selectedSurvey.type === 'select'">
+            <span class="mx-auto text-center text-my-gray-4 font-semibold text-lg"
+            >{{ selectedSurvey.message }}</span>
+            <div class="grid grid-cols-2 mt-2" style="max-height: 40vh; overflow-y: scroll">
+                <div class="col-span-1 mt-2" *ngFor="let item of selectedSurvey.list">
+                    <mat-checkbox>
+                        {{item}}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+        </ng-container>
+    </div>
+    <br><hr><br>
+    <div class="container" mat-dialog-actions>
+
+        <div class="flex justify-between w-full pt-4">
+            <button (click)="closeDialog()" class="h-10 bg-my-gray-3 text-white text-sm font-medium px-4"
+                    name="dismiss">Annuler</button>
+            <button (click)="nextSurvey()"
+                    class="h-10 bg-my-blue-1 text-white text-sm font-medium px-12"
+                    name="submit" type="submit">Suivant</button>
+
+        </div>
+    </div>
+</div>

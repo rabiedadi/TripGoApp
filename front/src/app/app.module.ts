@@ -25,6 +25,8 @@ import {
     faUserTie, faGifts, faPlus, faBookmark as falBookmark } from '@fortawesome/pro-light-svg-icons';
 import { faBadgeCheck } from '@fortawesome/pro-solid-svg-icons';
 import { faMale, faBookmark as fasBookmark, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import {AllDialogsComponents} from './home/dialogs/dialogs.components';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [
         AppComponent,
         AppRoutingComponents,
+        AllDialogsComponents
     ],
     imports: [
         SharedModule,
@@ -42,11 +45,18 @@ export function HttpLoaderFactory(http: HttpClient) {
         HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        StoreModule.forRoot({ auth: authReducer }),
+        StoreModule.forRoot({auth: authReducer}),
         EffectsModule.forRoot([AuthEffects]),
-        TranslateModule.forRoot({ loader: { provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient]} }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
         ToastrModule.forRoot(),
         FontAwesomeModule,
+        MatCheckboxModule,
     ],
     providers: [
         AuthGuard,

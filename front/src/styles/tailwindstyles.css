@@ -16,6 +16,12 @@ h1 {
   margin: 0.67em 0;
 }
 
+hr {
+  box-sizing: content-box; 
+  height: 0; 
+  overflow: visible; 
+}
+
 a {
   background-color: transparent;
 }
@@ -108,6 +114,7 @@ progress {
 }
 
 h1,
+hr,
 p {
   margin: 0;
 }
@@ -135,6 +142,10 @@ html {
   border-width: 0; 
   border-style: solid; 
   border-color: #e2e8f0; 
+}
+
+hr {
+  border-top-width: 1px;
 }
 
 img {
@@ -196,6 +207,40 @@ img {
   height: auto;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1920px;
+  }
+}
+
 .bg-white {
   --bg-opacity: 1;
   background-color: #fff;
@@ -254,6 +299,12 @@ img {
   --bg-opacity: 1;
   background-color: #4299e1;
   background-color: rgba(66, 153, 225, var(--bg-opacity));
+}
+
+.hover\:bg-my-blue-1:hover {
+  --bg-opacity: 1;
+  background-color: #1485D7;
+  background-color: rgba(20, 133, 215, var(--bg-opacity));
 }
 
 .hover\:bg-my-blue-2:hover {
@@ -404,6 +455,10 @@ img {
   justify-content: space-between;
 }
 
+.justify-around {
+  justify-content: space-around;
+}
+
 .flex-grow {
   flex-grow: 1;
 }
@@ -478,6 +533,10 @@ img {
 
 .h-28 {
   height: 7rem;
+}
+
+.h-32 {
+  height: 8rem;
 }
 
 .h-full {
@@ -811,6 +870,10 @@ img {
   padding-bottom: 0.5rem;
 }
 
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
 .pr-3 {
   padding-right: 0.75rem;
 }
@@ -1046,6 +1109,12 @@ img {
   gap: 1rem;
 }
 
+.col-gap-1 {
+  grid-column-gap: 0.25rem;
+  -moz-column-gap: 0.25rem;
+       column-gap: 0.25rem;
+}
+
 .row-gap-1 {
   grid-row-gap: 0.25rem;
   row-gap: 0.25rem;
@@ -1088,10 +1157,6 @@ img {
 
 .grid-cols-6 {
   grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
-.grid-cols-7 {
-  grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
 .grid-cols-8 {

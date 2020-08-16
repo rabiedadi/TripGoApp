@@ -12,8 +12,8 @@
 }
 
 ::ng-deep .mat-datepicker-content {
-  margin-top: 9px;
-  margin-left: -36px;
+  margin-top: 12px;
+  margin-left: -43px;
 }
 
 ::ng-deep .my-mat-datepicker {
@@ -90,14 +90,6 @@
 
 ::ng-deep .mat-select-value {
   max-width: 100% !important;
-}
-
-::ng-deep .mat-input-element::placeholder,
-::ng-deep .mat-input-element,
-::ng-deep .mat-select-placeholder,
-::ng-deep .mat-select-value-text > span {
-  color: #5B636D !important;
-  outline: none;
 }
 
 ::ng-deep .mat-option {
@@ -190,13 +182,6 @@
 @media (max-width: 480px) {
   ::ng-deep .mat-select-extra-options {
     margin-top: 30px;
-  }
-  /*sm*/
-  ::ng-deep #destination *,
-  ::ng-deep #check-in-out *,
-  ::ng-deep #pers-info * {
-    font-size: 12px !important;
-    color: #5B636D !important;
   }
 }
 

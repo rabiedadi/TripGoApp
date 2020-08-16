@@ -1,13 +1,67 @@
 <app-navbar class="w-full"></app-navbar>
 <!-- form d'info ======================================================================================= -->
-<!--<fa-icon [icon]="['fal', 'users']" size="sm" style="color: rgba(91, 99, 109, 0.7);"></fa-icon><br>-->
-<!--<fa-icon [icon]="['fal', 'bed-alt']" size="lg" style="color: rgba(91, 99, 109, 0.7);"></fa-icon><br>-->
-<!--<fa-icon [icon]="['fal', 'bed-alt']" style="font-size: 1.33em; color: rgba(91, 99, 109, 0.7);"></fa-icon><br>-->
-<!--<fa-icon [icon]="['fal', 'calendar-alt']" style="font-size: 1.4em; color: rgba(91, 99, 109, 0.7);"></fa-icon>-->
-
-<div class="content flex items-center justify-center px-4 md:px-12 lg:px-24 xl:px-0">
-  <div class="flex flex-col justify-start xl:w-3/4 2xl:w-2/4">
-    <h1 class="main-heading" [innerHTML]="'slogan' | translate"></h1>
-    <app-main-search></app-main-search>
-  </div>
+<div class="content px-4 md:px-12 lg:px-24 xl:px-0">
+    <div class="flex flex-col justify-start xl:w-3/4 2xl:w-2/4">
+        <h1 class="main-heading" [innerHTML]="'slogan' | translate"></h1>
+        <app-main-search></app-main-search>
+    </div>
 </div>
+<div class="px-4 md:px-12 lg:px-24 xl:px-0">
+    <div class="m-auto xl:w-3/4 2xl:w-2/4 relative">
+        <div id="slide-container" class="flex items-center">
+            <div class="hotel-card-wrapper">
+                <div class="hotel-card-container">
+                    <div class="hotel-card-image relative">
+                        <img class="absolute w-full" src="assets/images/hotel/img (1).jpg">
+                    </div>
+                    <p class="p-2 text-my-gray-4 text-sm font-bold">Royal Istanbul</p>
+                </div>
+            </div>
+            <div class="hotel-card-wrapper">
+                <div class="hotel-card-container">
+                    <div class="hotel-card-image relative">
+                        <img class="absolute w-full" src="assets/images/hotel/img (2).jpg">
+                    </div>
+                    <p class="p-2 text-my-gray-4 text-sm font-bold">Royal Istanbul</p>
+                </div>
+            </div>
+            <div class="hotel-card-wrapper">
+                <div class="hotel-card-container">
+                    <div class="hotel-card-image relative">
+                        <img class="absolute w-full" src="assets/images/hotel/img (3).jpg">
+                    </div>
+                    <p class="p-2 text-my-gray-4 text-sm font-bold">Royal Istanbul</p>
+                </div>
+            </div>
+            <div class="hotel-card-wrapper">
+                <div class="hotel-card-container">
+                    <div class="hotel-card-image relative">
+                        <img class="absolute w-full" src="assets/images/hotel/img (4).jpg">
+                    </div>
+                    <p class="p-2 text-my-gray-4 text-sm font-bold">Royal Istanbul</p>
+                </div>
+            </div>
+            <div class="hotel-card-wrapper">
+                <div class="hotel-card-container">
+                    <div class="hotel-card-image relative">
+                        <img class="absolute w-full" src="assets/images/hotel/img (5).jpg">
+                    </div>
+                    <p class="p-2 text-my-gray-4 text-sm font-bold">Royal Istanbul</p>
+                </div>
+            </div>
+            <div class="hotel-card-wrapper">
+                <div class="hotel-card-container">
+                    <div class="hotel-card-image relative">
+                        <img class="absolute w-full" src="assets/images/hotel/img (6).jpg">
+                    </div>
+                    <p class="p-2 text-my-gray-4 text-sm font-bold">Royal Istanbul</p>
+                </div>
+            </div>
+        </div>
+        <div (click)="slideBack()" class="slide-btn" id="slideBack" type="button">P</div>
+        <div (click)="slideNext()" class="slide-btn" id="slideNext" type="button">N</div>
+    </div>
+</div>
+
+
+

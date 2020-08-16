@@ -68,19 +68,21 @@
       <span (click)="navBar.openDialog1()"
             class="text-sm font-bold text-my-blue-1 cursor-pointer mt-2 sm:mt-0">{{'nav_bar.add_establishment' | translate}}</span>
     </div>
-    <div *ngFor="let estab of establishments$ | async" class="info-card flex sm:h-32" routerLink="/detail/hotel">
-      <img alt="wallpaper" class="h-full w-32 object-cover" src="assets/images/wallpaper1.png">
+    <!--  //  -->
+    <div *ngFor="let establishment of establishments$ | async" class="info-card flex sm:h-32" >
+      <img alt="wallpaper" class="h-full w-32 object-cover" src="asssets/images/wallpaper1.png" routerLink="/detail/hotel/{{establishment._id}}">
       <div class="flex flex-col flex-grow p-4 sm:px-8 sm:py-6" matRipple>
         <span class="flex items-center">
-          <span class="font-bold text-sm leading-none mr-2 text-my-gray-4">{{ estab.name }}</span>
-          <img *ngFor="let x of ' '.repeat(estab.starsNumber - 1).split(' ')"
+          <span class="font-bold text-sm leading-none mr-2 text-my-gray-4">{{ establishment.name }}</span>
+          <img *ngFor="let x of ' '.repeat(establishment.starsNumber - 1).split(' ')"
                class="h-2" src="assets/icons/star-gold.png" style="margin-left: 1px">
         </span>
-        <span class="text-xs leading-none mt-3">{{ estab.province }} - 84 chambres</span>
-        <span class="text-xs leading-none mt-2">
-          <span class="font-medium">Offres :</span> {{ estab.offersNumber }} -
+        <span class="text-xs leading-none mt-3">{{ establishment.province }} - {{ establishment.roomsNumber }} chambres</span>
+        <span (click)="openAddOfferDialog()" class="text-xs leading-none mt-2">
+          <span class="font-medium">Offres :</span> {{ establishment.offersNumber }} -
           <span class="font-bold text-my-blue-2 cursor-pointer">{{'profile.offer_creation' | translate}}</span>
         </span>
+        <span [routerLink]="['/creation/hotel', {id: establishment._id}]" class="cursor-pointer font-medium text-red-500">Edit (to be styled later)</span>
       </div>
       <div class="note-badge bg-my-blue-1" routerLink="/detail/hotel  ">
         <span class="font-bold text-sm leading-none">8.9</span>

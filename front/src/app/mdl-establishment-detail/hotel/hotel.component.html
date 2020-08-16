@@ -89,11 +89,23 @@
   <div class="w-full relative mt-4 grid grid-cols-4 gap-2">
     <div class="col-span-4 md:col-span-3">
       <div class="border border-gray-border-1 rounded ">
-        <div class="comment">
+        <div class="slide-wrapper">
+          <div class="slide-container">
+            <div class="comment">
             <span class="content">
               Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula
             </span>
-          <span class="author">Karim Mirak le 12/05/2020</span>
+              <span class="author">Karim Mirak le 12/05/2020</span>
+            </div>
+            <div class="comment">
+            <span class="content">
+              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula
+            </span>
+              <span class="author">Karim Mirak le 12/05/2020</span>
+            </div>
+          </div>
+          <div (click)="slideBack()" class="slide-btn" id="slideBack" type="button"><</div>
+          <div (click)="slideNext()" class="slide-btn" id="slideNext" type="button">></div>
         </div>
         <div class="flex items-center py-2">
           <div class="service-note">
