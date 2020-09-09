@@ -201,20 +201,40 @@ export class EditPasswordDialogComponent implements OnDestroy {
 }
 
 @Component({
-  selector: 'app-dialog-add-offer',
-  templateUrl: 'templates/add-offer-dialog.html' })
+    selector: 'app-dialog-add-offer',
+    templateUrl: 'templates/add-offer-dialog.html',
+    styleUrls: ['templates/add-offer-dialog.css']
+})
 export class AddOfferDialogComponent implements OnDestroy {
-  constructor(public dialogRef: MatDialogRef<AddOfferDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { state$: Observable<AuthState>}) { }
-  destroyed$ = new Subject<boolean>();
+    constructor(public dialogRef: MatDialogRef<AddOfferDialogComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: { state$: Observable<AuthState> }) {
+    }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
-  ngOnDestroy() {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-  }
+    destroyed$ = new Subject<boolean>();
+    offerType: string;
+    service = [
+        'service 1',
+        'service 1',
+        'service 1',
+        'service 1',
+        'service 1',
+        'service 1',
+        'service 1',
+        'service 1',
+        'service 1',
+        'service 1'
+    ];
+    PersonsNb: 2;
+    pricePerNight: any;
+
+    closeDialog() {
+        this.dialogRef.close();
+    }
+
+    ngOnDestroy() {
+        this.destroyed$.next(true);
+        this.destroyed$.complete();
+    }
 }
 
 @Component({

@@ -1,14 +1,14 @@
 <app-navbar class="w-full"></app-navbar>
 <!-- form d'info ======================================================================================= -->
-<div class="content px-4 md:px-12 lg:px-24 xl:px-0">
+<div class="bg-wrapper px-4 md:px-12 lg:px-24 xl:px-0">
     <div class="flex flex-col justify-start xl:w-3/4 2xl:w-2/4">
         <h1 class="main-heading" [innerHTML]="'slogan' | translate"></h1>
         <app-main-search></app-main-search>
     </div>
 </div>
 <div class="px-4 md:px-12 lg:px-24 xl:px-0">
-    <div class="m-auto xl:w-3/4 2xl:w-2/4 relative">
-        <div id="slide-container" class="flex items-center">
+    <div class="slider-wrapper">
+        <div class="flex items-center" id="slider-container">
             <div class="hotel-card-wrapper">
                 <div class="hotel-card-container">
                     <div class="hotel-card-image relative">
@@ -62,6 +62,14 @@
         <div (click)="slideNext()" class="slide-btn" id="slideNext" type="button">N</div>
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- footer ============================================================================================ -->
+<app-footer></app-footer>
 
 
 

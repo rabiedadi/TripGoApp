@@ -17,7 +17,8 @@
             <mat-option [value]=2>two</mat-option>
             <mat-option [value]=3>three</mat-option>
           </mat-select>
-          <img alt="arrow-down" class="arrow-down" src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
         </div>
         <div class="input-wrapper col-span-3 sm:col-span-2 lg:col-span-1">
           <mat-select disableOptionCentering panelClass="my-mat-select" placeholder="votre budget">
@@ -25,7 +26,8 @@
             <mat-option [value]=2>two</mat-option>
             <mat-option [value]=3>three</mat-option>
           </mat-select>
-          <img alt="arrow-down" class="arrow-down" src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
         </div>
         <div class="input-wrapper col-span-3 sm:col-span-2 lg:col-span-1">
           <mat-select disableOptionCentering panelClass="my-mat-select" placeholder="Etoiles">
@@ -33,7 +35,8 @@
             <mat-option [value]=2>two</mat-option>
             <mat-option [value]=3>three</mat-option>
           </mat-select>
-          <img alt="arrow-down" class="arrow-down" src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
         </div>
         <div class="input-wrapper col-span-3 sm:col-span-2 lg:col-span-1">
           <mat-select disableOptionCentering panelClass="my-mat-select" placeholder="Localisation">
@@ -41,7 +44,8 @@
             <mat-option [value]=2>two</mat-option>
             <mat-option [value]=3>three</mat-option>
           </mat-select>
-          <img alt="arrow-down" class="arrow-down" src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
         </div>
         <div class="hidden lg:flex col-span-1"></div>
         <div class="input-wrapper col-span-6 sm:col-span-4 lg:col-span-2">
@@ -107,46 +111,58 @@
             <mat-option [value]="'Le moins cher'">Le moins cher</mat-option>
             <mat-option [value]="'Proche de'">Proche de</mat-option>
           </mat-select>
-          <img alt="arrow-down" class="arrow-down" src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
         </div>
       </div>
-      <!-- info cards ============================================================================================== -->
+      <!-- Hotels cards ============================================================================================ -->
       <div class="info-card sm:flex sm:h-56 mt-4">
         <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
-          <span class="flex items-center">
-            <span class="font-bold text-sm leading-none mr-2 text-my-gray-4">Royal Istumbool</span>
-            <img *ngFor="let x of ' '.repeat(4).split(' ')"
-                 class="h-2" src="assets/icons/star-gold.png" style="margin-left: 1px">
+          <span class="flex items-center text-sm">
+            <span [routerLink]="['/detail/hotel', '5f134a1158960000125bffa8']"
+                  class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer">Royal Istumbool</span>
+            <fa-icon *ngFor="let x of 5 | ngForCount" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
+
           </span>
           <span class="text-xs leading-none mt-2 sm:mt-3">
             Hotel adress here - <span class="font-medium text-my-blue-1 cursor-pointer">Regardez sur Map</span>
           </span>
-          <span class="flex mt-3 sm:mt-4">
-            <img class="mr-2" src="assets/icons/profile/vip.png" *ngFor="let x of ' '.repeat(6).split('')">
+          <span class="flex mt-3">
+            <fa-icon [icon]="['fal', 'wifi']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'shuttle-van']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'smoking-ban']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'snowflake']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'bath']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'swimmer']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'hat-chef']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
           </span>
-          <div class="hidden lg:grid grid-cols-3 gap-2 mt-3 sm:mt-4">
+          <div class="hidden lg:grid grid-cols-3 gap-2 mt-3" style="font-size: 10px;">
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
+              <fa-icon [icon]="['fal', 'concierge-bell']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
               <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
             </div>
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
+              <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
               <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
             </div>
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
+              <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
               <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
             </div>
           </div>
           <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">Parking - Restaurant - Picine</span>
-          <div class="lg:h-full flex pt-2">
-            <div class="lg:mt-auto flex">
-              <img src="assets/icons/note_flag.png">
-              <div class="flex flex-col ml-2">
-                <span class="text-sm font-bold text-green-500 leading-none">Exelent</span>
+          <div class="lg:h-full flex">
+            <div class="lg:mt-auto flex items-center text-sm">
+              <div class="relative">
+                <fa-icon [icon]="['fas', 'bookmark']" rotate="270" size="3x" style="color: #0ABF32"></fa-icon>
+                <span class="absolute text-sm text-white font-bold leading-none"
+                      style="top: 50%; left: 0; transform: translate(10%, -50%)">9.7</span>
+              </div>
+              <div class="flex flex-col ml-4">
+                <span class="font-bold leading-none" style="color: #0ABF32">Exelent</span>
                 <span class="text-xs text-my-gray-3 leading-none mt-1">score de localisation</span>
               </div>
             </div>
@@ -188,193 +204,139 @@
         </div>
       </div>
       <div class="info-card sm:flex sm:h-56 mt-4">
-        <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
-          <span class="flex items-center">
-            <span class="font-bold text-sm leading-none mr-2 text-my-gray-4">Royal Istumbool</span>
-            <img *ngFor="let x of ' '.repeat(4).split(' ')"
-                 class="h-2" src="assets/icons/star-gold.png" style="margin-left: 1px">
+      <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
+          <span class="flex items-center text-sm">
+            <span [routerLink]="['/detail/hotel', '5f134a1158960000125bffa8']"
+                  class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer">Royal Istumbool</span>
+            <fa-icon *ngFor="let x of 5 | ngForCount" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
+
           </span>
-          <span class="text-xs leading-none mt-2 sm:mt-3">
+        <span class="text-xs leading-none mt-2 sm:mt-3">
             Hotel adress here - <span class="font-medium text-my-blue-1 cursor-pointer">Regardez sur Map</span>
           </span>
-          <span class="flex mt-3 sm:mt-4">
-            <img class="mr-2" src="assets/icons/profile/vip.png" *ngFor="let x of ' '.repeat(6).split('')">
+        <span class="flex mt-3">
+            <fa-icon [icon]="['fal', 'wifi']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'shuttle-van']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'smoking-ban']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'snowflake']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'bath']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'swimmer']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'hat-chef']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
           </span>
-          <div class="hidden lg:grid grid-cols-3 gap-2 mt-3 sm:mt-4">
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
+        <div class="hidden lg:grid grid-cols-3 gap-2 mt-3" style="font-size: 10px;">
+          <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
+            <fa-icon [icon]="['fal', 'concierge-bell']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+            <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
+            <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
           </div>
-          <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">Parking - Restaurant - Picine</span>
-          <div class="lg:h-full flex pt-2">
-            <div class="lg:mt-auto flex">
-              <img src="assets/icons/note_flag.png">
-              <div class="flex flex-col ml-2">
-                <span class="text-sm font-bold text-green-500 leading-none">Exelent</span>
-                <span class="text-xs text-my-gray-3 leading-none mt-1">score de localisation</span>
-              </div>
-            </div>
+          <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
+            <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+            <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
+            <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
           </div>
-          <div class="flex flex-col sm:hidden mt-3 pt-2 border-t border-gray-border-">
-            <span class="text-xs text-red-500">Reste une chambre</span>
-            <div class="flex justify-between">
-              <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-              <span class="text-sm text-my-gray-4">14 450<span class="font-semibold"> DZD</span></span>
+          <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
+            <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+            <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
+            <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
+          </div>
+        </div>
+        <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">Parking - Restaurant - Picine</span>
+        <div class="lg:h-full flex">
+          <div class="lg:mt-auto flex items-center text-sm">
+            <div class="relative">
+              <fa-icon [icon]="['fas', 'bookmark']" rotate="270" size="3x" style="color: #0ABF32"></fa-icon>
+              <span class="absolute text-sm text-white font-bold leading-none"
+                    style="top: 50%; left: 0; transform: translate(20%, -50%)">9.7</span>
+            </div>
+            <div class="flex flex-col ml-4">
+              <span class="font-bold leading-none" style="color: #0ABF32">Exelent</span>
+              <span class="text-xs text-my-gray-3 leading-none mt-1">score de localisation</span>
             </div>
           </div>
         </div>
-        <div class="sm:h-full sm:w-56 p-2 pt-1 sm:p-3">
-          <div class="h-12 sm:h-full grid grid-cols-4 sm:grid-cols-3 sm:grid-rows-3 gap-1 sm:gap-2">
-            <div class="col-span-1 flex items-center sm:col-span-3 sm:row-span-2">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="0" [src]="items[0].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="1" [src]="items[1].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="2" [src]="items[2].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="3" [src]="items[3].data.thumb">
-            </div>
-          </div>
-        </div>
-        <div class="sm:h-full w-full sm:w-40 ml-auto hidden sm:flex flex-col items-end justify-between p-2 pt-16 pb-5">
+        <div class="flex flex-col sm:hidden mt-3 pt-2 border-t border-gray-border-">
           <span class="text-xs text-red-500">Reste une chambre</span>
-          <div class="flex flex-col justify-between w-2/3 items-end ml-auto">
+          <div class="flex justify-between">
             <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-            <span class="text-sm text-my-gray-4 mt-1">14 450<span class="font-semibold"> DZD</span></span>
+            <span class="text-sm text-my-gray-4">14 450<span class="font-semibold"> DZD</span></span>
           </div>
-        </div>
-        <div class="note-badge bg-my-blue-1">
-          <span class="font-bold text-sm leading-none">8.9</span>
-          <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
         </div>
       </div>
-      <div class="info-card sm:flex sm:h-56 mt-4">
-        <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
-          <span class="flex items-center">
-            <span class="font-bold text-sm leading-none mr-2 text-my-gray-4">Royal Istumbool</span>
-            <img *ngFor="let x of ' '.repeat(4).split(' ')"
-                 class="h-2" src="assets/icons/star-gold.png" style="margin-left: 1px">
-          </span>
-          <span class="text-xs leading-none mt-2 sm:mt-3">
-            Hotel adress here - <span class="font-medium text-my-blue-1 cursor-pointer">Regardez sur Map</span>
-          </span>
-          <span class="flex mt-3 sm:mt-4">
-            <img class="mr-2" src="assets/icons/profile/vip.png" *ngFor="let x of ' '.repeat(6).split('')">
-          </span>
-          <div class="hidden lg:grid grid-cols-3 gap-2 mt-3 sm:mt-4">
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
+      <div class="sm:h-full sm:w-56 p-2 pt-1 sm:p-3">
+        <div class="h-12 sm:h-full grid grid-cols-4 sm:grid-cols-3 sm:grid-rows-3 gap-1 sm:gap-2">
+          <div class="col-span-1 flex items-center sm:col-span-3 sm:row-span-2">
+            <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="0" [src]="items[0].data.thumb">
           </div>
-          <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">Parking - Restaurant - Picine</span>
-          <div class="lg:h-full flex pt-2">
-            <div class="lg:mt-auto flex">
-              <img src="assets/icons/note_flag.png">
-              <div class="flex flex-col ml-2">
-                <span class="text-sm font-bold text-green-500 leading-none">Exelent</span>
-                <span class="text-xs text-my-gray-3 leading-none mt-1">score de localisation</span>
-              </div>
-            </div>
+          <div class="col-span-1 flex items-center">
+            <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="1" [src]="items[1].data.thumb">
           </div>
-          <div class="flex flex-col sm:hidden mt-3 pt-2 border-t border-gray-border-">
-            <span class="text-xs text-red-500">Reste une chambre</span>
-            <div class="flex justify-between">
-              <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-              <span class="text-sm text-my-gray-4">14 450<span class="font-semibold"> DZD</span></span>
-            </div>
+          <div class="col-span-1 flex items-center">
+            <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="2" [src]="items[2].data.thumb">
           </div>
-        </div>
-        <div class="sm:h-full sm:w-56 p-2 pt-1 sm:p-3">
-          <div class="h-12 sm:h-full grid grid-cols-4 sm:grid-cols-3 sm:grid-rows-3 gap-1 sm:gap-2">
-            <div class="col-span-1 flex items-center sm:col-span-3 sm:row-span-2">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="0" [src]="items[0].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="1" [src]="items[1].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="2" [src]="items[2].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="3" [src]="items[3].data.thumb">
-            </div>
+          <div class="col-span-1 flex items-center">
+            <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="3" [src]="items[3].data.thumb">
           </div>
-        </div>
-        <div class="sm:h-full w-full sm:w-40 ml-auto hidden sm:flex flex-col items-end justify-between p-2 pt-16 pb-5">
-          <span class="text-xs text-red-500">Reste une chambre</span>
-          <div class="flex flex-col justify-between w-2/3 items-end ml-auto">
-            <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-            <span class="text-sm text-my-gray-4 mt-1">14 450<span class="font-semibold"> DZD</span></span>
-          </div>
-        </div>
-        <div class="note-badge bg-my-blue-1">
-          <span class="font-bold text-sm leading-none">8.9</span>
-          <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
         </div>
       </div>
+      <div class="sm:h-full w-full sm:w-40 ml-auto hidden sm:flex flex-col items-end justify-between p-2 pt-16 pb-5">
+        <span class="text-xs text-red-500">Reste une chambre</span>
+        <div class="flex flex-col justify-between w-2/3 items-end ml-auto">
+          <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
+          <span class="text-sm text-my-gray-4 mt-1">14 450<span class="font-semibold"> DZD</span></span>
+        </div>
+      </div>
+      <div class="note-badge bg-my-blue-1">
+        <span class="font-bold text-sm leading-none">8.9</span>
+        <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
+      </div>
+    </div>
       <div class="info-card sm:flex sm:h-56 mt-4">
         <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
-          <span class="flex items-center">
-            <span class="font-bold text-sm leading-none mr-2 text-my-gray-4">Royal Istumbool</span>
-            <img *ngFor="let x of ' '.repeat(4).split(' ')"
-                 class="h-2" src="assets/icons/star-gold.png" style="margin-left: 1px">
+          <span class="flex items-center text-sm">
+            <span [routerLink]="['/detail/hotel', '5f134a1158960000125bffa8']"
+                  class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer">Royal Istumbool</span>
+            <fa-icon *ngFor="let x of 5 | ngForCount" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
+
           </span>
           <span class="text-xs leading-none mt-2 sm:mt-3">
             Hotel adress here - <span class="font-medium text-my-blue-1 cursor-pointer">Regardez sur Map</span>
           </span>
-          <span class="flex mt-3 sm:mt-4">
-            <img class="mr-2" src="assets/icons/profile/vip.png" *ngFor="let x of ' '.repeat(6).split('')">
+          <span class="flex mt-3">
+            <fa-icon [icon]="['fal', 'wifi']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'shuttle-van']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'smoking-ban']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'snowflake']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'bath']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'swimmer']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon [icon]="['fal', 'hat-chef']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
           </span>
-          <div class="hidden lg:grid grid-cols-3 gap-2 mt-3 sm:mt-4">
+          <div class="hidden lg:grid grid-cols-3 gap-2 mt-3" style="font-size: 10px;">
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
+              <fa-icon [icon]="['fal', 'concierge-bell']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
               <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
             </div>
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
+              <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
               <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
             </div>
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <img class="h-3 mx-1" src="assets/icons/belle.png">
-              <span class="text-my-gray-4" style="font-size: 10px; white-space: nowrap">Service exelent</span>
+              <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
+              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
               <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
             </div>
           </div>
           <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">Parking - Restaurant - Picine</span>
-          <div class="lg:h-full flex pt-2">
-            <div class="lg:mt-auto flex">
-              <img src="assets/icons/note_flag.png">
-              <div class="flex flex-col ml-2">
-                <span class="text-sm font-bold text-green-500 leading-none">Exelent</span>
+          <div class="lg:h-full flex">
+            <div class="lg:mt-auto flex items-center text-sm">
+              <div class="relative">
+                <fa-icon [icon]="['fas', 'bookmark']" rotate="270" size="3x" style="color: #0ABF32"></fa-icon>
+                <span class="absolute text-sm text-white font-bold leading-none"
+                      style="top: 50%; left: 0; transform: translate(20%, -50%)">9.7</span>
+              </div>
+              <div class="flex flex-col ml-4">
+                <span class="font-bold leading-none" style="color: #0ABF32">Exelent</span>
                 <span class="text-xs text-my-gray-3 leading-none mt-1">score de localisation</span>
               </div>
             </div>

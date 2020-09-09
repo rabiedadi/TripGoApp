@@ -17,7 +17,7 @@ import {Store} from '@ngrx/store';
 import {AuthState} from '../../store/reducers/auth.reducers';
 import {AppState} from '../../store/app.states';
 import {ToastrService} from 'ngx-toastr';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-hotel-creation',
@@ -35,7 +35,8 @@ export class HotelComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private store: Store<AppState>,
     private toast: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     translate.setDefaultLang(sharedS.currentLang);
     this.authState$ = store.select(state => state.auth);
@@ -114,7 +115,6 @@ export class HotelComponent implements OnInit, OnDestroy {
           }
         });
       });
-      console.log(this.route.snapshot.paramMap.get('id'));
     });
   }
   ngOnDestroy(): void {
@@ -535,6 +535,9 @@ export class HotelComponent implements OnInit, OnDestroy {
             this.savingInfo = false;
             console.log(data);
             this.toast.success('Le processus d\'enregistrement de l\'hôtel s\'est terminé avec succès', '', { positionClass: 'toast-top-center', timeOut: 5000 });
+            setTimeout(_ => {
+              this.router.navigate(['/profile', {new: this.loaderS.hotelId}]);
+            }, 2000);
           }, err => {
             console.log(err.error);
             this.savingInfo = false;

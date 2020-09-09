@@ -23,9 +23,11 @@ import {SafePipe} from '../pipes/safe.pipe';
 import {navBarDialogs} from './navbar/dialogs/dialogs.components';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FooterComponent} from './footer/footer.component';
+import {NgForCountPipe} from "../pipes/ng-for-count.pipe";
 
 @NgModule({
-    declarations: [NavbarComponent, MainSearchComponent, PhonePipe, SafePipe, PluralPipe, navBarDialogs],
+    declarations: [NavbarComponent, MainSearchComponent, PhonePipe, SafePipe, PluralPipe, NgForCountPipe, navBarDialogs, FooterComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -55,9 +57,12 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
         MatRippleModule,
         MatSelectModule,
         MatOptionModule,
+        MatCheckboxModule,
         PluralPipe,
         PhonePipe,
-        SafePipe
+        NgForCountPipe,
+        SafePipe,
+        FooterComponent
     ]
 })
 export class SharedModule {

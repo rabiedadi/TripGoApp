@@ -7,37 +7,46 @@
 <div class="w-full xl:w-3/4 2xl:w-3/5 px-4 md:px-12 lg:px-24 xl:px-0 mx-auto text-my-gray-4">
   <div class="w-full grid grid-cols-4 gap-4 my-4">
     <div class="col-span-4 md:col-span-3 rounded bg-my-gray-1 flex items-center justify-between px-6 py-4">
+      <!-- basic hotel Info -------------------------------->
       <div class="flex flex-col justify-between items-start">
-        <span class="p-1 text-white text-xs bg-my-blue-2 rounded-md leading-none hidden md:flex">Hotel 4 étoiles</span>
+        <span class="p-1 px-2 text-white text-xs bg-my-blue-2 rounded-md hidden md:flex">Hotel 4 étoiles</span>
         <div class="flex items-center">
-          <span class="font-bold text-lg mt-1 md:flex items-center">
-            Hotel Lamaraz Art Hotel
+          <span class="font-bold text-lg mt-2 md:flex items-center">
+            <span class="leading-none">Hotel Lamaraz Art Hotel</span>
             <span class="flex md:ml-2">
-              <svg-icon *ngFor="let x of ' '.repeat(3).split(' ')" [svgStyle]="{'width.px': 12, 'fill': '#FF8A00' }"
-                        class="mr-1"
-                        src="{{ 'assets/svg/star_filled.svg' }}"></svg-icon>
+              <div *ngFor="let x of ' '.repeat(3).split(' ')" style="font-size: 0.9rem">
+                <fa-icon class="mr-1" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00"></fa-icon>
+              </div>
             </span>
           </span>
         </div>
-        <span class="font-thin text-sm">Algerie - Alger - Rue du calver 15</span>
+        <span class="font-thin text-sm mt-1">Algerie - Alger - Rue du calver 15</span>
       </div>
-      <div class="box">
-        <div class="percent">
-          <svg>
-            <circle cx="20" cy="20" r="20"></circle>
+      <!-- basic hotel Info end ---------------------------->
+
+      <!-- match-percent-circle -------->
+      <div class="flex flex-col items-center text-my-gray-3">
+        <div id="percent-circle-container">
+          <svg width="100%" height="100%" viewPort="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <circle r="22" cx="50%" cy="50%" fill="transparent"
+                    stroke-dasharray="150"
+                    stroke-dashoffset="150"
+                    stroke-linecap="round"></circle>
           </svg>
-          <div class="number">90%</div>
         </div>
-        <span class="text-sm">match</span>
+        <span class="text-xs">Match</span>
       </div>
+      <!-- match-percent-circle end ---->
     </div>
-    <div class="col-span-4 md:col-span-1 rounded bg-my-gray-1 flex flex-col items-start px-6 py-4">
+
+    <!-- Hotel notes and votes --->
+    <div class="col-span-4 md:col-span-1 rounded bg-my-gray-1 flex flex-col px-6 py-4">
       <div class="flex items-center">
-        <div class="relative">
-          <svg-icon [svgStyle]="{'width.px': 50, 'fill': '#0C568B' }"
-                    src="{{ 'assets/svg/bookmark.svg' }}"></svg-icon>
-          <span class="absolute ml-1 text-sm text-white font-bold leading-none"
-                style="top: 50%; margin-top: -7px; margin-left: 7px">9.7</span>
+        <div class="relative" >
+          <fa-icon [fixedWidth]="true" rotate="270" [icon]="['fas', 'bookmark']"
+                   size="3x" style="color: #0C568B; margin-left: -6px"></fa-icon>
+          <span class="absolute text-sm text-white font-bold leading-none"
+              style="top: 50%; left: 0; transform: translate(40%, -50%)">9.7</span>
         </div>
         <div class="ml-4 flex flex-col">
           <span class="font-thin text-sm leading-none mb-1">Exelent</span>
@@ -46,23 +55,22 @@
           </span>
         </div>
       </div>
-      <div class="flex md:flex-col mt-2">
-        <span class="p-1 px-2 text-white bg-my-blue-2 rounded-full leading-none my-1 flex items-center mr-2"
-              style="font-size: 10px;">
-          Service de chambre
-          <svg-icon [svgStyle]="{'width.px': 8, 'fill': '#0ABF32' }" class="mx-1"
-                    src="{{ 'assets/svg/thumbs_up.svg' }}"></svg-icon>
-          12
+      <div class="flex md:flex-col">
+        <span class="p-1 px-2 text-white bg-my-blue-2 rounded-full leading-none my-1 flex items-end"
+              style="font-size: 10px; align-self: start">
+          <span>Service de chambre</span>
+          <fa-icon class="mx-1" [icon]="['fas', 'thumbs-up']" size="sm" style="color: #0ABF32; margin-bottom: 1px"></fa-icon>
+          <span>12</span>
         </span>
-        <span class="p-1 px-2 text-white bg-my-blue-2 rounded-full leading-none my-1 flex items-center mr-2"
-              style="font-size: 10px;">
-          Reception
-          <svg-icon [svgStyle]="{'width.px': 8, 'fill': '#0ABF32' }" class="mx-1"
-                    src="{{ 'assets/svg/thumbs_up.svg' }}"></svg-icon>
-          08
+        <span class="p-1 px-2 text-white bg-my-blue-2 rounded-full leading-none my-1 flex items-end"
+              style="font-size: 10px; align-self: start">
+          <span>Reception</span>
+          <fa-icon class="mx-1" [icon]="['fas', 'thumbs-up']" size="sm" style="color: #0ABF32; margin-bottom: 1px"></fa-icon>
+          <span>08</span>
         </span>
       </div>
     </div>
+    <!-- Hotel notes and votes end --->
   </div>
   <!-- Galery =============================================================================================================================== -->
   <div class="w-full relative" style="padding-bottom: 33%;">
@@ -89,6 +97,8 @@
   <div class="w-full relative mt-4 grid grid-cols-4 gap-2">
     <div class="col-span-4 md:col-span-3">
       <div class="border border-gray-border-1 rounded ">
+
+        <!-- Comment section ======================================================================================= -->
         <div class="slide-wrapper">
           <div class="slide-container">
             <div class="comment">
@@ -104,12 +114,21 @@
               <span class="author">Karim Mirak le 12/05/2020</span>
             </div>
           </div>
-          <div (click)="slideBack()" class="slide-btn" id="slideBack" type="button"><</div>
-          <div (click)="slideNext()" class="slide-btn" id="slideNext" type="button">></div>
+          <div (click)="slideBack()" class="slide-btn" id="slideBack" type="button">
+            <fa-icon [icon]="['fal', 'chevron-left']" size="lg" style="color: #5B636D;"></fa-icon>
+          </div>
+          <div (click)="slideNext()" class="slide-btn" id="slideNext" type="button">
+            <fa-icon [icon]="['fal', 'chevron-right']" size="lg" style="color: #5B636D;"></fa-icon>
+          </div>
         </div>
+        <!-- Comment section end =================================================================================== -->
+
+        <!-- Services notes section ================================================================================ -->
         <div class="flex items-center py-2">
           <div class="service-note">
-            <svg-icon [svgStyle]="{'fill': '#0C568B' }" src="{{ 'assets/svg/service.svg' }}"></svg-icon>
+            <div style="font-size: 1.2rem">
+              <fa-icon class="mr-3" [icon]="['fal', 'concierge-bell']" size="lg" style="color: #0C568B"></fa-icon>
+            </div>
             <div class="flex flex-col items-center md:items-start">
               <span class="remarque text-xs md:text-sm leading-none">Service exelent</span>
               <span class="note">
@@ -119,7 +138,9 @@
             </div>
           </div>
           <div class="service-note">
-            <svg-icon [svgStyle]="{'fill': '#0C568B' }" src="{{ 'assets/svg/service.svg' }}"></svg-icon>
+            <div style="font-size: 1.2rem">
+              <fa-icon class="mr-3" [icon]="['fal', 'user-tie']" size="lg" style="color: #0C568B"></fa-icon>
+            </div>
             <div class="flex flex-col items-center md:items-start">
               <span class="remarque text-xs md:text-sm leading-none">Service exelent</span>
               <span class="note">
@@ -129,7 +150,9 @@
             </div>
           </div>
           <div class="service-note">
-            <svg-icon [svgStyle]="{'fill': '#0C568B' }" src="{{ 'assets/svg/service.svg' }}"></svg-icon>
+            <div style="font-size: 1.2rem">
+              <fa-icon class="mr-3" [icon]="['fal', 'envelope-open-text']" size="lg" style="color: #0C568B"></fa-icon>
+            </div>
             <div class="flex flex-col items-center md:items-start">
               <span class="remarque text-xs md:text-sm leading-none">Service exelent</span>
               <span class="note">
@@ -139,70 +162,82 @@
             </div>
           </div>
         </div>
+        <!-- Services notes section end ============================================================================ -->
       </div>
+
       <div class="border border-gray-border-1 rounded flex items-center mt-4">
         <div class="bg-my-gray-1 p-6 hidden md:flex items-center">
-          <svg-icon [svgStyle]="{ 'height.px': 35 * serviceIconRatio, 'fill': '#0ABF32' }"
-                    src="{{ 'assets/svg/fat_bookmark.svg' }}"
-                    style="transform: rotate(-16deg)"></svg-icon>
+          <fa-icon [fixedWidth]="true" [icon]="['fas', 'bookmark']" size="2x" style="color: #0ABF32; transform: rotate(-17deg)"></fa-icon>
         </div>
         <div class="flex flex-col justify-center px-5">
           <span class="text-xs font-bold">Moins cher que 78% de toutes les propriétés d’Alger au cours des dernières 24 heures</span>
           <span class="text-xs font-thin mt-1">Moins cher que 78% de toutes les propriétés d’Alger au cours des dernières 24 heures</span>
         </div>
       </div>
+
     </div>
+
+    <!-- Google map ================================================================================================ -->
     <div class="col-span-4 md:col-span-1">
       <div class="border border-gray-border-1 w-full p-2 2xl:p-3 rounded flex flex-col h-full" >
-        <agm-map style="height: 150px; width: 100%" class="mb-2 hidden md:block"></agm-map>
+        <agm-map style="height: 110px; width: 100%" class="mb-2 hidden md:block"></agm-map>
         <span (click)="openMap()" class="my-1 font-bold text-sm cursor-pointer">
           Regardez sur le map
         </span>
       </div>
     </div>
+    <!-- Google map end ============================================================================================ -->
+
   </div>
-  <!-- Servies ============================================================================================================================== -->
-  <div
-    class="w-full px-3 md:px-8 py-3 md:py-5 mt-4 bg-my-gray-1 border border-gray-border-1 rounded">
+
+  <!-- Servies ===================================================================================================== -->
+  <div class="w-full px-3 md:px-8 py-3 md:py-5 mt-4 bg-my-gray-1 border border-gray-border-1 rounded">
     <div class="grid grid-cols-4 md:grid-cols-7">
       <div *ngFor="let s of services" class="service col-span-1 mx-1">
         <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mt-2">
-          <svg-icon [svgStyle]="{'width.px': s.width * serviceIconRatio, 'fill': '#0C568B' }"
-                    src="{{ 'assets/svg/'+s.icon+'.svg' }}"></svg-icon>
+          <div style="font-size: 1rem">
+              <fa-icon class="mx-2" [icon]="['fal', s.icon]" size="2x" style="color: #0C568B"></fa-icon>
+          </div>
         </div>
         <span class="text-xs 2xl:text-sm md:my-2 text-center leading-none">{{ s.name }}</span>
       </div>
     </div>
   </div>
-  <!-- Offres =============================================================================================================================== -->
+  <!-- Servies end ================================================================================================= -->
+
+  <!-- total offres infos ========================================================================================== -->
   <div class="w-full mt-4 flex flex-col md:flex-row md:items-center py-2">
     <div class="flex flex-col py-2 mr-3">
       <span class="text-lg font-bold">Selectionnez votre chambre</span>
-      <div class="flex items-end mt-1">
-        <svg-icon [svgStyle]="{'width.px': 15 , 'fill': '#0ABF32' }" class="mr-2"
-                  src="{{ 'assets/svg/badge_check.svg' }}"></svg-icon>
+      <div class="flex items-center mt-1">
+        <fa-icon class="mr-2" [icon]="['fas', 'badge-check']" size="1x" style="color: #0ABF32"></fa-icon>
         <span class="text-xs font-thin leading-none">Confirmation instantanée</span>
       </div>
     </div>
     <div class="self-stretch border-l border-gray-border-1 mx-5 hidden md:block"></div>
     <div class="flex items-center self-stretch">
-      <div class="flex py-2 mr-3 md:ml-3">
-        <svg-icon [svgStyle]="{'width.px': 20 , 'fill': '#0C568B' }" class="mr-2"
-                  src="{{ 'assets/svg/bed.svg' }}"></svg-icon>
+      <div class="flex items-center py-2 mr-3 md:ml-3">
+        <div style="font-size: 1rem">
+          <fa-icon class="mr-2" [icon]="['fal', 'bed-alt']" size="lg" style="color: #0C568B"></fa-icon>
+        </div>
         <span class="text-sm font-bold leading-none">17 Types de chambres</span>
       </div>
       <div class="self-stretch border-l border-gray-border-1 mx-2 md:mx-5"></div>
-      <div class="flex py-2 ml-3">
-        <svg-icon [svgStyle]="{'width.px': 22, 'fill': '#0C568B' }" class="mr-2"
-                  src="{{ 'assets/svg/gift.svg' }}"></svg-icon>
+      <div class="flex items-center py-2 ml-3">
+        <div style="font-size: 1rem">
+          <fa-icon class="mr-2" [icon]="['fal', 'gifts']" size="lg" style="color: #0C568B"></fa-icon>
+        </div>
         <span class="text-sm font-bold leading-none">58 offres</span>
       </div>
     </div>
   </div>
+  <!-- total offres infos end ====================================================================================== -->
+
+  <!-- Offres ====================================================================================================== -->
   <div class="w-full p-4 mt-4 flex flex-col border border-gray-border-1 rounded">
     <span class="text-lg font-bold">Chambre deluxe</span>
     <div class="w-full mt-2 p-4 flex bg-my-gray-1">
-      <div class="w-1/5">
+      <div class="flex flex-col justify-between w-1/5">
         <div class="relative w-full" style="padding-bottom: 120%">
           <div class="absolute w-full h-full grid grid-cols-2 gap-2">
             <div class="relative col-span-2 bg-my-gray-3" style="padding-bottom: 65%">
@@ -216,30 +251,10 @@
             </div>
           </div>
         </div>
-        <div class="w-full mt-4 px-4 flex flex-col overflow-x-auto">
-          <div class="flex my-3">
-            <img class="h-4 mr-2" src="assets/icons/service1.png">
-            <span class="text-xs leading-none">Wifi gratuit</span>
-          </div>
-          <div class="flex my-3">
-            <img class="h-4 mr-3" src="assets/icons/service1.png">
-            <span class="text-xs leading-none">Un grand lit</span>
-          </div>
-          <div class="flex my-3">
-            <img class="h-4 mr-3" src="assets/icons/service1.png">
-            <span class="text-xs leading-none">Douche</span>
-          </div>
-          <div class="flex my-3">
-            <img class="h-4 mr-3" src="assets/icons/service1.png">
-            <span class="text-xs leading-none">Executive lounge</span>
-          </div>
-          <div class="flex my-3">
-            <img class="h-4 mr-3" src="assets/icons/service1.png">
-            <span class="text-xs leading-none">Balcons</span>
-          </div>
-          <div class="flex my-3">
-            <img class="h-4 mr-3" src="assets/icons/service1.png">
-            <span class="text-xs leading-none">Surface de 44 M</span>
+        <div class="w-full mb-5 flex flex-col overflow-x-auto">
+          <div *ngFor="let s of offreServices" class="flex items-center my-2">
+            <fa-icon class="mx-2" [icon]="['fal', s.icon]" size="1x" style="color: #0C568B"></fa-icon>
+            <span class="text-xs leading-none">{{ s.name }}</span>
           </div>
         </div>
       </div>
@@ -252,24 +267,24 @@
           <div class="col-span-1 text-center"><span class="text-xs font-bold leading-none">Chambres</span></div>
           <div class="col-span-2 text-center"><span class="text-xs font-bold leading-none">Réservation</span></div>
         </div>
-        <div class="mt-2 grid grid-cols-9">
+        <div *ngFor="let x of ' '.repeat(1).split(' ')" class="mt-4 grid grid-cols-9">
           <div class="col-span-3 flex flex-col self-stretch">
             <div class="p-6 w-full flex flex-col flex-grow bg-white border border-gray-border-1 border-r-0">
               <span class="mb-2 text-xs leading-none">Votre prix inclus:</span>
-              <div class="flex my-3">
-                <img class="h-3 mr-2" src="assets/icons/green-check.png">
+              <div class="flex items-center my-1">
+                <fa-icon class="mr-2" [icon]="['fas', 'badge-check']" size="1x" style="color: #0ABF32"></fa-icon>
                 <span class="text-my-gray-3 text-xs leading-none">Petit dej gratuit pour deux</span>
               </div>
-              <div class="flex my-3">
-                <img class="h-3 mr-2" src="assets/icons/green-check.png">
+              <div class="flex items-center my-1">
+                <fa-icon class="mr-2" [icon]="['fas', 'badge-check']" size="1x" style="color: #0ABF32"></fa-icon>
                 <span class="text-my-gray-3 text-xs leading-none">Dinner</span>
               </div>
-              <div class="flex my-3">
-                <img class="h-3 mr-2" src="assets/icons/green-check.png">
+              <div class="flex items-center my-1">
+                <fa-icon class="mr-2" [icon]="['fas', 'badge-check']" size="1x" style="color: #0ABF32"></fa-icon>
                 <span class="text-my-gray-3 text-xs leading-none">Wifi gratuit</span>
               </div>
-              <div class="flex my-3">
-                <img class="h-3 mr-2" src="assets/icons/green-check.png">
+              <div class="flex items-center my-1">
+                <fa-icon class="mr-2" [icon]="['fas', 'badge-check']" size="1x" style="color: #0ABF32"></fa-icon>
                 <span class="text-my-gray-3 text-xs leading-none">Politique d’annulation</span>
               </div>
               <div class="flex my-3"></div>
@@ -281,14 +296,13 @@
             </div>
           </div>
           <div class="col-span-2 flex flex-col self-stretch">
-            <div
-              class="py-6 px-3 w-full flex flex-col items-end flex-grow bg-white border border-gray-border-1 border-r-0">
+            <div class="py-6 px-3 w-full flex flex-col items-end flex-grow bg-white border border-gray-border-1 border-r-0">
                 <span class="relative text-my-gray-2 text-xs font-bold">
                   <span class="absolute slash border-b border-my-gray-3"></span>
                   DZD <span class="font-thin text-sm">28 150</span>
                 </span>
               <span class="text-sm font-thin">DZD <span
-                class="text-my-blue-2 font-bold text-base">26 000</span></span>
+                      class="text-my-blue-2 font-bold text-base">26 000</span></span>
             </div>
           </div>
           <div class="col-span-1 flex flex-col self-stretch">
@@ -298,74 +312,15 @@
                   <mat-option *ngFor="let x of ' '.repeat(5).split(' '); let i = index" [value]="i+1">
                     0{{i + 1}}</mat-option>
                 </mat-select>
-                <img alt="arrow-down"
-                     class="absolute right-0 w-3 mx-2 pointer-events-none cursor-pointer" src="assets/icons/arrow-down.png">
+                <fa-icon class="absolute right-0 mr-1 pointer-events-none cursor-pointer"
+                [icon]="['fal', 'chevron-down']" size="xs" style="color: #5B636D"></fa-icon>
               </div>
             </div>
           </div>
           <div class="col-span-2 flex flex-col self-stretch">
             <div class="py-6 px-3 w-full flex flex-col flex-grow bg-white border border-gray-border-1">
-              <button class="w-full bg-my-blue-2 h-10">
-                <span class="text-xs text-white font-thin">Réserver ici</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="mt-4 grid grid-cols-9">
-          <div class="col-span-3 flex flex-col self-stretch">
-            <div class="p-6 w-full flex flex-col flex-grow bg-white border border-gray-border-1 border-r-0">
-              <span class="mb-2 text-xs leading-none">Votre prix inclus:</span>
-              <div class="flex my-3">
-                <img class="h-3 mr-2" src="assets/icons/green-check.png">
-                <span class="text-my-gray-3 text-xs leading-none">Petit dej gratuit pour deux</span>
-              </div>
-              <div class="flex my-3">
-                <img class="h-3 mr-2" src="assets/icons/green-check.png">
-                <span class="text-my-gray-3 text-xs leading-none">Dinner</span>
-              </div>
-              <div class="flex my-3">
-                <img class="h-3 mr-2" src="assets/icons/green-check.png">
-                <span class="text-my-gray-3 text-xs leading-none">Wifi gratuit</span>
-              </div>
-              <div class="flex my-3">
-                <img class="h-3 mr-2" src="assets/icons/green-check.png">
-                <span class="text-my-gray-3 text-xs leading-none">Politique d’annulation</span>
-              </div>
-              <div class="flex my-3"></div>
-            </div>
-          </div>
-          <div class="col-span-1 flex flex-col self-stretch">
-            <div class="p-6 w-full flex flex-col flex-grow bg-white border border-gray-border-1 border-r-0">
-
-            </div>
-          </div>
-          <div class="col-span-2 flex flex-col self-stretch">
-            <div
-              class="py-6 px-3 w-full flex flex-col items-end flex-grow bg-white border border-gray-border-1 border-r-0">
-                <span class="relative text-my-gray-2 text-xs font-bold">
-                  <span class="absolute slash border-b border-my-gray-3"></span>
-                  DZD <span class="font-thin text-sm">28 150</span>
-                </span>
-              <span class="text-sm font-thin">DZD <span
-                class="text-my-blue-2 font-bold text-base">26 000</span></span>
-            </div>
-          </div>
-          <div class="col-span-1 flex flex-col self-stretch">
-            <div class="py-6 px-3 w-full flex flex-col flex-grow bg-white border border-gray-border-1 border-r-0">
-              <div class="relative h-10 border border-my-gray-3 bg-my-gray-1 flex items-center">
-                <mat-select disableOptionCentering panelClass="my-mat-select">
-                  <mat-option *ngFor="let x of ' '.repeat(5).split(' '); let i = index" [value]="i+1">
-                    0{{i + 1}}</mat-option>
-                </mat-select>
-                <img alt="arrow-down"
-                     class="absolute right-0 w-3 mx-2 pointer-events-none cursor-pointer" src="assets/icons/arrow-down.png">
-              </div>
-            </div>
-          </div>
-          <div class="col-span-2 flex flex-col self-stretch">
-            <div class="py-6 px-3 w-full flex flex-col flex-grow bg-white border border-gray-border-1">
-              <button class="w-full bg-my-blue-2 h-10">
-                <span class="text-xs text-white font-thin">Réserver ici</span>
+              <button class="w-full bg-my-blue-2 text-xs text-white h-10" [routerLink]="['/booking']">
+                Réserver ici
               </button>
             </div>
           </div>

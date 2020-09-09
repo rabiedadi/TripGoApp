@@ -54,8 +54,8 @@
 }
 
 /* select option */
-  ::ng-deep .cdk-overlay-pane {
-  transform: none !important;
+::ng-deep .cdk-overlay-pane {
+    transform: none !important;
 }
 
 ::ng-deep .mat-select-panel {

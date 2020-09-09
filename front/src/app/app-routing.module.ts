@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
-import {ErrorPageComponent} from './error-page/error-page.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -18,6 +18,8 @@ const routes: Routes = [
       .then(mod => mod.ProfileModule), canActivate: [AuthGuard] },
   { path: 'admin', loadChildren: () => import('./mdl-admin/admin.module')
       .then(mod => mod.AdminModule), canActivate: [AuthGuard] },
+  { path: 'booking', loadChildren: () => import('./mdl-booking-process/booking-process.module')
+      .then(mod => mod.BookingProcessModule), canActivate: [AuthGuard] },
   { path: '**', component: ErrorPageComponent }
 ];
 

@@ -1,32 +1,79 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {AppRoutingComponents, AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+// In app components and modules imports -------------------------------------------------------------------------------
+import {SharedModule} from './mdl-shared/shared.module';
 import {AppComponent} from './app.component';
-
+import {AppRoutingComponents, AppRoutingModule} from './app-routing.module';
+import {HomeDialogsComponents} from './home/dialogs/dialogs.components';
+// translate modules imports -------------------------------------------------------------------------------------------
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-import {SharedModule} from './mdl-shared/shared.module';
+// Auth services and modules imports -----------------------------------------------------------------------------------
 import {AuthGuard} from './auth/auth.guard';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
-import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './store/effects/auth.effects';
+// NgRx store and Effects imports --------------------------------------------------------------------------------------
+import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {authReducer} from './store/reducers/auth.reducers';
 import {ToastrModule} from 'ngx-toastr';
-
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+// font awesome imports ------------------------------------------------------------------------------------------------
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
-    faUsers, faBedAlt, faCalendarAlt, faChevronDown, faWifi, faShuttleVan, faSmokingBan, faBath, faSwimmer,
-    faHatChef, faEnvelopeOpenText, faConciergeBell, faVectorSquare, faWindowFrameOpen, faShower, faLampDesk,
-    faUserTie, faGifts, faPlus, faBookmark as falBookmark } from '@fortawesome/pro-light-svg-icons';
-import { faBadgeCheck } from '@fortawesome/pro-solid-svg-icons';
-import { faMale, faBookmark as fasBookmark, faStar, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import {AllDialogsComponents} from './home/dialogs/dialogs.components';
-import {MatCheckboxModule} from "@angular/material/checkbox";
+    faBath,
+    faBedAlt,
+    faBookmark as falBookmark,
+    faCalendarAlt,
+    faChevronDown,
+    faConciergeBell,
+    faEdit,
+    faEnvelopeOpenText,
+    faGifts,
+    faHatChef,
+    faLampDesk,
+    faShower,
+    faShuttleVan,
+    faSmokingBan,
+    faSwimmer,
+    faUsers,
+    faUserTie,
+    faVectorSquare,
+    faWifi,
+    faWindowFrameOpen,
+    faBuilding,
+    faHotel,
+    faCaravan,
+    faHomeLg,
+    faStar as falStar,
+    faCommentAltDots,
+    faBoxCheck,
+    faMoneyCheck,
+    faMapSigns,
+    faMapMarkedAlt,
+    faDirections,
+    faPhoneRotary,
+    faPlus,
+    faTrashAlt,
+    faImages,
+    faBell,
+    faFileInvoice,
+    faChevronRight,
+    faChevronLeft,
+    faSnowflake,
+    faIdCard,
+    faExclamationCircle, faCheckCircle, faMapMarkerAlt, faStarHalfAlt, faUserCircle
+} from '@fortawesome/pro-light-svg-icons';
+import {faBadgeCheck, faShieldCheck} from '@fortawesome/pro-solid-svg-icons';
+import {
+    faBookmark as fasBookmark,
+    faMale,
+    faPlusCircle,
+    faStar as fasStar,
+    faThumbsUp
+} from '@fortawesome/free-solid-svg-icons';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -34,11 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        AppRoutingComponents,
-        AllDialogsComponents
-    ],
+    declarations: [AppComponent, AppRoutingComponents, HomeDialogsComponents],
     imports: [
         SharedModule,
         BrowserModule,
@@ -55,17 +98,30 @@ export function HttpLoaderFactory(http: HttpClient) {
             }
         }),
         ToastrModule.forRoot(),
-        FontAwesomeModule,
-        MatCheckboxModule,
+        FontAwesomeModule
     ],
-    providers: [
-        AuthGuard,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
-    ],
+    providers: [AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+    exports: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(faUsers, faBedAlt, faCalendarAlt, faChevronDown);
+        library.addIcons(
+            faUsers, faBedAlt, faCalendarAlt, faChevronDown, faChevronRight, faChevronLeft, faEdit, faWifi, faShuttleVan,
+            faSmokingBan, faBath, faSwimmer, faHatChef, faEnvelopeOpenText, faConciergeBell, faVectorSquare, faWindowFrameOpen,
+            faShower, faLampDesk, faUserTie, faGifts, faPlusCircle, falBookmark, fasBookmark, faBadgeCheck, faMale, falStar,
+            fasStar, faThumbsUp, faCommentAltDots, faBoxCheck, faMoneyCheck, faPlus, faTrashAlt, faImages, faSnowflake,
+            faIdCard, faExclamationCircle, faCheckCircle, faMapMarkerAlt, faStarHalfAlt, faUserCircle
+        );
+        library.addIcons(faMapSigns, faMapMarkedAlt, faDirections, faPhoneRotary, faShieldCheck, faBell, faFileInvoice);
+        library.addIcons(faBuilding, faHotel, faCaravan, faHomeLg);
     }
 }
+
+// <div style="font-size: 1.2rem">
+//     <fa-icon class="mx-2" [icon]="['fal', '']" size="1x" style="color: #5B636D"></fa-icon>
+// </div>
+
+// <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+// (click)="arrow_down_clicked()"
+//     [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>

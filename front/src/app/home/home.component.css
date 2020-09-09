@@ -1,4 +1,4 @@
-.content {
+.bg-wrapper {
   background-position: center;
   height: 300px;
   width: 100%;
@@ -7,37 +7,46 @@
   align-items: center;
 
 }
-.content-bg {
+.bg-img {
   background-image: url('/assets/images/wallpaper-semiwide.webp');
 }
 
 /* main heading */
 .main-heading {
   text-shadow: 0 1px 3px rgba(0,0,0,0.12);
-  font-weight: 600;
-  font-size: 36px;
-  color: white;
-  margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 36px;
+    color: white;
+    margin-bottom: 0.5rem;
 }
+
 .main-heading span {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 /* slide */
-#slide-container::-webkit-scrollbar {
-  display: none;
+.slider-wrapper {
+    margin: auto;
+    position: relative;
+    width: 100%;
 }
-#slide-container {
-  overflow: scroll;
+
+#slider-container::-webkit-scrollbar {
+    display: none;
 }
+
+#slider-container {
+    overflow: scroll;
+}
+
 .slide-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100px;
-  position: absolute;
-  top: 40%;
-  height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    position: absolute;
+    top: 40%;
+    height: 40px;
   width: 30px;
   background-color: #fff;
   box-shadow: 0 0 2px #666;
@@ -64,9 +73,9 @@
 }
 
 .hotel-card-image {
-  width: 100%;
-  padding-bottom: 80%;
-  overflow: hidden;
+    width: 100%;
+    padding-bottom: 60%;
+    overflow: hidden;
 
 }
 .hotel-card-image img {
@@ -104,21 +113,33 @@
     display: flex;
   }
 
-  .hotel-card-wrapper {
-    flex: 0 0 25%;
-  }
+    .hotel-card-wrapper {
+        flex: 0 0 25%;
+    }
 }
-@media (min-width: 1200px) { /*xl*/
-  .content-bg {
-    background-image: url('/assets/images/wallpaper-wide.webp');
-  }
+
+@media (min-width: 1200px) {
+    /*xl*/
+    .content-bg {
+        background-image: url('/assets/images/wallpaper-wide.webp');
+    }
+
+    .slider-wrapper {
+        width: 85%;
+    }
 }
-@media (min-width: 1920px) { /*2xl*/
-  .location-card-heading {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+
+@media (min-width: 1920px) {
+    /*2xl*/
+    .location-card-heading {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .slider-wrapper {
+        width: 75%;
+    }
 }
 
 

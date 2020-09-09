@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { AgmCoreModule } from '@agm/core';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { MatRadioModule } from '@angular/material/radio';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 
@@ -18,7 +18,6 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
       SharedModule,
       EstablishmentCreationRoutingModuleModule,
       MatProgressSpinnerModule,
-      MatCheckboxModule,
       MatRadioModule,
       AngularSvgIconModule,
       AgmCoreModule.forRoot({

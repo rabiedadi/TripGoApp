@@ -1,12 +1,10 @@
 <div class="text-my-gray-3" style="min-width: 1024px;"> <!-- wide screens only =========== -->
   <!-- Header ====================================================================================================== -->
   <header class="h-16 2xl:h-24 w-full px-16 lg:px-24 2xl:px-32 flex justify-between items-center">
-    <div class="cursor-pointer" routerLink="/">
-      <svg-icon src="{{ 'assets/svg/tripgo-logo.svg' }}" [svgStyle]="{ 'width.px':90 }"></svg-icon>
-    </div>
+    <img width="90px" src="assets/images/TripGo.png" class="cursor-pointer">
     <div class="flex items-center">
       <span class="lg:text-sm flex items-center">
-        <img alt="home" class="h-5 w-5 mx-2" src="assets/icons/home.png">
+        <fa-icon class="mx-2" [icon]="['fal', 'home-lg']" size="lg" style="color: #5B636D"></fa-icon>
         <span>Mes etablissements</span>
       </span>
       <div class="h-10 w-10 mx-8 my-boredr border-my-blue-1">
@@ -24,17 +22,14 @@
       <span class="text-white text-2xl font-bold ">{{ basicInfo.data.name || ('hotel_creation.establishment_name' | translate) }}</span>
       <div class="flex items-end text-white">
         <ng-container *ngIf="basicInfo.data.starsNumber != 0">
-          <svg-icon *ngFor="let x of ' '.repeat(basicInfo.data.starsNumber-1).split(' ')"
-                    [svgStyle]="{ 'width.px':16, 'fill': '#FFFFFF' }" class="mr-1"
-                    src="{{ 'assets/svg/star_filled.svg' }}"></svg-icon>
+          <fa-icon *ngFor="let x of ' '.repeat(basicInfo.data.starsNumber-1).split(' ')"
+                   class="mr-1" [icon]="['fas', 'star']" size="1x" style="color: #FFFFFF"></fa-icon>
         </ng-container>
         <ng-container *ngIf="basicInfo.data.starsNumber != 5">
-          <svg-icon *ngFor="let x of ' '.repeat(5-basicInfo.data.starsNumber-1).split(' ')"
-                    [svgStyle]="{ 'width.px':16, 'fill': '#FFFFFF' }" class="mr-1"
-                    src="{{ 'assets/svg/star.svg' }}"></svg-icon>
+          <fa-icon *ngFor="let x of ' '.repeat(5-basicInfo.data.starsNumber-1).split(' ')"
+                   class="mr-1" [icon]="['fal', 'star']" size="1x" style="color: #FFFFFF"></fa-icon>
         </ng-container>
-
-        <i class="text-xs block leading-none font-thin">{{ '0'+basicInfo.data.starsNumber || '00' }} Etoiles</i>
+        <i class="text-xs block leading-none font-thin mb-1">{{ '0'+basicInfo.data.starsNumber || '00' }} Etoiles</i>
       </div>
     </div>
   </div>
@@ -64,15 +59,17 @@
       <div class="blue_line"></div>
     </div>
     <div class="input-wrapper col-span-2">
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
-                src="{{ 'assets/svg/hotel.svg' }}"></svg-icon>
+      <div style="font-size: 1.2rem">
+        <fa-icon class="mx-2" [icon]="['fal', 'hotel']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
       <input (focus)="input_focused($event.target)" [(ngModel)]="basicInfo.data.name" class="my-input"
              placeholder="Nom de votre etablissement"
              type="text"><!--// INPUT //-->
     </div>
     <div class="input-wrapper col-span-2">
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
-                src="{{ 'assets/svg/star.svg' }}"></svg-icon>
+      <div style="font-size: 1.2rem">
+        <fa-icon class="mx-2" [icon]="['fal', 'star']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
       <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
                   [(ngModel)]="basicInfo.data.starsNumber"
                   disableOptionCentering panelClass="my-mat-select"
@@ -80,38 +77,41 @@
         <mat-option *ngFor="let x of ' '.repeat(4).split(' '); let i = index" [value]="i+1">
           <div class="flex items-center">
             <i class="mr-2 text-xs leading-none font-thin">{{i + 1}} Etoile(s)</i>
-            <svg-icon *ngFor="let x of ' '.repeat(i).split(' ')" [svgStyle]="{ 'width.px':12, 'fill': '#5B636D' }"
-                      src="{{ 'assets/svg/star_filled.svg' }}"></svg-icon>
+            <fa-icon *ngFor="let x of ' '.repeat(i).split(' ')"
+                     [icon]="['fas', 'star']" size="sm" style="color: #5B636D"></fa-icon>
           </div>
         </mat-option>
       </mat-select>
-      <img (click)="arrow_down_clicked()" alt="arrow-down"
-           class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-           src="assets/icons/arrow-down.png">
+      <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+               (click)="arrow_down_clicked()"
+               [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
     </div>
     <div class="input-wrapper col-span-2">
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
-                src="{{ 'assets/svg/address.svg' }}"></svg-icon>
+      <div style="font-size: 1.2rem">
+        <fa-icon class="mx-2" [icon]="['fal', 'map-signs']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
       <input #adresse (focus)="input_focused($event.target)" [(ngModel)]="basicInfo.data.address"
              class="my-input h-full" placeholder="Address"
              spellcheck="false" type="text"><!--// INPUT //-->
     </div>
     <div class="input-wrapper col-span-1">
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
-                src="{{ 'assets/svg/wilaya.svg' }}"></svg-icon>
+      <div style="font-size: 1.2rem">
+        <fa-icon class="mx-2" [icon]="['fal', 'map-marked-alt']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
       <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
                   [(ngModel)]="basicInfo.data.city"
                   disableOptionCentering panelClass="my-mat-select" placeholder="Wilaya">
         <!--// INPUT //-->
         <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
       </mat-select>
-      <img (click)="arrow_down_clicked()" alt="arrow-down"
-           class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-           src="assets/icons/arrow-down.png">
+      <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+               (click)="arrow_down_clicked()"
+               [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
     </div>
     <div class="input-wrapper col-span-1">
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
-                src="{{ 'assets/svg/direction.svg' }}"></svg-icon>
+      <div style="font-size: 1.2rem">
+        <fa-icon class="mx-2" [icon]="['fal', 'directions']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
       <input (focus)="input_focused($event.target)" [(ngModel)]="basicInfo.data.province" class="my-input"
              placeholder="Ville"
              type="text"><!--// INPUT //-->
@@ -122,7 +122,9 @@
       <div class="blue_line"></div>
     </div>
     <div class="input-wrapper col-span-2">
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2" src="{{ 'assets/svg/phone.svg' }}"></svg-icon>
+      <div style="font-size: 1.2rem">
+        <fa-icon class="mx-2" [icon]="['fal', 'phone-rotary']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
       <input (focus)="input_focused($event.target)"
              [ngModel]="phoneNumber | phone" class="my-input"
              (input)="phone_number_watcher($event.target);"
@@ -133,8 +135,9 @@
               style="min-width: fit-content; background-color: #F9F9F9">Envoyer le code</button>
     </div>
     <div class="input-wrapper col-span-2">
-      <svg-icon [svgStyle]="{ 'width.px':18, 'fill': '#FF8A00' }" class="mx-2"
-                src="{{ 'assets/svg/shield-check.svg' }}"></svg-icon>
+      <div style="font-size: 1.25rem">
+        <fa-icon class="mx-2" [icon]="['fas', 'shield-check']" size="1x" style="color: #FF8A00"></fa-icon>
+      </div>
       <span class="input-label flex items-center px-4 h-full"
             style="min-width: fit-content;">code de confermation</span>
       <div class="border-l border-my-gray-3 h-6"></div>
@@ -145,8 +148,9 @@
       </div>
     </div>
     <div class="input-wrapper col-span-2">
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-2"
-                src="{{ 'assets/svg/mail.svg' }}"></svg-icon>
+      <div style="font-size: 1.2rem">
+        <fa-icon class="mx-2" [icon]="['fal', 'envelope-open-text']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
       <input (focus)="input_focused($event.target)" [(ngModel)]="basicInfo.data.email" class="my-input"
              placeholder="Email"
              type="email"><!--// INPUT //-->
@@ -181,9 +185,9 @@
                     placeholder="Selectionner..."><!--// INPUT //-->
           <mat-option *ngFor="let x of roomType" [value]="x.reference">{{x.name}}</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+        (click)="arrow_down_clicked()"
+            [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="input_container col-span-2">
@@ -199,12 +203,13 @@
         <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
                     [(ngModel)]="rooms[roomIndex].data.roomName"
                     disableOptionCentering panelClass="my-mat-select"
+                    disableOptionCentering panelClass="my-mat-select"
                     placeholder="Selectionner...">
-          <mat-option *ngFor="let x of roomName" [value]="x.reference">{{x.name}}</mat-option>
+            <mat-option *ngFor="let x of roomName" [value]="x.reference">{{x.name}}</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="input_container col-span-2">
@@ -216,9 +221,9 @@
                     placeholder="Selectionner...">
           <mat-option *ngFor="let x of roomCustomName" [value]="x.reference">{{x.name}}</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="input_container col-span-2">
@@ -231,9 +236,9 @@
           <mat-option [value]="true">Oui</mat-option>
           <mat-option [value]="false">Non</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="input_container col-span-2">
@@ -257,9 +262,9 @@
           <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}}chambre(s)
           </mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="input_container col-span-1">
@@ -272,9 +277,9 @@
           <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}} sale(s) de bain
           </mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="input_container col-span-1">
@@ -286,9 +291,9 @@
                     placeholder="Selectionner...">
           <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}} Salon(s)</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <!-- Format du lit ==== -->
@@ -305,14 +310,13 @@
                       panelClass="my-mat-select" placeholder="Selectionner...">
             <mat-option *ngFor="let x of bedSize" [value]="x.reference">{{x.name}}</mat-option>
           </mat-select>
-          <img (click)="arrow_down_clicked()"
-               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-               src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   (click)="arrow_down_clicked()"
+                   [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
         </div>
       </div>
-      <div class="flex items-center justify-center">
-        <span class="text-lg px-3">x</span>
-      </div>
+      <fa-icon class="mx-2" [icon]="['fal', 'plus']" size="1x" style="color: #5B636D; transform: rotate(45deg)"></fa-icon>
+
       <div class="input_container flex-grow">
         <div class="input-wrapper w-full">
           <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
@@ -322,22 +326,20 @@
             <mat-option *ngFor="let x of ' '.repeat(9).split(' '); let i = index" [value]="i+2">{{ i + 2 }}lits
             </mat-option>
           </mat-select>
-          <img (click)="arrow_down_clicked()"
-               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-               src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   (click)="arrow_down_clicked()"
+                   [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
         </div>
       </div>
     </div>
     <div (click)="add_bed()" class="col-span-4 flex items-center cursor-pointer">
-      <svg-icon [svgStyle]="{ 'width.px':15, 'fill': '#5B636D' }" class="mr-3"
-                src="{{ 'assets/svg/add.svg' }}"></svg-icon>
+      <fa-icon class="mr-3" [icon]="['fas', 'plus-circle']" size="1x" style="color: #5B636D"></fa-icon>
       <span class="input-label">Ajouter un lit</span>
     </div>
     <div class="input_container col-span-2 mr-3">
       <span class="input-label mb-2">Combien de personnes peuvent dormir dans cette chambre</span>
       <div class="input-wrapper w-full">
-        <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-3"
-                  src="{{ 'assets/svg/users.svg' }}"></svg-icon>
+        <fa-icon class="mx-3" [icon]="['fal', 'users']" size="1x" style="color: #5B636D"></fa-icon>
         <input (focus)="input_focused($event.target)" [(ngModel)]="rooms[roomIndex].data.roomCapacity" class="my-input"
                min="0" placeholder="2" type="number">
       </div>
@@ -376,10 +378,10 @@
       <span class="font-bold">Chambre double delux</span>
       <span>Nombre : <span class="font-bold"> {{ room.data.available }} </span></span>
       <span class="flex">
-        <svg-icon (click)="edit_room(i)" [svgStyle]="{ 'height.px':18, 'fill': '#5B636D' }" class="mr-1 cursor-pointer"
-                  src="{{ 'assets/svg/edit.svg' }}"></svg-icon>
-        <svg-icon (click)="delete_room(i)" [svgStyle]="{ 'height.px':18, 'fill': '#5B636D' }" class="cursor-pointer"
-                  src="{{ 'assets/svg/trash.svg' }}"></svg-icon>
+        <div style="font-size: 1.2rem">
+          <fa-icon (click)="edit_room(i)" class="mr-1 cursor-pointer" [icon]="['fal', 'edit']" size="1x" style="color: #5B636D"></fa-icon>
+          <fa-icon (click)="delete_room(i)" class="mr-1 cursor-pointer" [icon]="['fal', 'trash-alt']" size="1x" style="color: #5B636D"></fa-icon>
+        </div>
       </span>
     </div>
     <!-- Contunue and return buttons ==== -->
@@ -410,9 +412,9 @@
                     placeholder="Selectionner...">
           <mat-option *ngFor="let x of parkingOption" [value]="x.reference">{{x.name}}</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="input-container col-span-2">
@@ -423,9 +425,9 @@
                     placeholder="Selectionner...">
           <mat-option *ngFor="let x of breakfastOption" [value]="x.reference">{{x.name}}</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <!-- Langues parlées ==== -->
@@ -438,8 +440,9 @@
       <div *ngFor="let lang of instServices.data.speakingLanguages; let i = index"
            class="w-full grid grid-cols-3 gap-2 flex items-center mb-2">
         <div class="input-wrapper col-span-2 input-label px-4">{{ get_lang_name_by_ref(lang) }}</div>
-        <svg-icon [svgStyle]="{ 'height.px':18, 'fill': '#E80B0B' }" class="cursor-pointer"
-                  src="{{ 'assets/svg/trash.svg' }}"></svg-icon>
+        <div style="font-size: 1.2rem">
+          <fa-icon class="cursor-pointer" [icon]="['fal', 'trash-alt']" size="1x" style="color: #E80B0B"></fa-icon>
+        </div>
       </div>
     </div>
     <div *ngIf="speakingLanguage && instServices.data.speakingLanguages.length < speakingLanguage.length"
@@ -452,9 +455,9 @@
                       [value]="x.reference">{{x.name}}</mat-option>
         </ng-container>
       </mat-select>
-      <img (click)="arrow_down_clicked()" alt="arrow-down"
-           class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-           src="assets/icons/arrow-down.png">
+      <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer arrow-down"
+               (click)="arrow_down_clicked()"
+               [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
     </div>
     <!-- <div class="col-span-4 flex items-center" (click)="add_lang()">
       <img src="assets/icons/add.png" class="mr-2" alt="add">
@@ -497,10 +500,10 @@
             <span class="input-label">Pouvez-vous fournir des lits supplémentaires?</span>
           </div>
           <div class="my-1 col-span-1 flex items-center bg-my-gray-1 p-2 py-4">
-            <mat-radio-button #extra_bed [value]=true checked disableRipple>Oui</mat-radio-button>
+            <mat-radio-button #extra_bed [value]="true" checked disableRipple>Oui</mat-radio-button>
           </div>
           <div class="my-1 col-span-1 flex items-center bg-my-gray-1 p-2 pr-0">
-            <mat-radio-button [value]=false disableRipple>Non</mat-radio-button>
+            <mat-radio-button [value]="false" disableRipple>Non</mat-radio-button>
           </div>
         </div>
       </mat-radio-group>
@@ -517,9 +520,9 @@
                       value="red">{{ i + selectedExtraBed }} bed(s)
           </mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
       <div class="col-span-6 mt-3">
         <span class="input-label">vous pouvez accueillir les personnes suivantes dans des lits d'appoint</span>
@@ -555,9 +558,9 @@
           <mat-option [value]=false>Oui, gratuit</mat-option>
           <mat-option [value]=true>Payant</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
       <div *ngIf="enfants.checked && freeBedForKids" class="input-wrapper col-span-3 my-2">
         <!-- <span class="input-label mb-2">Entrez le prix par nuit, par enfant</span> -->
@@ -618,8 +621,8 @@
     </div>
     <div (fileDropped)="onFileDropped($event)" appDragDrop
          class="col-span-4 border-4 border-dashed border-my-gray-3 flex flex-col items-center p-10">
-      <svg-icon [svgStyle]="{ 'width.px':80, 'fill': '#5B636D' }" class="mb-5"
-                src="{{ 'assets/svg/photos.svg' }}"></svg-icon>
+      <fa-icon class="mb-5" [icon]="['fal', 'images']" size="5x" style="color: #5B636D"></fa-icon>
+
       <span class="font-thin text-xs m-1">Ajouter au moins 1 photo</span>
       <span class="font-bold text-sm m-1">faites glisser et déposez votre photo ici</span>
       <span class="relative px-5 py-2 mt-2 bg-my-blue-1 hover:bg-my-blue-2 text-white text-xs font-semibold flex text-center items-center cursor-pointer">
@@ -637,8 +640,7 @@
         <img [src]="img.imageSRC" alt="" class="absolute top-0 h-full object-cover">
       </div>
       <span (click)="deleteFile(i)" class="w-full bg-my-gray-3 flex items-center justify-center py-2 cursor-pointer">
-        <svg-icon [svgStyle]="{ 'width.px':15, 'fill': '#FFFFFF' }" class="mr-2"
-                  src="{{ 'assets/svg/trash.svg' }}"></svg-icon>
+        <fa-icon class="mr-2" [icon]="['fal', 'trash-alt']" size="1x" style="color: #FFFFFF"></fa-icon>
         <span class="text-xs font-thin text-white">Supprimer</span>
       </span>
     </div>
@@ -664,9 +666,9 @@
                     placeholder="Selectionner...">
           <mat-option *ngFor="let x of ' '.repeat(9).split(' '); let i= index" [value]=i>{{ i }} Jour(s)</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="input-container col-span-2">
@@ -677,18 +679,19 @@
                     placeholder="Selectionner...">
           <mat-option *ngFor="let x of paymentTime" [value]="x.reference">{{x.name}}</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div *ngIf="policy.data.policy.cancelingDays && policy.data.policy.paymentTime"
          class="col-span-4 h-16 flex items-center bg-my-gray-1 shadow-xs cursor-pointer hover:shadow" matRipple>
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-3"
-                src="{{ 'assets/svg/bell.svg' }}"></svg-icon>
-      <div class="flex flex-col justify-center">
+      <div style="font-size: 1.5rem">
+        <fa-icon class="mx-3 mb-3" [icon]="['fal', 'bell']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
+      <div class="flex flex-col justify-center ml-1">
         <span class="text-xs font-bold">{{'hotel_creation.policies.hint' | translate:{'nbr_days':policy.data.policy.cancelingDays, 'where_to_pay': getSelectedPaymentTimeValue()} }}</span>
-        <span class="text-xs font-thin">{{'hotel_creation.policies.can_edit' | translate}}</span>
+        <span class="text-xs font-thin mt-1">{{'hotel_creation.policies.can_edit' | translate}}</span>
       </div>
     </div>
     <!-- Check in ==== -->
@@ -726,9 +729,10 @@
               <mat-option [value]="hour.value">{{hour.text}}</mat-option>
             </ng-container>
           </mat-select>
-          <img (click)="arrow_down_clicked()"
-               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-               src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   (click)="arrow_down_clicked()"
+                   [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
+
         </div>
       </div>
     </div>
@@ -760,9 +764,10 @@
                           [value]="hour.value">{{hour.text}}</mat-option>
             </ng-container>
           </mat-select>
-          <img (click)="arrow_down_clicked()"
-               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-               src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   (click)="arrow_down_clicked()"
+                   [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
+
         </span>
       </div>
     </div>
@@ -801,9 +806,10 @@
               <mat-option [value]="hour.value">{{hour.text}}</mat-option>
             </ng-container>
           </mat-select>
-          <img (click)="arrow_down_clicked()"
-               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-               src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   (click)="arrow_down_clicked()"
+                   [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
+
         </div>
       </div>
     </div>
@@ -835,9 +841,10 @@
                           [value]="hour.value">{{hour.text}}</mat-option>
             </ng-container>
           </mat-select>
-          <img (click)="arrow_down_clicked()"
-               alt="arrow-down" class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-               src="assets/icons/arrow-down.png">
+          <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                   (click)="arrow_down_clicked()"
+                   [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
+
         </div>
       </div>
     </div>
@@ -855,9 +862,9 @@
           <mat-option [value]=true>Oui c'est permis</mat-option>
           <mat-option [value]=false>Non sont interdit</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <!-- continue button ==== -->
@@ -871,7 +878,7 @@
 
   <!-- Tab8 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 "
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
     id="tab8">
     <!-- Option de paiments ==== -->
     <div class="col-span-4 flex items-center mb-3">
@@ -887,9 +894,9 @@
           <mat-option [value]="true">Oui</mat-option>
           <mat-option [value]="false">Non</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
       <span *ngIf="!payment.cardCharge" class="input-label mt-2">Nous informerons les clients que vous n'acceptez que des espèces</span>
     </div>
@@ -906,8 +913,9 @@
       <div class="blue_line"></div>
     </div>
     <div class="col-span-4 h-16 flex items-center bg-my-gray-1 shadow-xs cursor-pointer hover:shadow" matRipple>
-      <svg-icon [svgStyle]="{ 'width.px':20, 'fill': '#5B636D' }" class="mx-3"
-                src="{{ 'assets/svg/file.svg' }}"></svg-icon>
+      <div style="font-size: 1.6rem">
+          <fa-icon class="ml-4 mr-3 mb-3" [icon]="['fal', 'file-invoice']" size="1x" style="color: #5B636D"></fa-icon>
+      </div>
       <span class="input-label font-bold">{{'hotel_creation.payment.send_invoice' | translate}}</span>
       <span class="text-2xl font-bold px-3" style="color: #0ABF32;">17%</span>
     </div>
@@ -922,9 +930,9 @@
           <mat-option [value]="222">nom d'hotel</mat-option>
           <mat-option [value]="333">votre adress</mat-option>
         </mat-select>
-        <img (click)="arrow_down_clicked()" alt="arrow-down"
-             class="absolute right-0 mx-3 pointer-events-none cursor-pointer arrow-down"
-             src="assets/icons/arrow-down.png">
+        <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
+                 (click)="arrow_down_clicked()"
+                 [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
     </div>
     <div class="col-span-4"></div>

@@ -12,6 +12,7 @@ import {DetailService} from '../services/detail.service';
 export class HotelComponent implements OnInit {
   id: string;
   commentCardWidth = 500;
+  percentMatching = 97; // TODO
 
   constructor(
       private dialog: MatDialog,
@@ -19,26 +20,31 @@ export class HotelComponent implements OnInit {
       private detailS: DetailService) {
   }
 
-  services: { name: string, icon: string, width: number }[] = [
-    {name: 'Non fumeur', icon: 'smoke', width: 35},
-    {name: 'Transport aeroport', icon: 'car', width: 40},
-    {name: 'Wifi gratuit', icon: 'wifi', width: 40},
-    {name: 'Climatisation', icon: 'snow', width: 30},
-    {name: 'douche', icon: 'bath', width: 30},
-    {name: 'Grande picine', icon: 'swimming', width: 40},
-    {name: 'Restaurant', icon: 'chef_hat', width: 30},
+  services: { name: string, icon: string}[] = [
+    {name: 'Non fumeur', icon: 'smoking-ban'},
+    {name: 'Transport aeroport', icon: 'shuttle-van'},
+    {name: 'Wifi gratuit', icon: 'wifi'},
+    {name: 'Climatisation', icon: 'snowflake'},
+    {name: 'douche', icon: 'bath'},
+    {name: 'Grande picine', icon: 'swimmer'},
+    {name: 'Restaurant', icon: 'hat-chef'},
   ];
-  serviceIconRatio = 1;
+  offreServices: { name: string, icon: string}[] = [
+    {name: 'Wifi gratuit', icon: 'wifi'},
+    {name: 'Un grand lit', icon: 'bed-alt'},
+    {name: 'douche', icon: 'shower'},
+    {name: 'Executive lounge', icon: 'lamp-desk'},
+    {name: 'Balcon', icon: 'window-frame-open'},
+    {name: 'Surface de' + 44 + 'M', icon: 'vector-square'}
+  ];
 
   ngOnInit(): void {
-    if (window.screen.width < 768) { // phones and small tabs
-      this.serviceIconRatio = 0.8;
-    }
     this.id = this.route.snapshot.paramMap.get('id');
     this.detailS.getEstablishmentsDetails(this.id).subscribe(
         data => console.log(data)
     );
     this.commentCardWidth = (document.querySelector('.comment') as HTMLElement).offsetWidth;
+    this.setPercentMatchingCircle();
   }
 
   openMap() {
@@ -74,4 +80,16 @@ export class HotelComponent implements OnInit {
     }, 5);
   }
 
+  private setPercentMatchingCircle() {
+    document.getElementById('percent-circle-container')
+        .setAttribute('data-pct', this.percentMatching.toString());
+    const circle = document.querySelector('#percent-circle-container circle') as HTMLElement;
+    const radius = +circle.getAttribute('r').toString();
+    const dashArr = +circle.getAttribute('stroke-dasharray').toString();
+    const c = Math.PI * 2 * radius;
+    const pct = ((100 - this.percentMatching) / 100) * c + (dashArr + 10 - c);
+    setTimeout( _ => {
+      circle.style.strokeDashoffset = pct.toString();
+    }, 500);
+  }
 }

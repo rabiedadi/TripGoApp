@@ -1,4 +1,54 @@
 <div>
-  <h1 mat-dialog-title>Add offers to your hotel</h1>
+    <h1 mat-dialog-title>Ajoutez des offres à votre hôtel</h1>
+    <hr>
+    <div class="w-full" style="max-height: 70vh; overflow-y: scroll">
+        <div class="flex items-center mt-4 mb-3">
+            <span class="col-span-1">Veuillez choisir le type de l'offre :</span>
+            <div class="blue_line"></div>
+        </div>
+        <div class="grid grid-cols-3">
+            <div class="input-wrapper w-full">
+                <mat-select [(ngModel)]="offerType" disableOptionCentering
+                            panelClass="" placeholder="Selectionner...">
+                    <mat-option [value]="1">Suit de lux</mat-option>
+                    <mat-option [value]="2">Suit de lux</mat-option>
+                </mat-select>
+            </div>
+
+        </div>
+
+        <div class="flex items-center mt-4 mb-3">
+            <span class="col-span-4">Veuillez selectionner les services disponibles pour cette offres</span>
+            <div class="blue_line"></div>
+        </div>
+        <div class="grid grid-cols-4 row-gap-2">
+            <div *ngFor="let x of service" class="col-span-1">
+                <mat-checkbox class="pl-3" disableRipple></mat-checkbox>
+                <span class="check-box-label ml-4">{{ x }}</span>
+            </div>
+        </div>
+        <div class="flex items-center mt-4 mb-3">
+            <span class="col-span-4">Combien de personnes peuvent dormir dans cette chambre ?</span>
+            <div class="blue_line"></div>
+        </div>
+        <div class="grid grid-cols-3  ">
+            <div class="input-wrapper">
+                <input [(ngModel)]="PersonsNb" class="my-input"
+                       min="0" placeholder="nombre de chambres" type="number">
+            </div>
+        </div>
+        <div class="flex items-center mt-4 mb-3">
+            <span class="col-span-4">Prix par nuit</span>
+            <div class="blue_line"></div>
+        </div>
+        <div class="grid grid-cols-3  ">
+            <div class="input-wrapper col-span-1 flex">
+                <input [(ngModel)]="pricePerNight" class="my-input"
+                       min="0" placeholder="Prix" style="max-width: 150px"
+                       type="number">
+                <span class="input-label flex items-center px-4 h-full bg-my-gray-1 text-sm">DZD</span>
+            </div>
+        </div>
+    </div>
 
 </div>
