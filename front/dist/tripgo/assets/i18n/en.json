@@ -1,0 +1,145 @@
+{
+	"errors": {
+		"code1": "Unexpected error",
+		"code11": "Unauthorized modification",
+		"code12": "File too large",
+		"code13": "invalid file format",
+		"code14": "Old password is incorrect",
+		"code15": "Email already verified",
+		"code2": "Incorrect email or password",
+		"code5": "You have already used this password",
+		"code6": "code cannot be sent",
+		"code7": "verification link expired",
+		"code8": "This email is already in use",
+		"code9": "Invalid data"
+	},
+	"hotel_creation": {
+		"basic_info": "Basic Info",
+		"equipment": {
+			"equipment": "Equipment",
+			"extrabed": "Extra beds",
+			"extrabed_for": "the following people can be accommodated in extra beds.",
+			"nbr_extrabed": "The number of additional beds that can be added",
+			"other_equip": "Other equipment",
+			"provide_extrabed": "Can you provide extra beds"
+		},
+		"establishment_name": "The name of your establishment",
+		"inst&serv": {
+			"add_lang": "Add a language",
+			"breakfast": "Breakfast",
+			"choose_lang": "Choose a language",
+			"important_to_client": "Important to the customer",
+			"inst&serv": "Installations and services",
+			"parking": "Do you have a parking",
+			"spoken_lang": "Spoken languages"
+		},
+		"payment": {
+			"cache_only": "We will notify customers that you only accept cash",
+			"charge_ccard": "Can you charge credit cards on the spot",
+			"commission": "Commission",
+			"enter_address": "Enter an address",
+			"finish": "Complete registration",
+			"hotel_name": "Hotel Name",
+			"invoice_name": "What name should appear on the invoice (for example, legal / company name)",
+			"payment": "Payment",
+			"send_invoice": "At the start of each month we will send you an invoice for all full bookings from the previous month"
+		},
+		"photos": {
+			"add_photo": "Add a photo",
+			"drag": "drag and drop your photo here",
+			"one_at_least": "Add at least 1 photo",
+			"photos": "Photos"
+		},
+		"placeholder": {
+			"establishment_name": "Name of your establishment",
+			"nb_star": "Number of stars",
+			"select": "Select..."
+		},
+		"policies": {
+			"accept_animals": "Do you accept animals",
+			"can_edit": "You can make changes to your policies later",
+			"hint": "The customer must cancel {{nbr_days}} day in advance or pay 100% of the price {{where_to_pay}}",
+			"nbr_days": "How many days in advance can customers cancel for free",
+			"policies": "Policies",
+			"where_to_pay": "Where customers will pay 100%"
+		},
+		"room&price": {
+			"add_room": "Add a room",
+			"availbe_rooms": "How many type rooms are available?",
+			"bed_size": "Bed Size",
+			"nbr_bath": "Number of bathroom sales",
+			"nbr_lounge": "Number of Lounges",
+			"nbr_people": "How many people can sleep in this room",
+			"nbr_room": "Number of rooms",
+			"price/night": "Price in {{currency}} / Night",
+			"return": "Back to basic info",
+			"room&price": "Rooms & prices",
+			"room_area": "Chamber surface",
+			"room_custom_name": "Personalized name (Not required)",
+			"room_name": "Name of the room",
+			"room_type": "Room Type",
+			"rooms": "Rooms",
+			"smoking": "Smoking"
+		}
+	},
+	"main_search": {
+		"children_age": "How old are the children"
+	},
+	"nav_bar": {
+		"add_establishment": "Add my establishment",
+		"login": "Login",
+		"logout": "Logout",
+		"place_holder": {
+			"email_address": "Email address",
+			"full_name": "your full name"
+		},
+		"signin": "Create account",
+		"terms&conditions": "I certify that I have read the <span>terms and conditions</span> of use of the platform"
+	},
+	"other": {
+		"From": "From",
+		"No": "No",
+		"To": "To",
+		"address": "Address",
+		"adult": "Adult",
+		"animals": "Animals",
+		"apartment": "Apartment",
+		"cancel": "Cancel",
+		"cancellation": "Cancellation",
+		"checkin": "Check in",
+		"checkout": "Check out",
+		"child": "Child",
+		"city": "City",
+		"confirmation_code": "Confirmation Code",
+		"contact": "Contact",
+		"continue": "Continue",
+		"delete": "Delete",
+		"edit": "Edit",
+		"greeting": "Hello",
+		"hotels": "Hotels",
+		"houses": "Houses",
+		"other_locations": "Other locations",
+		"password": "Password",
+		"phone": "Phone",
+		"phone_number": "Phone Number",
+		"room": "Room",
+		"search": "search",
+		"services": "Services",
+		"wilaya": "Wilaya",
+		"year": "Year",
+		"yes": "Yes"
+	},
+	"profile": {
+		"comments": "Comments",
+		"inbox": "Inbox",
+		"information": "Information",
+		"my_establishments": "My establishments",
+		"my_reservations": "My reservations",
+		"offer_creation": "Create an offer",
+		"payment_methods": "Payment methods",
+		"profile": "Profile",
+		"trip_go_vip": "TripGo VIP",
+		"verify_email": "Your email has not been verified, <span>verify your email</span>"
+	},
+	"slogan": "Your next stay, <span>in just a few clicks!</span>"
+}
