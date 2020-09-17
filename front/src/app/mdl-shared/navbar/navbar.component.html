@@ -51,7 +51,7 @@
     <div (click)="toggleHiddenNav()" class="hidden-nav-closer"></div>
     <div id="hidden-nav-wrapper">
       <div id="hidden-nav">
-        <div class="hidden-nav-content">
+        <div class="hidden-nav-content px-3">
           <div class="flex flex-col text-my-gray-4">
             <div (click)="openDialog1(); toggleHiddenNav()" class="hidden-nav-item" matRipple>
               <span class="text-xs">{{'nav_bar.add_establishment' | translate}}</span>
@@ -63,15 +63,15 @@
             <div (click)="toggleHiddenNav()" *ngIf="(this.authState$ | async).isAuthenticated" class="hidden-nav-item"
                  routerLink="/profile">
               <span class="text-xs">{{ (this.authState$ | async).user?.fullName }}</span>
-              <fa-icon class="absolute right-0 mx-3 pointer-events-none cursor-pointer"
-                       [icon]="['fal', 'user-circle']" size="1x" style="color: #5B636D"></fa-icon>
+              <fa-icon class="absolute pointer-events-none cursor-pointer"
+                       [icon]="['fal', 'user-circle']" size="lg" style="color: #5B636D; right: 10px; transform: translateX(50%)"></fa-icon>
             </div>
             <div (click)="hidden_currency.classList.toggle('flex'); hidden_currency.classList.toggle('hidden');"
                  class="hidden-nav-item"
                  matRipple>
               <span class="text-xs">{{ currency }}</span>
-              <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
-                       [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
+              <fa-icon class="absolute mt-1 pointer-events-none cursor-pointer"
+                       [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D; right: 10px; transform: translateX(50%)"></fa-icon>
             </div>
             <div #hidden_currency class="hidden-nav-item-select hidden">
               <span (click)="hidden_currency.classList.replace('flex', 'hidden'); currency = 'DZD'; toggleHiddenNav()" class="text-xs"
@@ -85,8 +85,8 @@
                  class="hidden-nav-item"
                  matRipple>
               <span class="text-xs">{{ currentLang | uppercase }}</span>
-              <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
-                       [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
+              <fa-icon class="absolute mt-1 pointer-events-none cursor-pointer"
+                       [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D; right: 10px; transform: translateX(50%)"></fa-icon>
             </div>
             <div #hidden_language class="hidden-nav-item-select hidden">
               <span (click)="hidden_language.classList.replace('flex', 'hidden'); switchLanguage('fr'); toggleHiddenNav()" class="text-xs"
@@ -99,7 +99,7 @@
                   matRipple style="width: fit-content">Créer un compte
             </span>
             <span (click)="onLogoutSubmit(); toggleHiddenNav()" *ngIf="(this.authState$ | async).isAuthenticated"
-                  class="text-xs border border-gray-border-1 rounded-sm px-4 py-2 cursor-pointer ml-2 mt-4"
+                  class="text-xs border border-gray-border-1 rounded-sm px-4 py-2 cursor-pointer mt-4"
                   matRipple style="width: fit-content">Log out
             </span>
           </div>

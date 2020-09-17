@@ -42,6 +42,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.openSurveyDialog();
     document.getElementsByClassName('tab-label')[0].classList.add('active-tab-label');
     this.store.dispatch(new UserInfo());
     this.authState$.pipe(takeUntil(this.destroyed$)).subscribe(state => {
@@ -183,7 +184,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   openSurveyDialog() {
     this.dialog.open(dialogsComponents.SurveyDialogComponent, {
-      width: this.smallScreen ? '90%' : '50%',
+      width: this.smallScreen ? '90%' : '45 %',
       data: {}
     });
   }

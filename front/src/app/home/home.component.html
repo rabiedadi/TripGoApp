@@ -6,8 +6,49 @@
         <app-main-search></app-main-search>
     </div>
 </div>
-<div class="px-4 md:px-12 lg:px-24 xl:px-0">
+<div class="px-4 md:px-12 lg:px-24 xl:px-0 mt-8 hidden md:flex">
+    <div class="mx-auto" style="width: 85%">
+        <span class="secondary-heading mb-2">Trouvez l'inspiration pour votre prochain séjour</span>
+        <div class="flex relative" style="padding-bottom: 40%">
+            <div class="absolute w-full h-full grid grid-rows-2 grid-cols-6 gap-4" >
+                <div class="inspire-img-card col-span-2 row-span-1">
+                    <img src="{{ inspirationCards[2].img }}" class="inspire-img">
+                    <div (mouseover)="inspireImgHovered(true, $event)" (mouseleave)="inspireImgHovered(false, $event)"
+                         class="absolute h-full w-full" style="background-color: rgba(0, 0, 0, 0.3)"></div>
+                    <span class="inspire-text">{{ inspirationCards[2].text }}</span>
+                </div>
+                <div class="inspire-img-card col-span-2 row-span-1">
+                    <img src="{{ inspirationCards[3].img }}" class="inspire-img">
+                    <div (mouseover)="inspireImgHovered(true, $event)" (mouseleave)="inspireImgHovered(false, $event)"
+                         class="absolute h-full w-full" style="background-color: rgba(0, 0, 0, 0.3)"></div>
+                    <span class="inspire-text">{{ inspirationCards[3].text }}</span>
+                </div>
+                <div class="inspire-img-card col-span-2 row-span-1">
+                    <img src="{{ inspirationCards[4].img }}" class="inspire-img">
+                    <div (mouseover)="inspireImgHovered(true, $event)" (mouseleave)="inspireImgHovered(false, $event)"
+                         class="absolute h-full w-full" style="background-color: rgba(0, 0, 0, 0.3)"></div>
+                    <span class="inspire-text">{{ inspirationCards[4].text }}</span>
+                </div>
+                <div class="inspire-img-card col-span-3 row-span-1">
+                    <img src="{{ inspirationCards[0].img }}" class="inspire-img">
+                    <div (mouseover)="inspireImgHovered(true, $event)" (mouseleave)="inspireImgHovered(false, $event)"
+                         class="absolute h-full w-full" style="background-color: rgba(0, 0, 0, 0.3)"></div>
+                    <span class="inspire-text">{{ inspirationCards[0].text }}</span>
+                </div>
+                <div class="inspire-img-card col-span-3 row-span-1">
+                    <img src="{{ inspirationCards[1].img }}" class="inspire-img">
+                    <div (mouseover)="inspireImgHovered(true, $event)" (mouseleave)="inspireImgHovered(false, $event)"
+                         class="absolute h-full w-full" style="background-color: rgba(0, 0, 0, 0.3)"></div>
+                    <span class="inspire-text">{{ inspirationCards[1].text }}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="px-4 md:px-12 lg:px-24 xl:px-0 mt-5 pt-2">
     <div class="slider-wrapper">
+        <span class="secondary-heading">Nos suggestions pour votre prochain séjour</span>
         <div class="flex items-center" id="slider-container">
             <div class="hotel-card-wrapper">
                 <div class="hotel-card-container">
@@ -62,14 +103,15 @@
         <div (click)="slideNext()" class="slide-btn" id="slideNext" type="button">N</div>
     </div>
 </div>
-<br>
-<br>
+
 <br>
 <br>
 <br>
 <br>
 <!-- footer ============================================================================================ -->
-<app-footer></app-footer>
+<div class="hidden md:flex">
+    <app-footer class="w-full"></app-footer>
+</div>
 
 
 

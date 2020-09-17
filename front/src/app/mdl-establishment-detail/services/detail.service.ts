@@ -11,6 +11,6 @@ export class DetailService {
 
 
   getEstablishmentsDetails(id) {
-    return this.http.get(this.url + `:3003/hotel/FR/profile/${id}`);
+    return this.http.get(this.url + `:3001/hotel/profil/${id}`);
   }
 }

@@ -116,50 +116,43 @@
         </div>
       </div>
       <!-- Hotels cards ============================================================================================ -->
-      <div class="info-card sm:flex sm:h-56 mt-4">
+      <div class="info-card sm:flex sm:h-56 mt-4" *ngFor="let hotel of hotels">
         <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
           <span class="flex items-center text-sm">
             <span [routerLink]="['/detail/hotel', '5f134a1158960000125bffa8']"
-                  class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer">Royal Istumbool</span>
-            <fa-icon *ngFor="let x of 5 | ngForCount" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
-
+                  class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer">{{ hotel.name }}</span>
+            <fa-icon *ngFor="let x of hotel.stars | ngForCount" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
           </span>
           <span class="text-xs leading-none mt-2 sm:mt-3">
             Hotel adress here - <span class="font-medium text-my-blue-1 cursor-pointer">Regardez sur Map</span>
           </span>
           <span class="flex mt-3">
-            <fa-icon [icon]="['fal', 'wifi']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'shuttle-van']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'smoking-ban']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'snowflake']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'bath']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'swimmer']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'hat-chef']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
+            <fa-icon *ngFor="let s of hotel.services" [icon]="['fal', s]" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
           </span>
           <div class="hidden lg:grid grid-cols-3 gap-2 mt-3" style="font-size: 10px;">
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
               <fa-icon [icon]="['fal', 'concierge-bell']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
               <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
+              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">{{hotel.notes[0]}}</div>
             </div>
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
               <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
               <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
+              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">{{hotel.notes[1]}}</div>
             </div>
             <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
               <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
               <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
+              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">{{hotel.notes[2]}}</div>
             </div>
           </div>
-          <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">Parking - Restaurant - Picine</span>
+          <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">{{ hotel.services[0] }} - {{ hotel.services[1] }} - {{ hotel.services[2] }}</span>
           <div class="lg:h-full flex">
             <div class="lg:mt-auto flex items-center text-sm">
               <div class="relative">
                 <fa-icon [icon]="['fas', 'bookmark']" rotate="270" size="3x" style="color: #0ABF32"></fa-icon>
                 <span class="absolute text-sm text-white font-bold leading-none"
-                      style="top: 50%; left: 0; transform: translate(10%, -50%)">9.7</span>
+                      style="top: 50%; left: 0; transform: translate(10%, -50%)">{{ hotel.note }}</span>
               </div>
               <div class="flex flex-col ml-4">
                 <span class="font-bold leading-none" style="color: #0ABF32">Exelent</span>
@@ -178,16 +171,16 @@
         <div class="sm:h-full sm:w-56 p-2 pt-1 sm:p-3">
           <div class="h-12 sm:h-full grid grid-cols-4 sm:grid-cols-3 sm:grid-rows-3 gap-1 sm:gap-2">
             <div class="col-span-1 flex items-center sm:col-span-3 sm:row-span-2">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="0" [src]="items[0].data.thumb">
+              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="0" [src]="hotel.images[0].data.thumb">
             </div>
             <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="1" [src]="items[1].data.thumb">
+              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="1" [src]="hotel.images[1].data.thumb">
             </div>
             <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="2" [src]="items[2].data.thumb">
+              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="2" [src]="hotel.images[2].data.thumb">
             </div>
             <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="3" [src]="items[3].data.thumb">
+              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="3" [src]="hotel.images[3].data.thumb">
             </div>
           </div>
         </div>
@@ -198,182 +191,8 @@
             <span class="text-sm text-my-gray-4 mt-1">14 450<span class="font-semibold"> DZD</span></span>
           </div>
         </div>
-        <div class="note-badge bg-my-blue-1">
-          <span class="font-bold text-sm leading-none">8.9</span>
-          <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
-        </div>
-      </div>
-      <div class="info-card sm:flex sm:h-56 mt-4">
-      <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
-          <span class="flex items-center text-sm">
-            <span [routerLink]="['/detail/hotel', '5f134a1158960000125bffa8']"
-                  class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer">Royal Istumbool</span>
-            <fa-icon *ngFor="let x of 5 | ngForCount" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
-
-          </span>
-        <span class="text-xs leading-none mt-2 sm:mt-3">
-            Hotel adress here - <span class="font-medium text-my-blue-1 cursor-pointer">Regardez sur Map</span>
-          </span>
-        <span class="flex mt-3">
-            <fa-icon [icon]="['fal', 'wifi']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'shuttle-van']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'smoking-ban']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'snowflake']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'bath']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'swimmer']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'hat-chef']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-          </span>
-        <div class="hidden lg:grid grid-cols-3 gap-2 mt-3" style="font-size: 10px;">
-          <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-            <fa-icon [icon]="['fal', 'concierge-bell']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
-            <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-            <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-          </div>
-          <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-            <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
-            <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-            <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-          </div>
-          <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-            <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
-            <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-            <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-          </div>
-        </div>
-        <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">Parking - Restaurant - Picine</span>
-        <div class="lg:h-full flex">
-          <div class="lg:mt-auto flex items-center text-sm">
-            <div class="relative">
-              <fa-icon [icon]="['fas', 'bookmark']" rotate="270" size="3x" style="color: #0ABF32"></fa-icon>
-              <span class="absolute text-sm text-white font-bold leading-none"
-                    style="top: 50%; left: 0; transform: translate(20%, -50%)">9.7</span>
-            </div>
-            <div class="flex flex-col ml-4">
-              <span class="font-bold leading-none" style="color: #0ABF32">Exelent</span>
-              <span class="text-xs text-my-gray-3 leading-none mt-1">score de localisation</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-col sm:hidden mt-3 pt-2 border-t border-gray-border-">
-          <span class="text-xs text-red-500">Reste une chambre</span>
-          <div class="flex justify-between">
-            <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-            <span class="text-sm text-my-gray-4">14 450<span class="font-semibold"> DZD</span></span>
-          </div>
-        </div>
-      </div>
-      <div class="sm:h-full sm:w-56 p-2 pt-1 sm:p-3">
-        <div class="h-12 sm:h-full grid grid-cols-4 sm:grid-cols-3 sm:grid-rows-3 gap-1 sm:gap-2">
-          <div class="col-span-1 flex items-center sm:col-span-3 sm:row-span-2">
-            <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="0" [src]="items[0].data.thumb">
-          </div>
-          <div class="col-span-1 flex items-center">
-            <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="1" [src]="items[1].data.thumb">
-          </div>
-          <div class="col-span-1 flex items-center">
-            <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="2" [src]="items[2].data.thumb">
-          </div>
-          <div class="col-span-1 flex items-center">
-            <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="3" [src]="items[3].data.thumb">
-          </div>
-        </div>
-      </div>
-      <div class="sm:h-full w-full sm:w-40 ml-auto hidden sm:flex flex-col items-end justify-between p-2 pt-16 pb-5">
-        <span class="text-xs text-red-500">Reste une chambre</span>
-        <div class="flex flex-col justify-between w-2/3 items-end ml-auto">
-          <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-          <span class="text-sm text-my-gray-4 mt-1">14 450<span class="font-semibold"> DZD</span></span>
-        </div>
-      </div>
-      <div class="note-badge bg-my-blue-1">
-        <span class="font-bold text-sm leading-none">8.9</span>
-        <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
-      </div>
-    </div>
-      <div class="info-card sm:flex sm:h-56 mt-4">
-        <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
-          <span class="flex items-center text-sm">
-            <span [routerLink]="['/detail/hotel', '5f134a1158960000125bffa8']"
-                  class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer">Royal Istumbool</span>
-            <fa-icon *ngFor="let x of 5 | ngForCount" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
-
-          </span>
-          <span class="text-xs leading-none mt-2 sm:mt-3">
-            Hotel adress here - <span class="font-medium text-my-blue-1 cursor-pointer">Regardez sur Map</span>
-          </span>
-          <span class="flex mt-3">
-            <fa-icon [icon]="['fal', 'wifi']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'shuttle-van']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'smoking-ban']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'snowflake']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'bath']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'swimmer']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-            <fa-icon [icon]="['fal', 'hat-chef']" size="1x" class="mr-2" style="color: #0C568B"></fa-icon>
-          </span>
-          <div class="hidden lg:grid grid-cols-3 gap-2 mt-3" style="font-size: 10px;">
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <fa-icon [icon]="['fal', 'concierge-bell']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
-              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
-              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
-            <div class="relative xl:col-span-1 flex items-center h-6 border border-gray-border-2 rounded overflow-hidden">
-              <fa-icon [icon]="['fal', 'user-tie']" size="1x" class="mx-1" style="color: #0C568B"></fa-icon>
-              <span class="text-my-gray-4" style="white-space: nowrap">Service exelent</span>
-              <div class="absolute right-0 bg-my-blue-1 font-medium text-white px-1 h-full flex items-center justify-center" style="width: fit-content; font-size: 10px">9.2</div>
-            </div>
-          </div>
-          <span class="text-xs text-my-gray-4 font-semibold mt-2 sm:mt-3">Parking - Restaurant - Picine</span>
-          <div class="lg:h-full flex">
-            <div class="lg:mt-auto flex items-center text-sm">
-              <div class="relative">
-                <fa-icon [icon]="['fas', 'bookmark']" rotate="270" size="3x" style="color: #0ABF32"></fa-icon>
-                <span class="absolute text-sm text-white font-bold leading-none"
-                      style="top: 50%; left: 0; transform: translate(20%, -50%)">9.7</span>
-              </div>
-              <div class="flex flex-col ml-4">
-                <span class="font-bold leading-none" style="color: #0ABF32">Exelent</span>
-                <span class="text-xs text-my-gray-3 leading-none mt-1">score de localisation</span>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col sm:hidden mt-3 pt-2 border-t border-gray-border-">
-            <span class="text-xs text-red-500">Reste une chambre</span>
-            <div class="flex justify-between">
-              <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-              <span class="text-sm text-my-gray-4">14 450<span class="font-semibold"> DZD</span></span>
-            </div>
-          </div>
-        </div>
-        <div class="sm:h-full sm:w-56 p-2 pt-1 sm:p-3">
-          <div class="h-12 sm:h-full grid grid-cols-4 sm:grid-cols-3 sm:grid-rows-3 gap-1 sm:gap-2">
-            <div class="col-span-1 flex items-center sm:col-span-3 sm:row-span-2">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="0" [src]="items[0].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="1" [src]="items[1].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="2" [src]="items[2].data.thumb">
-            </div>
-            <div class="col-span-1 flex items-center">
-              <img alt="wallpaper" class="h-12 sm:h-full w-full object-cover" [lightbox]="3" [src]="items[3].data.thumb">
-            </div>
-          </div>
-        </div>
-        <div class="sm:h-full w-full sm:w-40 ml-auto hidden sm:flex flex-col items-end justify-between p-2 pt-16 pb-5">
-          <span class="text-xs text-red-500">Reste une chambre</span>
-          <div class="flex flex-col justify-between w-2/3 items-end ml-auto">
-            <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-            <span class="text-sm text-my-gray-4 mt-1">14 450<span class="font-semibold"> DZD</span></span>
-          </div>
-        </div>
-        <div class="note-badge bg-my-blue-1">
-          <span class="font-bold text-sm leading-none">8.9</span>
+        <div class="note-badge bg-my-blue-1 ">
+          <span class="font-bold text-sm leading-none">{{ hotel.note }}</span>
           <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
         </div>
       </div>

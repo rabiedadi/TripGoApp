@@ -22,6 +22,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   authState$: Observable<AuthState>;
   authState: AuthState;
   destroyed$ = new Subject<boolean>();
+  inspirationCards: {text: string, img: string}[] = [
+    {text: 'Découvrez Ghardaia de l\'intérieur', img: 'https://pbs.twimg.com/media/C-dEGt2XUAAMDX1.jpg'},
+    {text: 'Constantine, ville des ponts suspendus', img: 'https://steemitimages.com/0x0/https://pli.io/f4YDM.jpg'},
+    {text: 'Ne manquez pas l\'opportunité de nager dans les plages de Bejaia', img: 'https://izzoran.com/wp-content/uploads/2020/03/liste-des-plage-de-bejaia.jpg'},
+    {text: 'Que diriez-vous de nuits tranquilles à Tamanrasset', img: 'https://i.pinimg.com/originals/f9/99/b0/f999b0adc1f1cd9e83f9a5c0efb5f717.jpg'},
+    {text: 'Profitez de vos vacances à Oran', img: 'https://www.entv.dz/wp-content/uploads/2019/07/Oran_-de_Santa-Cruz.jpg'},
+  ];
 
   constructor(private sharedS: SharedService,
               private store: Store<AppState>,
@@ -90,6 +97,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+
+
+  inspireImgHovered(state: boolean, $event: MouseEvent) {
+    if (state) {
+      ($event.target as HTMLElement).style.opacity = '0';
+      (($event.target as HTMLElement).parentElement as HTMLElement).classList.add('hovered');
+    } else {
+      ($event.target as HTMLElement).style.opacity = '1';
+      (($event.target as HTMLElement).parentElement as HTMLElement).classList.remove('hovered');
+
+    }
   }
 }
 

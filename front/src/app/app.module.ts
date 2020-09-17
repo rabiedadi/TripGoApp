@@ -63,7 +63,14 @@ import {
     faChevronLeft,
     faSnowflake,
     faIdCard,
-    faExclamationCircle, faCheckCircle, faMapMarkerAlt, faStarHalfAlt, faUserCircle
+    faExclamationCircle,
+    faCheckCircle,
+    faMapMarkerAlt,
+    faStarHalfAlt,
+    faUserCircle,
+    faParking,
+    faUtensilsAlt,
+    faCroissant, faTvAlt
 } from '@fortawesome/pro-light-svg-icons';
 import {faBadgeCheck, faShieldCheck} from '@fortawesome/pro-solid-svg-icons';
 import {
@@ -73,6 +80,7 @@ import {
     faStar as fasStar,
     faThumbsUp
 } from '@fortawesome/free-solid-svg-icons';
+import { SurveyComponent } from './temporary/survey/survey.component';
 
 
 
@@ -81,7 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-    declarations: [AppComponent, AppRoutingComponents, HomeDialogsComponents],
+    declarations: [AppComponent, AppRoutingComponents, HomeDialogsComponents, SurveyComponent],
     imports: [
         SharedModule,
         BrowserModule,
@@ -111,7 +119,8 @@ export class AppModule {
             faSmokingBan, faBath, faSwimmer, faHatChef, faEnvelopeOpenText, faConciergeBell, faVectorSquare, faWindowFrameOpen,
             faShower, faLampDesk, faUserTie, faGifts, faPlusCircle, falBookmark, fasBookmark, faBadgeCheck, faMale, falStar,
             fasStar, faThumbsUp, faCommentAltDots, faBoxCheck, faMoneyCheck, faPlus, faTrashAlt, faImages, faSnowflake,
-            faIdCard, faExclamationCircle, faCheckCircle, faMapMarkerAlt, faStarHalfAlt, faUserCircle
+            faIdCard, faExclamationCircle, faCheckCircle, faMapMarkerAlt, faStarHalfAlt, faUserCircle,
+            faParking, faUtensilsAlt, faCroissant, faTvAlt
         );
         library.addIcons(faMapSigns, faMapMarkedAlt, faDirections, faPhoneRotary, faShieldCheck, faBell, faFileInvoice);
         library.addIcons(faBuilding, faHotel, faCaravan, faHomeLg);

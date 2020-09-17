@@ -1,20 +1,20 @@
-<div class="text-my-gray-3" style="min-width: 1024px;"> <!-- wide screens only =========== -->
+<div class="text-my-gray-3" id="wrapper">
   <!-- Header ====================================================================================================== -->
-  <header class="h-16 2xl:h-24 w-full px-16 lg:px-24 2xl:px-32 flex justify-between items-center">
-    <img width="90px" src="assets/images/TripGo.png" class="cursor-pointer">
+  <header class="h-16 2xl:h-24 w-full px-6 md:px-12 lg:px-24 2xl:px-32 flex justify-between items-center">
+    <img width="90px" src="assets/images/TripGo.png" class="cursor-pointer" [routerLink]="['/']">
     <div class="flex items-center">
-      <span class="lg:text-sm flex items-center">
+      <span class="lg:text-sm flex items-center mr-5 cursor-pointer" [routerLink]="['/profile']">
         <fa-icon class="mx-2" [icon]="['fal', 'home-lg']" size="lg" style="color: #5B636D"></fa-icon>
         <span>Mes etablissements</span>
       </span>
-      <div class="h-10 w-10 mx-8 my-boredr border-my-blue-1">
+      <div class="h-10 w-10 my-boredr border-my-blue-1">
         <img alt="avatar" class="h-full w-full" src="assets/images/Rectangle 20.png">
       </div>
     </div>
   </header>
 
   <!-- Sub header ================================================================================================== -->
-  <div class="h-24 2xl:h-32 w-full px-16 lg:px-24 2xl:px-32 flex items-center bg-my-blue-1">
+  <div class="h-24 2xl:h-32 w-full px-6 md:px-12 lg:px-24 2xl:px-32 flex items-center bg-my-blue-1">
     <div class="h-16 w-16 2xl:w-24 2xl:h-24 my-border">
       <img alt="avatar" class="h-full w-full" src="assets/images/avatar.png">
     </div>
@@ -22,11 +22,11 @@
       <span class="text-white text-2xl font-bold ">{{ basicInfo.data.name || ('hotel_creation.establishment_name' | translate) }}</span>
       <div class="flex items-end text-white">
         <ng-container *ngIf="basicInfo.data.starsNumber != 0">
-          <fa-icon *ngFor="let x of ' '.repeat(basicInfo.data.starsNumber-1).split(' ')"
+          <fa-icon *ngFor="let x of basicInfo.data.starsNumber | ngForCount"
                    class="mr-1" [icon]="['fas', 'star']" size="1x" style="color: #FFFFFF"></fa-icon>
         </ng-container>
         <ng-container *ngIf="basicInfo.data.starsNumber != 5">
-          <fa-icon *ngFor="let x of ' '.repeat(5-basicInfo.data.starsNumber-1).split(' ')"
+          <fa-icon *ngFor="let x of (5-basicInfo.data.starsNumber) | ngForCount"
                    class="mr-1" [icon]="['fal', 'star']" size="1x" style="color: #FFFFFF"></fa-icon>
         </ng-container>
         <i class="text-xs block leading-none font-thin mb-1">{{ '0'+basicInfo.data.starsNumber || '00' }} Etoiles</i>
@@ -35,8 +35,8 @@
   </div>
 
   <!-- Tabs menu =================================================================================================== -->
-  <div class="w-full px-16 lg:px-24 2xl:px-32 bg-my-gray-1 shadow-xs ">
-    <div class="w-4/5 2xl:w-3/4 flex">
+  <div class="w-full px-6 md:px-12 lg:px-24 2xl:px-32 bg-my-gray-1 shadow-xs" >
+    <div class="w-4/5 2xl:w-3/4 flex" id="tabs-menu">
       <span (click)="tab_navigator(1)" id="tab-menu-1" class="active" translate>hotel_creation.basic_info<div class="bg-my-blue-1"></div></span>
       <span (click)="tab_navigator(2)" id="tab-menu-2">{{'hotel_creation.room&price.room&price' | translate}}<div class="bg-my-blue-1"></div></span>
       <span (click)="tab_navigator(3)" id="tab-menu-3" style="flex-grow: 0"><div class="bg-my-blue-1"></div></span>
@@ -50,7 +50,7 @@
 
   <!-- Tab1 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10"
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-6 md:px-12 lg:px-24 2xl:px-32 mb-10"
     id="tab1">
     <!-- Bienvenue ==== -->
     <div class="col-span-4 flex items-center mb-3">
@@ -74,10 +74,10 @@
                   [(ngModel)]="basicInfo.data.starsNumber"
                   disableOptionCentering panelClass="my-mat-select"
                   placeholder="Nbr d'etoils..."><!--// INPUT //-->
-        <mat-option *ngFor="let x of ' '.repeat(4).split(' '); let i = index" [value]="i+1">
+        <mat-option *ngFor="let x of 5 | ngForCount; let i = index" [value]="i+1">
           <div class="flex items-center">
             <i class="mr-2 text-xs leading-none font-thin">{{i + 1}} Etoile(s)</i>
-            <fa-icon *ngFor="let x of ' '.repeat(i).split(' ')"
+            <fa-icon *ngFor="let x of (i+1) | ngForCount"
                      [icon]="['fas', 'star']" size="sm" style="color: #5B636D"></fa-icon>
           </div>
         </mat-option>
@@ -166,7 +166,7 @@
 
   <!-- Tab2 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-4 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    class="grid grid-cols-4 gap-2 row-gap-4 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-6 md:px-12 lg:px-24 2xl:px-32 mb-10 hidden"
     id="tab2">
     <!-- Chambres ==== -->
     <div class="col-span-4 flex flex-col">
@@ -259,7 +259,7 @@
                     [(ngModel)]="rooms[roomIndex].data.roomCount"
                     disableOptionCentering panelClass="my-mat-select"
                     placeholder="Selectionner...">
-          <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}}chambre(s)
+          <mat-option *ngFor="let x of 20 | ngForCount; let i = index" [value]="i">{{i}}chambre(s)
           </mat-option>
         </mat-select>
         <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
@@ -274,7 +274,7 @@
                     [(ngModel)]="rooms[roomIndex].data.bathRoomCount"
                     disableOptionCentering panelClass="my-mat-select"
                     placeholder="Selectionner...">
-          <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}} sale(s) de bain
+          <mat-option *ngFor="let x of 20 | ngForCount; let i = index" [value]="i">{{i}} sale(s) de bain
           </mat-option>
         </mat-select>
         <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
@@ -289,7 +289,7 @@
                     [(ngModel)]="rooms[roomIndex].data.livingRoomCount"
                     disableOptionCentering panelClass="my-mat-select"
                     placeholder="Selectionner...">
-          <mat-option *ngFor="let x of ' '.repeat(20).split(' '); let i = index" [value]="i">{{i}} Salon(s)</mat-option>
+          <mat-option *ngFor="let x of 20 | ngForCount; let i = index" [value]="i">{{i}} Salon(s)</mat-option>
         </mat-select>
         <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
                  (click)="arrow_down_clicked()"
@@ -323,7 +323,7 @@
                       [(ngModel)]="rooms[roomIndex].data.beds[i].bedCount" disableOptionCentering
                       panelClass="my-mat-select" placeholder="Selectionner...">
             <mat-option [value]="1">1 lit</mat-option>
-            <mat-option *ngFor="let x of ' '.repeat(9).split(' '); let i = index" [value]="i+2">{{ i + 2 }}lits
+            <mat-option *ngFor="let x of 10 | ngForCount; let i = index" [value]="i+2">{{ i + 2 }}lits
             </mat-option>
           </mat-select>
           <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
@@ -367,7 +367,7 @@
 
   <!-- Tab3 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-6 md:px-12 lg:px-24 2xl:px-32 mb-10 hidden"
     id="tab3">
     <!-- Chambre & prix ==== -->
     <div class="col-span-4 flex items-center my-4">
@@ -397,7 +397,7 @@
 
   <!-- Tab4 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-6 md:px-12 lg:px-24 2xl:px-32 mb-10 hidden"
     id="tab4">
     <!-- Important chez le client ==== -->
     <div class="col-span-4 flex items-center mb-3">
@@ -441,7 +441,8 @@
            class="w-full grid grid-cols-3 gap-2 flex items-center mb-2">
         <div class="input-wrapper col-span-2 input-label px-4">{{ get_lang_name_by_ref(lang) }}</div>
         <div style="font-size: 1.2rem">
-          <fa-icon class="cursor-pointer" [icon]="['fal', 'trash-alt']" size="1x" style="color: #E80B0B"></fa-icon>
+          <fa-icon class="cursor-pointer" size="1x" style="color: #E80B0B"
+                   [icon]="['fal', 'trash-alt']" (click)="del_lang(i)"></fa-icon>
         </div>
       </div>
     </div>
@@ -459,10 +460,6 @@
                (click)="arrow_down_clicked()"
                [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
     </div>
-    <!-- <div class="col-span-4 flex items-center" (click)="add_lang()">
-      <img src="assets/icons/add.png" class="mr-2" alt="add">
-      <span class="text-xs cursor-pointer">Ajouter une langue</span>
-    </div> -->
     <!-- Services ==== -->
     <div class="col-span-4 flex items-center mt-4 mb-3">
       <span class="section-label">Services</span>
@@ -470,7 +467,9 @@
     </div>
     <div class="col-span-4 grid grid-cols-3 gap-2 row-gap-3">
       <div *ngFor="let x of service" class="my-1 col-span-1 flex items-center">
-        <mat-checkbox (change)="service_selected($event.checked, x.reference)" (focusin)="input_focused($event.target)"
+        <mat-checkbox (change)="service_selected($event.checked, x.reference)"
+                      (focusin)="input_focused($event.target)"
+                      [checked]="instServices.data.services.indexOf(x.reference) !== -1"
                       disableRipple></mat-checkbox>
         <span class="check-box-label ml-4">{{ x.name }}</span>
       </div>
@@ -486,7 +485,7 @@
 
   <!-- Tab5 ======================================================================================================== -->
   <div
-    class="grid grid-cols-6 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    class="grid grid-cols-6 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-6 md:px-12 lg:px-24 2xl:px-32 mb-10 hidden"
     id="tab5">
     <!-- Lits supplémentaires ==== -->
     <div class="col-span-6 flex items-center mb-3">
@@ -514,9 +513,10 @@
         Le nombre de lits supplémentaires qui peuvent être ajoutés
       </div>
       <div class="input-wrapper col-span-1">
-        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
+        <mat-select (focus)="input_focused($event.target)"
+                    (openedChange)="mat_toggled($event)"
                     [(ngModel)]="equipment.data.extraBedCount" disableOptionCentering panelClass="my-mat-select">
-          <mat-option *ngFor="let x of ' '.repeat(10).split(' '); let i = index" [value]="i+selectedExtraBed"
+          <mat-option *ngFor="let x of 20 | ngForCount; let i = index" [value]="i+selectedExtraBed"
                       value="red">{{ i + selectedExtraBed }} bed(s)
           </mat-option>
         </mat-select>
@@ -524,34 +524,41 @@
                  (click)="arrow_down_clicked()"
                  [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
+
       <div class="col-span-6 mt-3">
         <span class="input-label">vous pouvez accueillir les personnes suivantes dans des lits d'appoint</span>
       </div>
 
+      <!-- kids 2 yrs ============================================================================================== -->
       <div class="col-span-6 flex items-center mt-2">
-        <mat-checkbox #enfants2ans (change)="extra_bed_selected(0, extraBedFor[0].reference, $event.checked)"
+        <mat-checkbox #child2yrs
+                      (change)="extra_bed_selected(0, extraBedFor[0].reference, $event.checked)"
+                      [checked]="equipment.data.extraBed[0]?.price !== null || false"
                       (focusin)="input_focused($event.target)"
                       disableRipple></mat-checkbox>
         <span class="check-box-label ml-4">{{ extraBedFor[0].name }}</span>
       </div>
-      <div *ngIf="enfants2ans.checked" class="input-wrapper col-span-3 my-2">
+      <div *ngIf="child2yrs.checked" class="input-wrapper col-span-3 my-2">
         <!-- <span class="input-label mb-2">Entrez le prix par nuit, par enfant</span> -->
         <span class="input-label flex items-center px-4 h-full bg-my-gray-1" style="min-width: fit-content;">DZD</span>
-        <div class="flex-grow h-full flex items-center">
-          <input (focus)="input_focused($event.target)" [(ngModel)]="equipment.data.extraBed[0].price" class="my-input"
+        <div  class="flex-grow h-full flex items-center">
+          <input (focus)="input_focused($event.target)"
+                 [(ngModel)]="equipment.data.extraBed[0].price" class="my-input"
                  min="0" placeholder="Entrez le prix par nuit, par enfant" type="number">
         </div>
       </div>
+      <!-- kids 2 yrs end ========================================================================================== -->
 
+      <!-- Kids ==================================================================================================== -->
       <div class="col-span-6 flex items-center mt-2">
         <mat-checkbox #enfants
                       (change)="extra_bed_selected(1, extraBedFor[1].reference, $event.checked)"
+                      [checked]="equipment.data.extraBed[1]?.price !== null || false"
                       (focusin)="input_focused($event.target)"
                       disableRipple></mat-checkbox>
         <span class="check-box-label ml-4">{{ extraBedFor[1].name }}</span>
       </div>
       <div *ngIf="enfants.checked" class="input-wrapper col-span-3 my-2">
-        <!-- <span class="input-label mb-2"></span> -->
         <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
                     [(ngModel)]="freeBedForKids" disableOptionCentering panelClass="my-mat-select"
                     placeholder="Selectionner...">
@@ -570,10 +577,13 @@
                  min="0" placeholder="Entrez le prix par nuit, par enfant" type="number">
         </div>
       </div>
+      <!-- Kids end ================================================================================================ -->
 
+      <!-- adults ================================================================================================== -->
       <div class="col-span-6 flex items-center mt-2">
         <mat-checkbox #adults
                       (change)="extra_bed_selected(2, extraBedFor[2].reference, $event.checked)"
+                      [checked]="equipment.data.extraBed[2]?.price !== null || false"
                       (focusin)="input_focused($event.target)"
                       disableRipple></mat-checkbox>
         <span class="check-box-label ml-4">{{ extraBedFor[2].name }}</span>
@@ -582,10 +592,12 @@
         <!-- <span class="input-label mb-2">Entrez le prix par nuit, par adulte</span> -->
         <span class="input-label flex items-center  px-4 h-full bg-my-gray-1" style="min-width: fit-content;">DZD</span>
         <div class="flex-grow h-full flex items-center">
-          <input (focus)="input_focused($event.target)" [(ngModel)]="equipment.data.extraBed[2].price" class="my-input"
+          <input (focus)="input_focused($event.target)"
+                 [(ngModel)]="equipment.data.extraBed[2].price" class="my-input"
                  min="0" placeholder="Entrez le prix par nuit, par adult" type="number">
         </div>
       </div>
+      <!-- adults end ================================================================================================== -->
     </ng-container>
 
     <!-- Autre equipements ==== -->
@@ -598,6 +610,7 @@
       <div *ngFor="let x of otherEquipment" class="w-1/3 flex items-center my-4">
         <mat-checkbox (change)="otherEquipment_selected($event.checked, x.reference)"
                       (focusin)="input_focused($event.target)"
+                      [checked]="equipment.data.otherEquipment.indexOf(x.reference) !== -1"
                       disableRipple></mat-checkbox>
         <span class="check-box-label ml-4">{{ x.name }}</span>
       </div>
@@ -612,7 +625,7 @@
 
   <!-- Tab6 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-6 md:px-12 lg:px-24 2xl:px-32 mb-10 hidden"
     id="tab6">
     <!-- Galerie des photos ==== -->
     <div class="col-span-4 flex items-center">
@@ -651,7 +664,7 @@
 
   <!-- Tab7 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-6 md:px-12 lg:px-24 2xl:px-32 mb-10 hidden"
     id="tab7">
     <!-- Annulation ==== -->
     <div class="col-span-4 flex items-center mb-3">
@@ -664,7 +677,7 @@
         <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
                     [(ngModel)]="policy.data.policy.cancelingDays" disableOptionCentering panelClass="my-mat-select"
                     placeholder="Selectionner...">
-          <mat-option *ngFor="let x of ' '.repeat(9).split(' '); let i= index" [value]=i>{{ i }} Jour(s)</mat-option>
+          <mat-option *ngFor="let x of 10 | ngForCount; let i= index" [value]=i>{{ i }} Jour(s)</mat-option>
         </mat-select>
         <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
                  (click)="arrow_down_clicked()"
@@ -703,26 +716,29 @@
       <span class="input-label mb-2">De</span>
       <div class="w-full h-12 bg-white grid grid-cols-5 gap-2">
         <div class="col-span-1">
-          <button (click)="select_check('checkIn', 'from', 1, $event.target.value)" class="check-hours-input"
-                  id="checkInfrom1"
-                  value="09">09:00
+          <button (click)="select_check('checkIn', 'From', 1, checkInFrom1.value)" class="check-hours-input"
+                  id="checkInFrom1"
+                  value="9"
+                  [class.selected-check-hours]="policy.data.checkIn.from.toString() === checkInFrom1.value" #checkInFrom1>09:00
           </button>
         </div>
         <div class="col-span-1">
-          <button (click)="select_check('checkIn', 'from', 2, $event.target.value)" class="check-hours-input"
-                  id="checkInfrom2"
-                  value="10">10:00
+          <button (click)="select_check('checkIn', 'From', 2, checkInFrom2.value)" class="check-hours-input"
+                  id="checkInFrom2"
+                  value="10"
+                  [class.selected-check-hours]="policy.data.checkIn.from.toString() === checkInFrom2.value" #checkInFrom2>10:00
           </button>
         </div>
         <div class="col-span-1">
-          <button (click)="select_check('checkIn', 'from', 3, $event.target.value)" class="check-hours-input"
-                  id="checkInfrom3"
-                  value="11">11:00
+          <button (click)="select_check('checkIn', 'From', 3, checkInFrom3.value)" class="check-hours-input"
+                  id="checkInFrom3"
+                  value="11"
+                  [class.selected-check-hours]="policy.data.checkIn.from.toString() === checkInFrom3.value" #checkInFrom3>11:00
           </button>
         </div>
         <div class="input-wrapper col-span-2">
           <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
-                      (selectionChange)="select_check('checkIn', 'from', 1, $event.value)"
+                      (selectionChange)="select_check('checkIn', 'From', 1, $event.value)"
                       disableOptionCentering panelClass="my-mat-select"
                       placeholder="Autre...">
             <ng-container *ngFor="let hour of checkHours">
@@ -740,23 +756,29 @@
       <span class="input-label mb-2">A</span>
       <div class="w-full h-12 bg-white grid grid-cols-5 gap-2">
         <div class="col-span-1">
-          <button (click)="select_check('checkIn', 'to', 1, $event.target.value)" class="check-hours-input" disabled
-                  id="checkInto1" value="10">10:00
+          <button (click)="select_check('checkIn', 'To', 1, checkInTo1.value)" class="check-hours-input" disabled
+                  id="checkInTo1"
+                  value="10"
+                  [class.selected-check-hours]="policy.data.checkIn.to.toString() === checkInTo1.value" #checkInTo1>10:00
           </button>
         </div>
         <div class="col-span-1">
-          <button (click)="select_check('checkIn', 'to', 2, $event.target.value)" class="check-hours-input" disabled
-                  id="checkInto2" value="11">11:00
+          <button (click)="select_check('checkIn', 'To', 2, checkInTo2.value)" class="check-hours-input" disabled
+                  id="checkInTo2"
+                  value="11"
+                  [class.selected-check-hours]="policy.data.checkIn.to.toString() === checkInTo2.value" #checkInTo2>11:00
           </button>
         </div>
         <div class="col-span-1">
-          <button (click)="select_check('checkIn', 'to', 3, $event.target.value)" class="check-hours-input" disabled
-                  id="checkInto3" value="12">12:00
+          <button (click)="select_check('checkIn', 'To', 3, checkInTo3.value)" class="check-hours-input" disabled
+                  id="checkInTo3"
+                  value="12"
+                  [class.selected-check-hours]="policy.data.checkIn.to.toString() === checkInTo3.value" #checkInTo3>12:00
           </button>
         </div>
         <span class="input-wrapper col-span-2">
           <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
-                      (selectionChange)="select_check('checkIn', 'to', 1, $event.value)"
+                      (selectionChange)="select_check('checkIn', 'To', 1, $event.value)"
                       disableOptionCentering panelClass="my-mat-select"
                       placeholder="Autre...">
             <ng-container *ngFor="let hour of checkHours">
@@ -780,26 +802,29 @@
       <span class="input-label mb-2">De</span>
       <div class="w-full h-12 bg-white grid grid-cols-5 gap-2">
         <div class="col-span-1">
-          <button (click)="select_check('checkOut', 'from', 1, $event.target.value)" class="check-hours-input"
-                  id="checkOutfrom1"
-                  value="09">09:00
+          <button (click)="select_check('checkOut', 'From', 1, checkOutFrom1.value)" class="check-hours-input"
+                  id="checkOutFrom1"
+                  value="9"
+                  [class.selected-check-hours]="policy.data.checkOut.from.toString() === checkOutFrom1.value" #checkOutFrom1>09:00
           </button>
         </div>
         <div class="col-span-1">
-          <button (click)="select_check('checkOut', 'from', 2, $event.target.value)" class="check-hours-input"
-                  id="checkOutfrom2"
-                  value="10">10:00
+          <button (click)="select_check('checkOut', 'From', 2, checkOutFrom2.value)" class="check-hours-input"
+                  id="checkOutFrom2"
+                  value="10"
+                  [class.selected-check-hours]="policy.data.checkOut.from.toString() === checkOutFrom2.value" #checkOutFrom2>10:00
           </button>
         </div>
         <div class="col-span-1">
-          <button (click)="select_check('checkOut', 'from', 3, $event.target.value)" class="check-hours-input"
-                  id="checkOutfrom3"
-                  value="11">11:00
+          <button (click)="select_check('checkOut', 'From', 3, checkOutFrom3.value)" class="check-hours-input"
+                  id="checkOutFrom3"
+                  value="11"
+                  [class.selected-check-hours]="policy.data.checkOut.from.toString() === checkOutFrom3.value" #checkOutFrom3>11:00
           </button>
         </div>
         <div class="input-wrapper col-span-2">
           <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
-                      (selectionChange)="select_check('checkOut', 'from', 1, $event.value)"
+                      (selectionChange)="select_check('checkOut', 'From', 1, $event.value)"
                       disableOptionCentering panelClass="my-mat-select"
                       placeholder="Autre...">
             <ng-container *ngFor="let hour of checkHours">
@@ -817,23 +842,29 @@
       <span class="input-label mb-2">A</span>
       <div class="w-full h-12 bg-white grid grid-cols-5 gap-2">
         <div class="col-span-1">
-          <button (click)="select_check('checkOut', 'to', 1, $event.target.value)" class="check-hours-input" disabled
-                  id="checkOutto1" value="10">10:00
+          <button (click)="select_check('checkOut', 'To', 1, checkOutTo1.value)" class="check-hours-input" disabled
+                  id="checkOutTo1"
+                  value="10"
+                  [class.selected-check-hours]="policy.data.checkOut.to.toString() === checkOutTo1.value" #checkOutTo1>10:00
           </button>
         </div>
         <div class="col-span-1">
-          <button (click)="select_check('checkOut', 'to', 2, $event.target.value)" class="check-hours-input" disabled
-                  id="checkOutto2" value="11">11:00
+          <button (click)="select_check('checkOut', 'To', 2, checkOutTo2.value)" class="check-hours-input" disabled
+                  id="checkOutTo2"
+                  value="11"
+                  [class.selected-check-hours]="policy.data.checkOut.to.toString() === checkOutTo2.value" #checkOutTo2>11:00
           </button>
         </div>
         <div class="col-span-1">
-          <button (click)="select_check('checkOut', 'to', 3, $event.target.value)" class="check-hours-input" disabled
-                  id="checkOutto3" value="12">12:00
+          <button (click)="select_check('checkOut', 'To', 3, checkOutTo3.value)" class="check-hours-input" disabled
+                  id="checkOutTo3"
+                  value="12"
+                  [class.selected-check-hours]="policy.data.checkOut.to.toString() === checkOutTo3.value" #checkOutTo3>12:00
           </button>
         </div>
         <div class="input-wrapper col-span-2">
           <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
-                      (selectionChange)="select_check('checkOut', 'to', 1, $event.value)"
+                      (selectionChange)="select_check('checkOut', 'To', 1, $event.value)"
                       disableOptionCentering panelClass="my-mat-select"
                       placeholder="Autre...">
             <ng-container *ngFor="let hour of checkHours">
@@ -878,7 +909,7 @@
 
   <!-- Tab8 ======================================================================================================== -->
   <div
-    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-16 lg:px-24 2xl:px-32 mb-10 hidden"
+    class="grid grid-cols-4 gap-2 row-gap-3 w-full lg:w-3/4 2xl:w-3/5 mt-12 2xl:mt-14 px-6 md:px-12 lg:px-24 2xl:px-32 mb-10 hidden"
     id="tab8">
     <!-- Option de paiments ==== -->
     <div class="col-span-4 flex items-center mb-3">
@@ -888,9 +919,10 @@
     <div class="input-container col-span-2">
       <span class="input-label mb-2">Pouvez-vous débiter les cartes de crédit sur place?</span>
       <div class="input-wrapper w-full">
-        <mat-select (focus)="input_focused($event.target)" (openedChange)="mat_toggled($event)"
-                    [(ngModel)]="payment.cardCharge" disableOptionCentering panelClass="my-mat-select"
-                    placeholder="Selectionner...">
+        <mat-select (focus)="input_focused($event.target)"
+                    (openedChange)="mat_toggled($event)"
+                    disableOptionCentering panelClass="my-mat-select"
+                    placeholder="Selectionner..." #chargeCard>
           <mat-option [value]="true">Oui</mat-option>
           <mat-option [value]="false">Non</mat-option>
         </mat-select>
@@ -898,11 +930,13 @@
                  (click)="arrow_down_clicked()"
                  [icon]="['fal', 'chevron-down']" size="1x" style="color: #5B636D"></fa-icon>
       </div>
-      <span *ngIf="!payment.cardCharge" class="input-label mt-2">Nous informerons les clients que vous n'acceptez que des espèces</span>
+      <span *ngIf="!chargeCard.value" class="input-label mt-2">Nous informerons les clients que vous n'acceptez que des espèces</span>
     </div>
-    <ng-container *ngIf="payment.cardCharge">
+    <ng-container *ngIf="chargeCard.value">
       <div *ngFor="let x of creditCard" class="col-span-4 flex items-center">
-        <mat-checkbox (change)="creditCard_selected($event.checked, x._id)" (focusin)="input_focused($event.target)"
+        <mat-checkbox (change)="creditCard_selected($event.checked, x._id)"
+                      (focusin)="input_focused($event.target)"
+                      [checked]="payment.data.creditCards.indexOf(x._id) !== -1"
                       disableRipple></mat-checkbox>
         <span class="check-box-label ml-4">{{ x.name }}</span>
       </div>

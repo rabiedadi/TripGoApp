@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import {SurveyComponent} from './temporary/survey/survey.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
+  { path: 'survey', component: SurveyComponent },
   { path: 'verify', component: HomeComponent },
   { path: 'creation', loadChildren: () => import('./mdl-establishment-creation/establishment-creation.module')
       .then(mod => mod.EstablishmentCreationModule), canActivate: [AuthGuard] },

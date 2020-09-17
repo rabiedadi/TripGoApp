@@ -8,7 +8,7 @@
   font-weight: 700;
 }
 
-span[id^="tab-menu"] {
+#tabs-menu span {
   font-size: 14px;
   color: rgba(91, 99, 109, 0.5);
   height: 65px;
@@ -19,15 +19,15 @@ span[id^="tab-menu"] {
   position: relative;
   cursor: pointer;
 }
-span[id^="tab-menu"]:hover {
+#tabs-menu span:hover {
   background-color: #F3F3F3;
 }
-span[id^="tab-menu"].active {
+#tabs-menu span.active {
   font-size: 14px;
   color: #5B636D;
   font-weight: 500;
 }
-span[id^="tab-menu"] div {
+#tabs-menu span div {
   width: 0;
   position: absolute;
   bottom: 0;
@@ -36,7 +36,7 @@ span[id^="tab-menu"] div {
   height: 4px;
   margin-bottom: -2px;
 }
-span[id^="tab-menu"].active div {
+#tabs-menu span.active div {
   width: 100%;
 }
 
@@ -159,4 +159,11 @@ span[id^="tab-menu"].active div {
   100% {
     opacity: 1;
   }
+}
+
+
+@media (max-width: 480px) { /*sm*/
+#wrapper {
+  min-width: 800px;
+}
 }

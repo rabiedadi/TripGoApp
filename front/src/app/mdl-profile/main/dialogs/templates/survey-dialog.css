@@ -39,16 +39,16 @@
 @media (min-width: 1024px) { /*lg*/
 }
 @media (min-width: 1200px) { /*xl*/
-    .container {
-        padding-right: 50px;
-        padding-left: 50px;
-    }
+    /*.container {*/
+    /*    padding-right: 50px;*/
+    /*    padding-left: 50px;*/
+    /*}*/
 }
 @media (min-width: 1920px) { /*2xl*/
-    .container {
-        padding-right: 100px;
-        padding-left: 100px;
-    }
+    /*.container {*/
+    /*    padding-right: 100px;*/
+    /*    padding-left: 100px;*/
+    /*}*/
 
     .survey-container {
         max-width: 320px;

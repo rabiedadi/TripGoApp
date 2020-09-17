@@ -214,15 +214,15 @@ export class AddOfferDialogComponent implements OnDestroy {
     offerType: string;
     service = [
         'service 1',
-        'service 1',
-        'service 1',
-        'service 1',
-        'service 1',
-        'service 1',
-        'service 1',
-        'service 1',
-        'service 1',
-        'service 1'
+        'service 2',
+        'service 3',
+        'service 4',
+        'service 5',
+        'service 6',
+        'service 8',
+        'service 9',
+        'service 10',
+        'service 11'
     ];
     PersonsNb: 2;
     pricePerNight: any;
@@ -248,13 +248,22 @@ export class SurveyDialogComponent implements OnDestroy {
     this.selectedSurvey = this.survey.find(s => s.title === this.selectedSurveyTitle);
   }
   destroyed$ = new Subject<boolean>();
-  selectedSurveyTitle = 'tourismeOuTravail';
+  selectedSurveyTitle = 'previousRating';
   selectedSurvey: any;
   selectedChoice = null;
   survey = [
     {
+      title: 'previousRating',
+      type: 'stars',
+      globalNote: 0,
+      locationNote: 0,
+      servicesNote: 0,
+      receptionNote: 0,
+      communicationNote: 0,
+      message: 'Si votre hôtel est répertorié sur un autre site et a des notes, veuillez les cité ici',
+      nextTitle: 'tourismeOuTravail'
+    }, {
       title: 'tourismeOuTravail',
-      status: 'active',
       type: 'choice',
       message: 'Votre hôtel se trouve dans un lieu touristique ou bien milieu des affaires',
       choices: [
@@ -267,8 +276,18 @@ export class SurveyDialogComponent implements OnDestroy {
       message: 'Votre hôtel se trouve dans une zone urbaine ou naturelle ?',
       choices: [
         { choice: 'Urbaine', img: 'https://webunwto.s3.eu-west-1.amazonaws.com/styles/slider/s3/2020-07/200730-travel-restrictions_0.jpg?itok=NBYof7bK',
-          nextTitle: 'anciennesOuModernes' },
+          nextTitle: 'ancienOuModern' },
         { choice: 'naturelle', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRd9TWK0IelS1K76nuSeclkKJYqYkJF-_CxZg&usqp=CAU',
+          nextTitle: 'natureType' }
+      ]
+    }, {
+      title: 'ancienOuModern',
+      type: 'choice',
+      message: 'Votre hôtel se trouve dans un endroit moderne ou ancien ?',
+      choices: [
+        { choice: 'Moderne', img: 'https://pix10.agoda.net/hotelImages/96605/-1/dd32d9b188d86d6d8dc40d1ff9a0ebf6.jpg?s=1024x768',
+          nextTitle: 'aaa' },
+        { choice: 'Ancien', img: 'https://i.pinimg.com/originals/6d/29/39/6d2939af5eff46f20669705eeaab78f8.jpg',
           nextTitle: 'natureType' }
       ]
     }, {
@@ -341,6 +360,7 @@ export class SurveyDialogComponent implements OnDestroy {
     const item = $event.target as HTMLElement;
     item.style.backgroundColor = 'rgba(20, 133, 215, 1)';
   }
+
 }
 
 export const AllDialogsComponents = [

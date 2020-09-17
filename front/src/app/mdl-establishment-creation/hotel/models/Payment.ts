@@ -1,5 +1,4 @@
 export class Payment {
-  cardCharge = false;
   data = {
     creditCards : [],
     invoiceName : ''
