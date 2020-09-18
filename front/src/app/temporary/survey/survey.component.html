@@ -2,8 +2,8 @@
     <h1 mat-dialog-title></h1>
     <br>
 
-    <div class="flex flex-col container" mat-dialog-content>
-        <hr><br>
+    <div *ngIf="selectedSurvey" class="flex flex-col container" mat-dialog-content>
+        <br>
         <ng-container *ngIf="selectedSurvey.type === 'choice'">
             <span class="mx-auto text-center text-my-gray-4 font-semibold text-lg"
             >{{ selectedSurvey.message }}</span>
@@ -42,25 +42,28 @@
     </div>
     <br>
     <div class="container" mat-dialog-actions>
-        <hr><br>
-        <div class="flex justify-end w-full pt-4">
-            <button (click)="nextSurvey()"
+        <div *ngIf="selectedSurvey" class="flex justify-end w-full pt-4">
+            <hr><br>
+            <button *ngIf="selectedSurvey.nextTitle !== ''" (click)="nextSurvey()"
                     class="h-10 bg-my-blue-1 text-white text-sm font-medium px-12"
                     name="submit" type="submit">
-                <span *ngIf="selectedSurvey.nextTitle !== ''">suivant</span>
-                <span *ngIf="selectedSurvey.nextTitle === ''">terminer</span>
+                <span  >suivant</span>
             </button>
-
+            <button *ngIf="selectedSurvey.nextTitle === ''" (click)="getRecommendations(); nextSurvey()"
+                    class="h-10 bg-my-blue-1 text-white text-sm font-medium px-12"
+                    name="submit" type="submit">
+                <span  >terminer</span>
+            </button>
         </div>
         <br><hr><br>
-        <h3 class="font-bold text-my-gray-3">Résultat:</h3>
+        <h3 *ngIf="recommendations$" class="font-bold text-my-gray-3">Résultat:</h3>
         <div class="grid grid-cols-2">
-            <div *ngFor="let r of result" class="text-my-gray-3 col-span-1">
+            <div *ngFor="let r of recommendations$ | async" class="text-my-gray-3 col-span-1">
                 <ul>
                     <li><span class="font-semibold">Nom :</span>{{ r.name }}</li>
                     <li><span class="font-semibold">Ètoiles :</span>{{ r.stars }}</li>
                     <li><span class="font-semibold">Ville :</span>{{ r.city }}</li>
-                    <li><span class="font-semibold">Score :</span>{{ r.note }}</li>
+                    <li><span class="font-semibold">Score :</span>{{ r.score }}</li>
                 </ul>
             </div>
         </div>

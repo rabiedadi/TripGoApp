@@ -1,5 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {IRecommendation, SurveyService} from '../survey.service';
 
 @Component({
   selector: 'app-survey',
@@ -7,7 +8,7 @@ import {Subject} from 'rxjs';
   styleUrls: ['./survey.component.css']
 })
 export class SurveyComponent implements OnDestroy{
-  constructor() {
+  constructor(private surveyS: SurveyService) {
     this.selectedSurvey = this.survey.find(s => s.title === this.selectedSurveyTitle);
   }
   destroyed$ = new Subject<boolean>();
@@ -37,7 +38,8 @@ export class SurveyComponent implements OnDestroy{
       title: 'villePlusVisités',
       type: 'select',
       message: 'Quelles sont les villes les plus souvent visités ?',
-      list: ['01 Adrar', '02 Chlef', '03 Laghouat', '04 Oum-ElBouaghi', '05 Batna', '06 Béjaïa', '07 Biskra', '08 Béchar', '09 Blida', '10 Bouira', '11 Tamanrasset', '12 Tébessa', '13 Tlemcen', '14 Tiaret', '15 Tizi-Ouzou', '16 Alger', '17 Djelfa', '18 Jijel', '19 Sétif', '20 Saida', '21 Skikda', '22 Sidi-BelAbbès', '23 Annaba', '24 Guelma', '25 Constantine', '26 Médéa', '27 Mostaganem', '28 M\'Sila', '29 Mascara', '30 Ouargla', '31 Oran', '32 El-Bayadh', '33 illizi', '34 Bordj-BouArreridj', '35 Boumerdès', '36 El-Taref', '37 Tindouf', '38 Tissemsilt', '39 El-Oued', '40 Khenchela', '41 Souk-Ahras', '42 Tipaza', '43 Mila', '44 Aïn-Defla', '45 Naâma', '46 AïnTémouchent', '47 Ghardaia', '48 Relizane'],
+      list: ['Madrid', 'Lisbon', 'Youta', 'Minsk', 'Rouen', 'Lyon', 'Bern', 'Rome', 'Caen', 'Orleans', 'Paris', 'Berlin', 'Bruxelles', 'Manila', 'Bilbao', 'Salamanque', 'Valladolid', 'Gijon', 'Porto', 'Coimbre', 'Huelva', 'Jaen', 'Grenade', 'Malaga', 'Lorca', 'Benidorm', 'Lérida', 'Milan', 'Venise', 'Graze', 'Zagreb', 'Brno', 'Dresde', 'Leipzig', 'Breme', 'Hambourg', 'Cologne'
+      ],
       nextTitle: 'anciennesOuModernes'
     }, {
       title: 'anciennesOuModernes',
@@ -61,23 +63,7 @@ export class SurveyComponent implements OnDestroy{
       nextTitle: ''
     }
   ];
-  result: {
-    name: string,
-    stars: number,
-    city: string,
-    note: number
-  }[] = [
-      {name: 'Coast hote', stars: 5, city: 'Madrid', note: 84},
-      {name: 'Primland', stars: 5, city: 'Lyon', note: 81},
-      {name: 'Hillside', stars: 4, city: 'Rome', note: 75},
-      {name: 'Moody moon', stars: 3, city: 'Bilbao', note: 71},
-      {name: 'Mandarin Oriental', stars: 4, city: 'Salamanque', note: 68}
-    ];
-  ngOnDestroy() {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-  }
-
+  recommendations$: Observable<{}[]>;
   preselecteChoice(choiceNb: number, value: number) {
     const surveyProgressContainer1 =
         document.getElementsByClassName('survey-progerss-container')[choiceNb] as HTMLElement;
@@ -96,9 +82,17 @@ export class SurveyComponent implements OnDestroy{
   }
 
   nextSurvey() {
-    const s = this.survey.find(_ => _.title === this.selectedSurveyTitle);
-    this.selectedSurveyTitle = s.nextTitle;
-    if (this.selectedSurveyTitle === '') { }
+    this.selectedSurveyTitle = this.selectedSurvey.nextTitle;
+    if (this.selectedSurveyTitle === '') { this.selectedSurvey = undefined; }
     this.selectedSurvey = this.survey.find(_ => _.title === this.selectedSurveyTitle);
+  }
+
+  getRecommendations() {
+    this.recommendations$ = this.surveyS.getRecommendations();
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 }

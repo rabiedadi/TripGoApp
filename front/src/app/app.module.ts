@@ -81,6 +81,8 @@ import {
     faThumbsUp
 } from '@fortawesome/free-solid-svg-icons';
 import { SurveyComponent } from './temporary/survey/survey.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 
@@ -106,7 +108,8 @@ export function HttpLoaderFactory(http: HttpClient) {
             }
         }),
         ToastrModule.forRoot(),
-        FontAwesomeModule
+        FontAwesomeModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
     exports: [],
