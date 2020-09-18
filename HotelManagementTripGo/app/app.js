@@ -14,6 +14,7 @@ const room = require('./routes/room');
 const bodyParser = require('body-parser');
 const mongoose = require('../config/db');
 const config = require('./routes/config');
+const recommend = require('./routes/recommend');
 
 
 
@@ -51,6 +52,7 @@ app.use('/hotel/platformLanguage', platformLanguage);
 app.use('/hotel/room', room);
 app.use('/hotel', hotel);
 app.use('/config', config);
+app.use('/recommend', recommend);
 
 // express doesn't consider not found 404 as an error so we need to handle 404 explicitly
 app.use(errors.notFound);

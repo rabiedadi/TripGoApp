@@ -16,6 +16,7 @@ const hotelModel = require('../Models/hotel');
 const roomModel = require('../Models/room');
 const userModel = require('../Models/user');
 const offerModel = require('../Models/offer');
+const HR = require('../Models/HotelRec');
 
 const mongoose = require('mongoose');
 
@@ -656,6 +657,46 @@ module.exports = {
 
         // fs.mkdirSync(__dirname, '../public');
         // fs.mkdirSync(__dirname, '../public/images');
+        HR.create({name:"Coast Hotels", stars:5, city:"Madrid", score:0})
+        HR.create({name:"Kings Inn", stars:4, city:"Lisbon", score:0})
+        HR.create({name:"Lustrio Inn", stars:3, city:"Youta", score:0})
+        HR.create({name:"Moss View Hotel", stars:5, city:"Minsk", score:0})
+        HR.create({name:"Omni Hotels", stars:4, city:"Minsk", score:0})
+        HR.create({name:"Paramount Hotel", stars:3, city:"Rouen", score:0})
+        HR.create({name:"Primland", stars:5, city:"Lyon", score:0})
+        HR.create({name:"Roadside", stars:4, city:"Bern", score:0})
+        HR.create({name:"Malibu", stars:3, city:"Rome", score:0})
+        HR.create({name:"Hillside", stars:5, city:"Caen", score:0})
+        HR.create({name:"Small Town B&B", stars:4, city:"Orleans", score:0})
+        HR.create({name:"The Local B&B", stars:3, city:"Paris", score:0})
+        HR.create({name:"Quaint Motel", stars:5, city:"Berlin", score:0})
+        HR.create({name:"Breeze Blows", stars:4, city:"Berlin", score:0})
+        HR.create({name:"La Parisienne", stars:3, city:"Paris", score:0})
+        HR.create({name:"The Wordly", stars:5, city:"Bruxelles", score:0})
+        HR.create({name:"Clean Convenience", stars:4, city:"Manila", score:0})
+        HR.create({name:"Moody Moon", stars:3, city:"Bilbao", score:0})
+        HR.create({name:"Mandarin Oriental", stars:5, city:"Salamanque", score:0})
+        HR.create({name:"Knights Inn", stars:4, city:"Valladolid", score:0})
+        HR.create({name:"Radisson Hotel", stars:3, city:"Gijon", score:0})
+        HR.create({name:"Classio Hotel", stars:5, city:"Porto", score:0})
+        HR.create({name:"The Bay Club", stars:4, city:"Coimbre", score:0})
+        HR.create({name:"Travelodge", stars:3, city:"Huelva", score:0})
+        HR.create({name:"Jack Summer Inn", stars:5, city:"Jaen", score:0})
+        HR.create({name:"Hotel Grizzly", stars:4, city:"Grenade", score:0})
+        HR.create({name:"Twice Happy Resorts", stars:3, city:"Malaga", score:0})
+        HR.create({name:"Hotel Agoura", stars:5, city:"Lorca", score:0})
+        HR.create({name:"Hotel Crossroads", stars:4, city:"Benidorm", score:0})
+        HR.create({name:"Grand Hotel", stars:3, city:"Lérida", score:0})
+        HR.create({name:"The Bristol Hotel", stars:5, city:"Milan", score:0})
+        HR.create({name:"The Gourmet Resorts", stars:4, city:"Venise", score:0})
+        HR.create({name:"Cotton House Hotel", stars:3, city:"Graze", score:0})
+        HR.create({name:"Pacifica Hotel", stars:5, city:"Zagreb", score:0})
+        HR.create({name:"Hotel Barry Love", stars:4, city:"Brno", score:0})
+        HR.create({name:"Cosmopolitan Hotel", stars:3, city:"Dresde", score:0})
+        HR.create({name:"White Dove Hotels", stars:5, city:"Leipzig", score:0})
+        HR.create({name:"Reefs Resort & Club", stars:4, city:"Breme", score:0})
+        HR.create({name:"Beachwalk Resort", stars:3, city:"Hambourg", score:0})
+        HR.create({name:"Fountain Fun", stars:5, city:"Cologne", score:0})
 
 
         res.status(200).json({message: "success"});

@@ -5,6 +5,7 @@ let resError = {};
 module.exports = {
 
     verifyToken: function (req, res, next) {
+        console.log(req.headers['authorization'])
         let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
         if(!token){
             resError.status = 400; resError.message = 'token is required'; resError.code = 4;

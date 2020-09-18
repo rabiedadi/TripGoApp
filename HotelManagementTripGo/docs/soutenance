@@ -1,0 +1,49 @@
+GET
+http://127.0.0.1:3001/recommend/get
+
+[
+    {
+        "_id": "5f5f8d2d6b942120b08fef3b",
+        "name": "Malibu",
+        "stars": 3,
+        "city": "Rome",
+        "score": 84,
+        "__v": 0
+    },
+    {
+        "_id": "5f5f8d2d6b942120b08fef37",
+        "name": "Omni Hotels",
+        "stars": 4,
+        "city": "Minsk",
+        "score": 71,
+        "__v": 0
+    },
+    {
+        "_id": "5f5f8d2d6b942120b08fef40",
+        "name": "Breeze Blows",
+        "stars": 4,
+        "city": "Berlin",
+        "score": 59,
+        "__v": 0
+    },
+    {
+        "_id": "5f5f8d2d6b942120b08fef38",
+        "name": "Paramount Hotel",
+        "stars": 3,
+        "city": "Rouen",
+        "score": 55,
+        "__v": 0
+    },
+    {
+        "_id": "5f5f8d2d6b942120b08fef36",
+        "name": "Moss View Hotel",
+        "stars": 5,
+        "city": "Minsk",
+        "score": 0,
+        "__v": 0
+    }
+]
+
+*************************************************************
+GET
+http://127.0.0.1:3001/recommend/send
