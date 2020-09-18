@@ -36,7 +36,7 @@ module.exports = {
         let todayFile = path.join(__dirname,'../var/FactureBooking0113652.pdf');
 
         fs.readFile( todayFile, function(err, data) {
-            const msg = {to: 'o.hamidi@esi-sba.dz', from: 'oussolr32@gmail.com', subject: 'TripGo facture de reservation N°0113652', text: '...',
+            const msg = {to: req.body.email, from: 'oussolr32@gmail.com', subject: 'TripGo facture de reservation N°0113652', text: '...',
                 attachments : [{filename: 'FactureBooking0113652.pdf',
                     content: data.toString('base64'),
                     type: 'application/txt',

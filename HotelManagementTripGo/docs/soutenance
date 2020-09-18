@@ -45,5 +45,15 @@ http://127.0.0.1:3001/recommend/get
 ]
 
 *************************************************************
-GET
+POST
 http://127.0.0.1:3001/recommend/send
+
+req
+{
+    "email":"o.hamidi@esi-sba.dz"
+}
+
+res
+{
+    "message": "sent"
+}
