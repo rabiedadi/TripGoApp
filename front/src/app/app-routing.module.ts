@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
-import {ErrorPageComponent} from './error-page/error-page.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import {SurveyComponent} from './temporary/survey/survey.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
+  { path: 'survey', component: SurveyComponent },
   { path: 'verify', component: HomeComponent },
   { path: 'creation', loadChildren: () => import('./mdl-establishment-creation/establishment-creation.module')
       .then(mod => mod.EstablishmentCreationModule), canActivate: [AuthGuard] },
@@ -18,6 +20,8 @@ const routes: Routes = [
       .then(mod => mod.ProfileModule), canActivate: [AuthGuard] },
   { path: 'admin', loadChildren: () => import('./mdl-admin/admin.module')
       .then(mod => mod.AdminModule), canActivate: [AuthGuard] },
+  { path: 'booking', loadChildren: () => import('./mdl-booking-process/booking-process.module')
+      .then(mod => mod.BookingProcessModule), canActivate: [AuthGuard] },
   { path: '**', component: ErrorPageComponent }
 ];
 

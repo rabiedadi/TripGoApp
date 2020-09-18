@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
-import {AuthState} from '../../store/reducers/auth.reducers';
 import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 
 @Component({
@@ -10,33 +8,33 @@ import {Gallery, GalleryItem, ImageItem} from '@ngx-gallery/core';
 })
 export class MainComponent implements OnInit {
   selectedTab = 1;
-  items: GalleryItem[] = [];
-  data = [
-    {
-      srcUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg',
-      previewUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg'
-    },
-    {
-      srcUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
-      previewUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg'
-    },
-    {
-      srcUrl: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-      previewUrl: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'
-    },
-    {
-      srcUrl: 'https://iphonesoft.fr/images/_082019/fond-ecran-dynamique-macos-wallpaper-club.jpg',
-      previewUrl: 'https://iphonesoft.fr/images/_082019/fond-ecran-dynamique-macos-wallpaper-club.jpg'
-    }
+  images = [
+    'assets/images/hotel/img%20(1).jpg',
+    'assets/images/hotel/img%20(2).jpg',
+    'assets/images/hotel/img%20(3).jpg',
+    'assets/images/hotel/img%20(4).jpg',
+    'assets/images/hotel/img%20(5).jpg',
+    'assets/images/hotel/img%20(6).jpg',
+    'assets/images/hotel/img%20(7).jpg',
+    ];
+  services = ['wifi', 'shuttle-van', 'smoking-ban', 'snowflake', 'bath', 'swimmer', 'hat-chef', 'window-frame-open',
+    'parking', 'utensils-alt', 'croissant', 'tv-alt'];
+  hotels: {name: string, stars: number, images: GalleryItem[], services: string[], note: number, notes: number[]}[] = [
+    {name: 'Roayal', stars: 4, images: [], services: [], note: 8.0, notes: [8.1, 8.2, 8.0]},
+    {name: 'Mariot', stars: 5, images: [], services: [], note: 9.2, notes: [9.3, 9.4, 9.0]},
+    {name: 'Ibis', stars: 4, images: [], services: [], note: 8.8, notes: [9, 8.9, 8.7]},
+    {name: 'Madina', stars: 3, images: [], services: [], note: 7.5, notes: [7.2, 7.4, 8]},
+    {name: 'FourPoint', stars: 4, images: [], services: [], note: 9.0, notes: [8.9, 9.2, 9.1]}
   ];
   constructor(private gallery: Gallery) { }
 
   ngOnInit(): void {
     this.tabSelected(0);
-    this.items = this.data.map(item =>
-      new ImageItem({ src: item.srcUrl, thumb: item.previewUrl })
-    );
-    this.gallery.ref().load(this.items);
+    this.hotels.map(hotel => {
+      hotel.services = this.shuffleArray(this.services);
+      hotel.images = this.shuffleArray(this.images).map(image => new ImageItem({ src: image, thumb: image }));
+      this.gallery.ref().load(hotel.images);
+    });
   }
 
   tabSelected(index: number) {
@@ -59,5 +57,15 @@ export class MainComponent implements OnInit {
     prevTab.classList.add('hidden');
     nextTab.classList.remove('hidden');
     this.selectedTab = index;
+  }
+
+  shuffleArray(array: string[]): string[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return [...array];
   }
 }

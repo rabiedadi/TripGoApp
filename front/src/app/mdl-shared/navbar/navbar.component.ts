@@ -27,13 +27,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     authState$: Observable<AuthState>;
     authState: AuthState;
 
-    ngOnInit(): void {
-    }
-
-    ngOnDestroy() {
-        this.destroyed$.next(true);
-        this.destroyed$.complete();
-    }
 
     switchLanguage(language: string) {
         this.translate.use(language);
@@ -88,19 +81,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.store.dispatch(new LogOut());
     }
 
-    private handle_auth_success() {
-        if (this.authState.SuccessMessage?.split(':')[0] === 'auth') {
-            if (this.authState.SuccessMessage.split(':')[1].indexOf('logout') !== -1) {
-                window.location.reload();
-            } else {
-                if (this.direction) {
-                    this.router.navigate([`/creation/${this.direction}`]);
-                } else {
-                    this.toast.info('welcome to TripGo', '', {positionClass: 'toast-top-center', timeOut: 4000});
-                }
-            }
-            this.store.dispatch(new ResetMessages('SuccessMessage'));
-        }
+    ngOnInit(): void {
     }
 
     constructor(
@@ -122,5 +103,26 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.authState$.pipe(takeUntil(this.destroyed$)).subscribe(
             data => this.authState = data
         );
+    }
+
+    ngOnDestroy() {
+        this.destroyed$.next(true);
+        this.destroyed$.complete();
+    }
+
+    private handle_auth_success() {
+        console.log(this.authState);
+        if (this.authState.SuccessMessage?.split(':')[0] === 'auth') {
+            if (this.authState.SuccessMessage.split(':')[1].indexOf('logout') !== -1) {
+                window.location.reload();
+            } else {
+                if (this.direction) {
+                    this.router.navigate([`/creation/${this.direction}`]);
+                } else {
+                    this.toast.info('welcome to TripGo', '', {positionClass: 'toast-top-center', timeOut: 4000});
+                }
+            }
+            this.store.dispatch(new ResetMessages('SuccessMessage'));
+        }
     }
 }

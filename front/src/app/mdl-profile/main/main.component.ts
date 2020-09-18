@@ -9,7 +9,7 @@ import * as dialogsComponents from './dialogs/dialogs.components';
 import {ToastrService} from 'ngx-toastr';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ProfileService} from '../services/profile.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserInfo} from '../../store/actions/auth.actions';
 
 
@@ -25,15 +25,24 @@ export class MainComponent implements OnInit, OnDestroy {
   establishments$: Observable<any>;
   profilePicSrc = '';
   private smallScreen = false;
+  evaluationArray: {eval: string, val: number}[] = [
+    {eval: 'global', val: 0},
+    {eval: 'place', val: 0},
+    {eval: 'services', val: 0},
+    {eval: 'reception', val: 0},
+    {eval: 'response', val: 0}
+  ];
   constructor(private store: Store<AppState>,
               private profileS: ProfileService,
               private dialog: MatDialog,
               private toast: ToastrService,
+              private route: ActivatedRoute,
               public domSanitizer: DomSanitizer) {
     this.authState$ = store.select(state => state.auth);
   }
 
   ngOnInit(): void {
+    this.openSurveyDialog();
     document.getElementsByClassName('tab-label')[0].classList.add('active-tab-label');
     this.store.dispatch(new UserInfo());
     this.authState$.pipe(takeUntil(this.destroyed$)).subscribe(state => {
@@ -47,7 +56,11 @@ export class MainComponent implements OnInit, OnDestroy {
     if (window.screen.width < 768) { // phones and small tabs
       this.smallScreen = true;
     }
-    this.openSurveyDialog();
+    if (this.route.snapshot.paramMap.get('new')) {
+      setTimeout(_ => {
+        this.openSurveyDialog();
+      }, 2500);
+    }
   }
 
   ngOnDestroy() {
@@ -125,7 +138,13 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   sendEmailVerification() {
-    this.profileS.sendVerificationEmail().subscribe(data => console.log(data));
+    this.profileS.sendVerificationEmail().subscribe(data => {
+      if (data.msg === 'email sent') {
+        this.toast.success(
+            `Un Email a été envoyé à :  ${this.authState.user.email}` , '',
+            { positionClass: 'toast-top-center', timeOut: 4000 });
+      }
+    });
   }
 
   openProfileInfoDialog() {
@@ -158,15 +177,19 @@ export class MainComponent implements OnInit, OnDestroy {
 
   openAddOfferDialog() {
     this.dialog.open(dialogsComponents.AddOfferDialogComponent, {
-      width: '100%',
-      data: {state$: this.authState$}
+        width: this.smallScreen ? '90%' : '50%',
+        data: {state$: this.authState$}
     });
   }
 
   openSurveyDialog() {
     this.dialog.open(dialogsComponents.SurveyDialogComponent, {
-      width: this.smallScreen ? '90%' : '50%',
+      width: this.smallScreen ? '90%' : '45 %',
       data: {}
     });
+  }
+
+  addEvaluation(evaluation: string, val: number) {
+    (this.evaluationArray.filter(e => e.eval === evaluation))[0].val = val + 1;
   }
 }

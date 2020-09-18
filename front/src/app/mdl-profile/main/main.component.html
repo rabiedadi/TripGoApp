@@ -1,161 +1,373 @@
 <app-navbar #navBar></app-navbar>
-
+<!-- Main search =================================================================================================== -->
 <div class="flex items-center justify-center w-full bg-my-blue-2">
-  <div class="w-full xl:w-3/4 2xl:w-3/5 py-6 px-4 md:px-12 lg:px-24 xl:px-0">
-    <app-main-search></app-main-search>
-  </div>
+    <div class="w-full xl:w-3/4 2xl:w-3/5 py-6 px-4 md:px-12 lg:px-24 xl:px-0">
+        <app-main-search></app-main-search>
+    </div>
 </div>
+<!-- Main search end =============================================================================================== -->
+
 <div class="relative w-full grid grid-cols-3 xl:w-3/4 2xl:w-3/5 px-4 md:px-12 lg:px-24 xl:px-0 mx-auto text-my-gray-3">
-  <!-- Tabs MENU =================================================================================================== -->
-  <div #tab_menu class="tabs-menu sm:col-span-1 flex flex-col sm:border-l border-r border-my-gray-2 min-h-screen bg-white">
-    <div (click)="tab_selected(6); tab_menu.classList.remove('expanded-tabs-menu')"
-         class="flex items-center py-3 sm:pl-8 sm:py-10">
-      <img [src]="profilePicSrc"  class="w-10 m-1 sm:m-0 sm:w-1/4 rounded-full cursor-pointer">
-      <div class="flex flex-col ml-5 text-my-gray-4">
-        <span class="font-bold leading-none">{{ authState.user?.fullName || '' }}</span>
-        <span class="text-sm leading-none mt-1">{{ authState.user?.email || '' }}</span>
-      </div>
-    </div>
-    <div (click)="tab_selected(0); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
-      <div class="tab-indicator"></div>
-      <img class="mx-4 sm:ml-8" src="assets/icons/profile/building.png">{{'profile.my_establishments' | translate}}
-    </div>
-    <div (click)="tab_selected(1); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
-      <div class="tab-indicator"></div>
-      <img class="mx-4 sm:ml-8" src="assets/icons/profile/bed.png">{{'profile.my_reservations' | translate}}
-    </div>
-    <div (click)="tab_selected(2); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
-      <div class="tab-indicator"></div>
-      <img class="mx-4 sm:ml-8" src="assets/icons/profile/mail.png">{{'profile.inbox' | translate}}
-      <span class="badge">8</span>
-    </div>
-    <div (click)="tab_selected(3); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
-      <div class="tab-indicator"></div>
-      <img class="mx-4 sm:ml-8" src="assets/icons/profile/comment.png">{{'profile.comments' | translate}}
-    </div>
-    <div (click)="tab_selected(4); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
-      <div class="tab-indicator"></div>
-      <img class="mx-4 sm:ml-8" src="assets/icons/profile/vip.png">{{'profile.trip_go_vip' | translate}}
-    </div>
-    <div class="tab-label">
-      <div class="tab-indicator"></div>
-      <div (click)="tab_selected(5); tab_menu.classList.add('expanded-tabs-menu')" class="tab-label-content" matRipple>
-        <img class="mx-4 sm:ml-8" src="assets/icons/profile/people.png">{{'profile.profile' | translate}}
-      </div>
-      <div class="hidden-tab-label transform hidden">
+    <!-- Tabs MENU =================================================================================================== -->
+    <div #tab_menu
+         class="tabs-menu sm:col-span-1 flex flex-col sm:border-l border-r border-my-gray-2 min-h-screen bg-white">
         <div (click)="tab_selected(6); tab_menu.classList.remove('expanded-tabs-menu')"
-             class="flex items-center h-8 ml-12 flex-grow">
-          <img class="mx-4" src="assets/icons/profile/ellipse.png">
-          <span class="text-xs">{{'profile.information' | translate}}</span>
+             class="flex items-center py-3 sm:pl-8 sm:py-10">
+            <img [src]="profilePicSrc" class="w-10 m-1 sm:m-0 sm:w-1/4 rounded-full cursor-pointer">
+            <div class="flex flex-col ml-5 text-my-gray-4">
+                <span class="font-bold leading-none">{{ authState.user?.fullName || '' }}</span>
+                <span class="text-sm leading-none mt-1">{{ authState.user?.email || '' }}</span>
+            </div>
         </div>
-        <div (click)="tab_selected(7); tab_menu.classList.remove('expanded-tabs-menu')"
-             class="flex items-center h-8 ml-12 flex-grow">
-          <img class="mx-4" src="assets/icons/profile/ellipse.png">
-          <span class="text-xs">{{'profile.payment_methods' | translate}}</span>
+        <div (click)="tab_selected(0); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+            <div class="tab-indicator"></div>
+            <fa-icon [icon]="['fal', 'hotel']" class="mx-4 sm:ml-8" size="1x" style="color: #0C568B"></fa-icon>
+            {{'profile.my_establishments' | translate}}
         </div>
-      </div>
-    </div>
-    <span (click)="tab_menu.classList.toggle('expanded-tabs-menu')"
-          class="tab-label mt-16 font-bold text-sm pl-3 text-my-blue-2">
+        <div (click)="tab_selected(1); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+            <div class="tab-indicator"></div>
+            <fa-icon [icon]="['fal', 'bed-alt']" class="mx-4 sm:ml-8" size="1x" style="color: #0C568B"></fa-icon>
+            {{'profile.my_reservations' | translate}}
+        </div>
+        <div (click)="tab_selected(2); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+            <div class="tab-indicator"></div>
+            <fa-icon [icon]="['fal', 'envelope-open-text']" class="mx-4 sm:ml-8" size="1x"
+                     style="color: #0C568B"></fa-icon>
+            {{'profile.inbox' | translate}}
+            <span class="badge">8</span>
+        </div>
+        <div (click)="tab_selected(3); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+            <div class="tab-indicator"></div>
+            <fa-icon [icon]="['fal', 'comment-alt-dots']" class="mx-4 sm:ml-8" size="1x"
+                     style="color: #0C568B"></fa-icon>
+            {{'profile.comments' | translate}}
+        </div>
+        <div (click)="tab_selected(4); tab_menu.classList.remove('expanded-tabs-menu')" class="tab-label" matRipple>
+            <div class="tab-indicator"></div>
+            <fa-icon [icon]="['fal', 'box-check']" class="mx-4 sm:ml-8" size="1x" style="color: #0C568B"></fa-icon>
+            {{'profile.trip_go_vip' | translate}}
+        </div>
+        <div class="tab-label">
+            <div class="tab-indicator"></div>
+            <div (click)="tab_selected(5); tab_menu.classList.add('expanded-tabs-menu')" class="tab-label-content"
+                 matRipple>
+                <fa-icon [icon]="['fal', 'users']" class="mx-4 sm:ml-8" size="1x" style="color: #0C568B"></fa-icon>
+                {{'profile.profile' | translate}}
+            </div>
+            <div class="hidden-tab-label transform hidden">
+                <div (click)="tab_selected(6); tab_menu.classList.remove('expanded-tabs-menu')"
+                     class="flex items-center h-8 ml-12 flex-grow">
+                    <fa-icon [fixedWidth]="true" [icon]="['fal', 'id-card']" class="mx-4" size="1x"
+                             style="color: #0C568B"></fa-icon>
+                    <span class="text-xs">{{'profile.information' | translate}}</span>
+                </div>
+                <div (click)="tab_selected(7); tab_menu.classList.remove('expanded-tabs-menu')"
+                     class="flex items-center h-8 ml-12 flex-grow">
+                    <fa-icon [fixedWidth]="true" [icon]="['fal', 'money-check']" class="mx-4" size="1x"
+                             style="color: #0C568B"></fa-icon>
+                    <span class="text-xs">{{'profile.payment_methods' | translate}}</span>
+                </div>
+            </div>
+        </div>
+        <span (click)="tab_menu.classList.toggle('expanded-tabs-menu')"
+              class="tab-label mt-16 font-bold text-sm pl-3 text-my-blue-2">
       <=>
     </span>
-  </div>
-  <!-- Tab0 ======================================================================================================== -->
-  <div class="tab-0 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12">
-    <div class="mb-3 sm:mb-6 flex flex-col items-start sm:items-center sm:flex-row justify-between">
-      <input class="search-input w-full sm:w-2/4" placeholder="Rechercher"
-             type="search">
-      <span (click)="navBar.openDialog1()"
-            class="text-sm font-bold text-my-blue-1 cursor-pointer mt-2 sm:mt-0">{{'nav_bar.add_establishment' | translate}}</span>
     </div>
-    <!--  //  -->
-    <div *ngFor="let establishment of establishments$ | async" class="info-card flex sm:h-32" >
-      <img alt="wallpaper" class="h-full w-32 object-cover" src="asssets/images/wallpaper1.png" routerLink="/detail/hotel/{{establishment._id}}">
-      <div class="flex flex-col flex-grow p-4 sm:px-8 sm:py-6" matRipple>
-        <span class="flex items-center">
-          <span class="font-bold text-sm leading-none mr-2 text-my-gray-4">{{ establishment.name }}</span>
-          <img *ngFor="let x of ' '.repeat(establishment.starsNumber - 1).split(' ')"
-               class="h-2" src="assets/icons/star-gold.png" style="margin-left: 1px">
-        </span>
-        <span class="text-xs leading-none mt-3">{{ establishment.province }} - {{ establishment.roomsNumber }} chambres</span>
-        <span (click)="openAddOfferDialog()" class="text-xs leading-none mt-2">
+    <!-- Tab0 ======================================================================================================== -->
+    <div class="tab-0 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12">
+        <div class="mb-3 sm:mb-6 flex flex-col items-start sm:items-center sm:flex-row justify-between">
+            <input class="search-input w-full sm:w-2/4" placeholder="Rechercher"
+                   type="search">
+            <span (click)="navBar.openDialog1()"
+                  class="text-sm font-bold text-my-blue-1 cursor-pointer mt-2 sm:mt-0">{{'nav_bar.add_establishment' | translate}}</span>
+        </div>
+        <!--  //  -->
+        <div *ngFor="let establishment of establishments$ | async" class="info-card flex sm:h-32">
+            <img alt="wallpaper" class="h-full w-32 object-cover" src="assets/images/wallpaper1.png">
+            <div class="flex flex-col flex-grow p-4 sm:px-8 sm:py-6">
+                <span class="flex items-center text-sm">
+                    <span class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer"
+                          routerLink="/detail/hotel/{{establishment._id}}">{{ establishment.name }}</span>
+                    <fa-icon *ngFor="let x of (establishment.starsNumber) | ngForCount"
+                             [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
+                    <fa-icon [icon]="['fal', 'edit']"
+                             [routerLink]="['/creation/hotel', {id: establishment._id}]" class="mx-3 cursor-pointer"
+                             size="sm" style="color: rgba(91, 99, 109, 0.7);"></fa-icon>
+                </span>
+                <span class="text-xs leading-none mt-3">{{ establishment.province }} - {{ establishment.roomsNumber }}
+                    chambres</span>
+                <span (click)="openAddOfferDialog()" class="text-xs leading-none mt-2">
           <span class="font-medium">Offres :</span> {{ establishment.offersNumber }} -
           <span class="font-bold text-my-blue-2 cursor-pointer">{{'profile.offer_creation' | translate}}</span>
         </span>
-        <span [routerLink]="['/creation/hotel', {id: establishment._id}]" class="cursor-pointer font-medium text-red-500">Edit (to be styled later)</span>
-      </div>
-      <div class="note-badge bg-my-blue-1" routerLink="/detail/hotel  ">
-        <span class="font-bold text-sm leading-none">8.9</span>
-        <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
-      </div>
-    </div>
-  </div>
-  <!-- Tab1 ======================================================================================================== -->
-  <div class="tab-1 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
-  <!-- Tab2 ======================================================================================================== -->
-  <div class="tab-2 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden">
-    <div class="mb-3 sm:mb-6 flex flex-col items-start sm:items-center sm:flex-row justify-between">
-      <input class="search-input w-full sm:w-2/4" placeholder="Rechercher"
-             type="search">
-      <div class="flex items-center mt-2 sm:mt-0 ml-auto">
-        <span class="text-sm font-medium mr-5 sm:mr-2">Disponible</span>
-        <mat-slide-toggle disableRipple></mat-slide-toggle>
-      </div>
-    </div>
-  </div>
-  <!-- Tab3 ======================================================================================================== -->
-  <div class="tab-3 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
-  <!-- Tab4 ======================================================================================================== -->
-  <div class="tab-4 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
-  <!-- Tab6 ======================================================================================================== -->
-  <div class="tab-6 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden">
-    <div class="info-card">
-      <div class="info-card-content justify-between">
-        <div class="flex flex-grow items-center">
-          <img [src]="profilePicSrc" class="rounded-full mr-5" style="width: 56px">
-          <div class="flex flex-col text-my-gray-4">
-            <span class="font-bold text-xs leading-none">Name</span>
-            <span class="text-sm leading-none mt-2">{{ authState.user?.fullName || '' }}</span>
-          </div>
+            </div>
+            <div class="note-badge bg-my-blue-1" routerLink="/detail/hotel  ">
+                <span class="font-bold text-sm leading-none">8.9</span>
+                <span class="font-medium leading-none mt-1" style="font-size: 10px">Excellent</span>
+            </div>
         </div>
-        <span (click)="openProfileInfoDialog()" class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
-      </div>
     </div>
-    <div class="info-card">
-      <div class="info-card-content justify-between">
-        <div class="flex flex-col text-my-gray-4">
-          <span class="font-bold text-xs leading-none">Email</span>
-          <span class="text-sm leading-none mt-2">{{ authState.user?.email || '' }}</span>
-          <div *ngIf="!authState.user?.emailConfirmed"
-               class="relative flex items-center px-5 py-2 mt-3 bg-my-gray-1">
-            <span [innerHTML]="'profile.verify_email' | translate | safe:'html'" class="verify-email" (click)="sendEmailVerification()"></span>
-            <div class="absolute left-0 h-full w-1" style="background-color: #FF8A00"></div>
-          </div>
+    <!-- Tab1 ======================================================================================================== -->
+    <div class="tab-1 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden">
+        <div class="border border-gray-border-1 rounded p-2 mb-5">
+            <div class="flex">
+                <div style="width: 20%; max-width: 130px">
+                    <div class="w-full relative" style="padding-bottom: 100%">
+                        <img class="absolute w-full h-full object-cover rounded"
+                             src="assets/images/hotel/img%20(1).jpg">
+                    </div>
+                </div>
+                <div class="ml-5 flex flex-col">
+                    <span class="text-lg font-bold">ibis Oran les Falaises</span>
+                    <div class="flex items-center mt-2">
+                        <fa-icon [fixedWidth]="true" [icon]="['fal', 'map-marker-alt']" size="1x"
+                                 style="color: #0C568B"></fa-icon>
+                        <span class="text-xs ml-2">Avenue De Canastel Route Des Falaises 31000 , 31000 Oran Algeria</span>
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <fa-icon [fixedWidth]="true" [icon]="['fal', 'calendar-alt']" size="1x"
+                                 style="color: #0C568B"></fa-icon>
+                        <span class="text-xs ml-2">
+                            de <span class="font-semibold mx-2">Mon 7 Sept 2020</span>
+                            à <span class="font-semibold mx-2">Thu 17 Sept 2020</span>
+                        </span>
+                    </div>
+                    <div class="flex items-center mt-2">
+                        <fa-icon [fixedWidth]="true" [icon]="['fal', 'star-half-alt']" size="1x"
+                                 style="color: #0C568B"></fa-icon>
+                        <span class="text-xs ml-2">
+                            vous avez déjà évalué cette réservation
+                            <span class="font-semibold mx-2 text-my-blue-2 cursor-pointer" (click)="showEvaluationSection.classList.toggle('hidden')">Montre mes évaluations</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Show Evaluation section =========================================================================== -->
+            <div class="flex flex-col border border-gray-border-1 rounded mt-2 p-2 hidden" #showEvaluationSection>
+                <div class="flex">
+                    <div>
+                        <div class="flex items-center h-6 text-xs font-medium">
+                            <fa-icon [fixedWidth]="true" [icon]="['fal', 'star']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation globale
+                        </div>
+                        <div class="flex items-center h-6 text-xs font-medium">
+                            <fa-icon [fixedWidth]="true" [icon]="['fal', 'map-marker-alt']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation de l'emplacement
+                        </div>
+                        <div class="flex items-center h-6 text-xs font-medium">
+                            <fa-icon [fixedWidth]="true" [icon]="['fal', 'concierge-bell']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation des services
+                        </div>
+                        <div class="flex items-center h-6 text-xs font-medium">
+                            <fa-icon [fixedWidth]="true" [icon]="['fal', 'user-tie']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation de la réception
+                        </div>
+                        <div class="flex items-center h-6 text-xs font-medium">
+                            <fa-icon [fixedWidth]="true" [icon]="['fal', 'envelope-open-text']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation de la communication
+                        </div>
+                    </div>
+                    <div class="ml-5">
+                        <div class="flex items-center text-xs h-6">
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[0].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[0].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                        </div>
+                        <div class="flex items-center text-xs h-6">
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[1].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[1].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                        </div>
+                        <div class="flex items-center text-xs h-6">
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[2].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[2].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                        </div>
+                        <div class="flex items-center text-xs h-6">
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[3].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[3].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                        </div>
+                        <div class="flex items-center text-xs h-6">
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[4].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[4].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center text-xs font-semibold mt-2">
+                    <fa-icon [fixedWidth]="true" [icon]="['fal', 'comment-alt-dots']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Votre commentaire :
+                </div>
+                <p class="text-xs mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet beatae, blanditiis dignissimos dolor dolorum ducimus explicabo laudantium magni neque nulla optio perferendis rem sint, sit soluta vero voluptatum. Id, ullam!</p>
+            </div>
+            <!-- Show Evaluation section end ======================================================================= -->
         </div>
-        <span (click)="openEditEmailDialog()" class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="info-card-content justify-between">
-        <div class="flex flex-col text-my-gray-4">
-          <span class="font-bold text-xs leading-none">{{'other.phone' | translate}}</span>
-          <span class="text-sm leading-none mt-2 text-my-gray-3">{{ authState.user?.phone || '.........' | phone }}</span>
+        <div class="border border-gray-border-1 rounded p-2 mb-5">
+            <div class="flex flex-col">
+                <div class="flex">
+                    <div style="width: 20%; max-width: 130px">
+                        <div class="w-full relative" style="padding-bottom: 100%">
+                            <img class="absolute w-full h-full object-cover rounded"
+                                 src="assets/images/hotel/img%20(3).jpg">
+                        </div>
+                    </div>
+                    <div class="ml-5 flex flex-col">
+                        <span class="text-lg font-bold">royal Oran ree da la sommame</span>
+                        <div class="flex items-center mt-2">
+                            <fa-icon [fixedWidth]="true" [icon]="['fal', 'map-marker-alt']" size="1x"
+                                     style="color: #0C568B"></fa-icon>
+                            <span class="text-xs ml-2">Avenue De Canastel Route Des Falaises 31000 , 31000 Oran Algeria</span>
+                        </div>
+                        <div class="flex items-center mt-2">
+                            <fa-icon [fixedWidth]="true" [icon]="['fal', 'calendar-alt']" size="1x"
+                                     style="color: #0C568B"></fa-icon>
+                            <span class="text-xs ml-2">
+                            de <span class="font-semibold mx-2">Mon 7 Sept 2020</span>
+                            à <span class="font-semibold mx-2">Thu 17 Sept 2020</span>
+                        </span>
+                        </div>
+                        <div class="flex items-center mt-2">
+                            <fa-icon [fixedWidth]="true" [icon]="['fal', 'star-half-alt']" size="1x"
+                                     style="color: #0C568B"></fa-icon>
+                            <span class="text-xs ml-2">
+                            vous n'avez pas encore noté cette réservation
+                            <span class="font-semibold mx-2 text-my-blue-2 cursor-pointer" (click)="addEvaluationSection.classList.toggle('hidden')">Èvaluer mainteneant</span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Evaluation section ======================================================================== -->
+                <div class="flex flex-col border border-gray-border-1 rounded mt-2 p-2 hidden" #addEvaluationSection>
+                    <div class="flex">
+                        <div>
+                            <div class="flex items-center h-6 text-xs font-medium">
+                                <fa-icon [fixedWidth]="true" [icon]="['fal', 'star']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation globale
+                            </div>
+                            <div class="flex items-center h-6 text-xs font-medium">
+                                <fa-icon [fixedWidth]="true" [icon]="['fal', 'map-marker-alt']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation de l'emplacement
+                            </div>
+                            <div class="flex items-center h-6 text-xs font-medium">
+                                <fa-icon [fixedWidth]="true" [icon]="['fal', 'concierge-bell']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation des services
+                            </div>
+                            <div class="flex items-center h-6 text-xs font-medium">
+                                <fa-icon [fixedWidth]="true" [icon]="['fal', 'user-tie']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation de la réception
+                            </div>
+                            <div class="flex items-center h-6 text-xs font-medium">
+                                <fa-icon [fixedWidth]="true" [icon]="['fal', 'envelope-open-text']" class="mr-2" size="lg" style="color: #0C568B"></fa-icon>Évaluation de la communication
+                            </div>
+                        </div>
+                        <div class="ml-5">
+                            <div class="flex items-center text-xs h-6">
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of evaluationArray[0].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('global', i)"></fa-icon>
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of (5 - evaluationArray[0].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('global', i + evaluationArray[0].val)"></fa-icon>
+                            </div>
+                            <div class="flex items-center text-xs h-6">
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of evaluationArray[1].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('place', i)"></fa-icon>
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of (5 - evaluationArray[1].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('place', i + evaluationArray[1].val)"></fa-icon>
+                            </div>
+                            <div class="flex items-center text-xs h-6">
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of evaluationArray[2].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('services', i)"></fa-icon>
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of (5 - evaluationArray[2].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('services', i + evaluationArray[2].val)"></fa-icon>
+                            </div>
+                            <div class="flex items-center text-xs h-6">
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of evaluationArray[3].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('reception', i)"></fa-icon>
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of (5 - evaluationArray[3].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('reception', i + evaluationArray[3].val)"></fa-icon>
+                            </div>
+                            <div class="flex items-center text-xs h-6">
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of evaluationArray[4].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('response', i)"></fa-icon>
+                                <fa-icon class="cursor-pointer mr-1" *ngFor="let x of (5 - evaluationArray[4].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                         size="1x" style="color: #FF8A00" (click)="addEvaluation('response', i + evaluationArray[4].val)"></fa-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <textarea class="w-full border border-gray-border-1 p-2 mt-2" placeholder="Ajouter un commentaire" rows="3" style="resize: vertical" spellcheck="false"></textarea>
+                    <button class="h-8 px-12 bg-my-blue-2 text-xs font-medium text-white mt-2 ml-auto">Soumettre</button>
+                </div>
+                <!-- Add Evaluation section end ==================================================================== -->
+            </div>
         </div>
-        <span (click)="openEditPhoneDialog()" class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
-      </div>
     </div>
-    <div class="info-card">
-      <div class="info-card-content justify-between">
-        <div class="flex flex-col text-my-gray-4">
-          <span class="font-bold text-xs leading-none">{{'other.password' | translate}}</span>
-          <div class="flex mt-3">
-            <div *ngFor="let x of ' '.repeat(8).split(' ')" class="h-1 w-1 bg-my-gray-2 rounded-full mr-1"></div>
-          </div>
+    <!-- Tab2 ======================================================================================================== -->
+    <div class="tab-2 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden">
+        <div class="mb-3 sm:mb-6 flex flex-col items-start sm:items-center sm:flex-row justify-between">
+            <input class="search-input w-full sm:w-2/4" placeholder="Rechercher"
+                   type="search">
+            <div class="flex items-center mt-2 sm:mt-0 ml-auto">
+                <span class="text-sm font-medium mr-5 sm:mr-2">Disponible</span>
+                <mat-slide-toggle disableRipple></mat-slide-toggle>
+            </div>
         </div>
-        <span (click)="openEditPasswordDialog()" class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
-      </div>
     </div>
-  </div>
-  <!-- Tab7 ======================================================================================================== -->
-  <div class="tab-7 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
+    <!-- Tab3 ======================================================================================================== -->
+    <div class="tab-3 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
+    <!-- Tab4 ======================================================================================================== -->
+    <div class="tab-4 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
+    <!-- Tab6 ======================================================================================================== -->
+    <div class="tab-6 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden">
+        <div class="info-card">
+            <div class="info-card-content justify-between">
+                <div class="flex flex-grow items-center">
+                    <img [src]="profilePicSrc" class="rounded-full mr-5" style="width: 56px">
+                    <div class="flex flex-col text-my-gray-4">
+                        <span class="font-bold text-xs leading-none">Name</span>
+                        <span class="text-sm leading-none mt-2">{{ authState.user?.fullName || '' }}</span>
+                    </div>
+                </div>
+                <span (click)="openProfileInfoDialog()"
+                      class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-card-content justify-between">
+                <div class="flex flex-col text-my-gray-4">
+                    <span class="font-bold text-xs leading-none">Email</span>
+                    <span class="text-sm leading-none mt-2">{{ authState.user?.email || '' }}</span>
+                    <div *ngIf="!authState.user?.emailConfirmed"
+                         class="relative flex items-center px-5 py-2 mt-3 bg-my-gray-1">
+                        <span (click)="sendEmailVerification()"
+                              [innerHTML]="'profile.verify_email' | translate | safe:'html'"
+                              class="verify-email"></span>
+                        <div class="absolute left-0 h-full w-1" style="background-color: #FF8A00"></div>
+                    </div>
+                </div>
+                <span (click)="openEditEmailDialog()"
+                      class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-card-content justify-between">
+                <div class="flex flex-col text-my-gray-4">
+                    <span class="font-bold text-xs leading-none">{{'other.phone' | translate}}</span>
+                    <span class="text-sm leading-none mt-2 text-my-gray-3">{{ authState.user?.phone || '.........' | phone }}</span>
+                </div>
+                <span (click)="openEditPhoneDialog()"
+                      class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-card-content justify-between">
+                <div class="flex flex-col text-my-gray-4">
+                    <span class="font-bold text-xs leading-none">{{'other.password' | translate}}</span>
+                    <div class="flex mt-3">
+                        <div *ngFor="let x of ' '.repeat(8).split(' ')"
+                             class="h-1 w-1 bg-my-gray-2 rounded-full mr-1"></div>
+                    </div>
+                </div>
+                <span (click)="openEditPasswordDialog()"
+                      class="font-bold text-xs leading-none cursor-pointer">{{'other.edit' | translate}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- Tab7 ======================================================================================================== -->
+    <div class="tab-7 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12 hidden"></div>
 </div>

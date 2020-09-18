@@ -17,7 +17,7 @@ import {Store} from '@ngrx/store';
 import {AuthState} from '../../store/reducers/auth.reducers';
 import {AppState} from '../../store/app.states';
 import {ToastrService} from 'ngx-toastr';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-hotel-creation',
@@ -26,7 +26,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class HotelComponent implements OnInit, OnDestroy {
 
-  // Constructor ========================================================================================================================= >
+  /** Constructor ==================================================================================================> */
   constructor(
     private sharedS: SharedService,
     private loaderS: HotelLoaderService,
@@ -35,13 +35,15 @@ export class HotelComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private store: Store<AppState>,
     private toast: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     translate.setDefaultLang(sharedS.currentLang);
     this.authState$ = store.select(state => state.auth);
+    this.loadOptions();
   }
 
-  // Variables ================================================================================================================== >
+  /** Variables ====================================================================================================> */
   @ViewChild('adresse') public searchElement: ElementRef;
   private destroyed$ = new Subject<boolean>();
   private authState$: Observable<AuthState>;
@@ -54,7 +56,7 @@ export class HotelComponent implements OnInit, OnDestroy {
     {text: '22:00', value: 22}, {text: '23:00', value: 23}, {text: '00:00', value: 24}
   ];
   otherEquipment: any[];
-  extraBedFor: any[] = ['', '', ''];
+  extraBedFor: any[] = [{reference: 'Child up to 2 years old in cradles'}, {reference: 'Children'}, {reference: 'Adults'}];
   bedSize: any[];
   paymentTime: any[];
   parkingOption: any[];
@@ -73,37 +75,36 @@ export class HotelComponent implements OnInit, OnDestroy {
   activeTab = 1;
   tabProgress = 1;
 
-  // TAB1 basic_info management ========================================================================================================== >
+  /** TAB1 basic_info management ===================================================================================> */
   basicInfo = new BasicInfo();
   numberConfId = null;
   phoneNumber = '';
 
-  // TAB2 rooms & beds management ======================================================================================================== >
+  /** TAB2 rooms & beds management =================================================================================> */
   rooms = [new Room()];
   roomIndex = 0;
 
-  // TAB3 installation & services management ============================================================================================= >
+  /** TAB3 installation & services management ======================================================================> */
   instServices = new Service();
 
-  // TAB4 equipment management =========================================================================================================== >
+  /** TAB4 equipment management ====================================================================================> */
   selectedExtraBed = 0;
   equipment = new Equipment();
   freeBedForKids = false;
+  priceBed = new Array(this.extraBedFor.length);
 
-  // TAB5 photos management ============================================================================================================== >
+  /** TAB5 photos management =======================================================================================> */
   zipFile: JSZip = new JSZip();
   images = [];
   editedImages = [];
-
-  // TAB6 policies management ============================================================================================================ >
+  /** TAB6 policies management =====================================================================================> */
   policy = new Policy();
 
-  // TAB7 payment managment ============================================================================================================== >
+  /** TAB7 payment management ======================================================================================> */
   payment = new Payment();
 
-  // On_init ============================================================================================================================= >
+  /** On_init ======================================================================================================> */
   ngOnInit(): void {
-    this.loadOptions();
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, {types: ['address']});
       autocomplete.addListener('place_changed', () => {
@@ -114,22 +115,31 @@ export class HotelComponent implements OnInit, OnDestroy {
           }
         });
       });
-      console.log(this.route.snapshot.paramMap.get('id'));
     });
+    const hotelId = this.route.snapshot.paramMap.get('id');
+    if (hotelId) {
+      this.loaderS.load_hotel_profile(hotelId).subscribe( data => {
+        console.log(data);
+        this.setHotelProfile(data);
+      });
+    }
   }
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();
   }
 
-  // initiation ========================================================================================================================== >
+  /** initiation ===================================================================================================> */
   loadOptions() {
     // User infos
     this.authState$.pipe(takeUntil(this.destroyed$)).subscribe(state => this.authState = state);
     // Hotel options
     this.loaderS.load_bedSize().pipe(takeUntil(this.destroyed$)).subscribe(res => this.bedSize = res);
     this.loaderS.load_breakfastOption().pipe(takeUntil(this.destroyed$)).subscribe(res => this.breakfastOption = res);
-    this.loaderS.load_extraBedFor().pipe(takeUntil(this.destroyed$)).subscribe(res => this.extraBedFor = res);
+    this.loaderS.load_extraBedFor().pipe(takeUntil(this.destroyed$)).subscribe(res => {
+      this.extraBedFor = res;
+      this.equipment.setExtraBed(res);
+    });
     this.loaderS.load_otherEquipment().pipe(takeUntil(this.destroyed$)).subscribe(res => this.otherEquipment = res);
     this.loaderS.load_parkingOption().pipe(takeUntil(this.destroyed$)).subscribe(res => this.parkingOption = res);
     this.loaderS.load_paymentTime().pipe(takeUntil(this.destroyed$)).subscribe(res => this.paymentTime = res);
@@ -140,8 +150,49 @@ export class HotelComponent implements OnInit, OnDestroy {
     this.loaderS.load_speakingLanguage().pipe(takeUntil(this.destroyed$)).subscribe(res => this.speakingLanguage = res);
     this.loaderS.load_creditCard().pipe(takeUntil(this.destroyed$)).subscribe(res => this.creditCard = res);
   }
+  setHotelProfile(_: any) {
+    this.tabProgress = _.creationStep === 1 ? 2 : _.creationStep + 2;
+    if (this.tabProgress > 8) { this.tabProgress = 8; }
+    this.loaderS.hotelId = _._id;
+    this.phoneNumber = _.phone.substr(3);
+    /** basic info */
+    this.basicInfo.data = {
+      name: _.name, starsNumber: _.starsNumber, address: _.address, city: _.city, email: _.email, province: _.province
+    };
+    /** rooms */
+    if (_.creationStep > 1) { for (const room of _.roomsDetail) { this.rooms.push(new Room(room)); } }
+    /** inst & services */
+    if (_.creationStep > 2) {
+      this.instServices.data = {
+        breakfast: _.breakfast, parking: _.parking, services: _.services, speakingLanguages: _.speakingLanguages
+      };
+    }
+    /** equipment */
+    if (_.creationStep > 3) {
+      this.equipment.setData({ extraBed: _.extraBed, extraBedCount: _.extraBedCount, otherEquipment: _.otherEquipment });
+      this.freeBedForKids = this.equipment.data.extraBed[1].price !== null;
+    }
+    /** images TODO load saved images */
+    if (_.creationStep > 4) { }
+    /** policy */
+    if (_.creationStep > 5) {
+      this.policy.data = {policy: _.policy, animals: _.animals, checkIn: _.checkIn, checkOut: _.checkOut};
+      this.select_check('checkIn', 'From', 1, _.checkIn.from);
+      this.select_check('checkIn', 'To', 1, _.checkIn.to);
+      this.select_check('checkOut', 'From', 1, _.checkOut.from);
+      this.select_check('checkOut', 'To', 1, _.checkOut.to);
+      console.log(this.tabProgress);
+    }
+    /** payment */
+    if (_.creationStep > 6) {
+      this.payment.data.creditCards = _.creditCards;
+      this.payment.data.invoiceName = _.invoiceName;
+    }
+    /** navigation to active tab */
+    if (_.creationStep < 7) { setTimeout(() => { this.tab_navigator(this.tabProgress); }, 500); }
+  }
 
-  // TABS management ===================================================================================================================== >
+  /** TABS management ==============================================================================================> */
   tab_navigator(index) {
     if (index <= (this.tabProgress)) {
       const direction = this.activeTab < index;
@@ -165,7 +216,8 @@ export class HotelComponent implements OnInit, OnDestroy {
       this.activeTab = index;
     }
   }
-  // Elements management ================================================================================================================= >
+
+  /** Elements management ==========================================================================================> */
   input_focused(inputElement) { // Hilighting focused input
     if (this.inputWrapper) {
       this.inputWrapper.classList.remove('input-focused');
@@ -196,7 +248,7 @@ export class HotelComponent implements OnInit, OnDestroy {
     (document.getElementsByClassName('cdk-overlay-backdrop')[0] as HTMLElement).click();
   }
 
-  // TAB1 basic_info management ========================================================================================================== >
+  /** TAB1 basic_info management ===================================================================================> */
 
   // TODO
   phone_number_watcher(target) {
@@ -232,7 +284,7 @@ export class HotelComponent implements OnInit, OnDestroy {
     }
   }
 
-  // TAB2 rooms & beds management ======================================================================================================== >
+  /** TAB2 rooms & beds management =================================================================================> */
   add_room() {
     this.rooms.unshift(new Room());
     this.roomIndex = 0;
@@ -245,7 +297,12 @@ export class HotelComponent implements OnInit, OnDestroy {
   delete_room(index) {
     console.log(index);
     if (this.rooms.length > 1) {
-      this.rooms.splice(index, 1);
+      if (this.rooms[index].id) {
+        alert('Deleting existing rooms from db not implemented yet!!!');
+        // TODO : delete room from database then from local rooms
+      } else {
+        this.rooms.splice(index, 1);
+      }
     }
   }
   add_bed() {
@@ -257,7 +314,7 @@ export class HotelComponent implements OnInit, OnDestroy {
   //   }
   // }
 
-  // TAB3 installation & services management ============================================================================================= >
+  /** TAB3 installation & services management ======================================================================> */
   service_selected(stat, Id) {
     const serviceIndex = this.instServices.data.services.indexOf(Id);
     if (stat) {
@@ -286,15 +343,20 @@ export class HotelComponent implements OnInit, OnDestroy {
     }
   }
 
-  // TAB4 equipment management =========================================================================================================== >
+  /** TAB4 equipment management ====================================================================================> */
   extra_bed_selected(index: number, ref: string, stat: boolean) {
-    if (stat) {
-      this.equipment.data.extraBed[index].for = ref;
-      this.selectedExtraBed++;
-    } else {
-      this.equipment.data.extraBed[index].for = '';
-      this.selectedExtraBed--;
-    }
+      if (stat) {
+        this.equipment.data.extraBed[index].price = 0;
+        this.selectedExtraBed++;
+        this.equipment.data.extraBedCount++;
+      } else {
+          this.equipment.data.extraBed[index].price = null;
+          this.selectedExtraBed--;
+          this.equipment.data.extraBedCount--;
+      }
+  }
+  checkIfBedSelected(ref) {
+    return this.equipment.data.extraBed.find(bed => bed.for === ref) !== null;
   }
   otherEquipment_selected(stat, Id) {
     const equipmentIndex = this.equipment.data.otherEquipment.indexOf(Id);
@@ -309,7 +371,7 @@ export class HotelComponent implements OnInit, OnDestroy {
     }
   }
 
-  // TAB5 photos management ============================================================================================================== >
+  /** TAB5 photos management =======================================================================================> */
   onFileDropped($event) {
     /** on file drop handler */
     this.prepareFilesList($event);
@@ -348,7 +410,7 @@ export class HotelComponent implements OnInit, OnDestroy {
     return imagesFormData;
   }
 
-  // TAB6 policies management ============================================================================================================ >
+  /** TAB6 policies management =====================================================================================> */
   getSelectedPaymentTimeValue(): string {
     try {
       return this.paymentTime.find(item => item.reference === this.policy.data.policy.paymentTime).name;
@@ -365,18 +427,17 @@ export class HotelComponent implements OnInit, OnDestroy {
           element.innerText = value + ':00';
         }
         if (i === index) {
-          element.classList.add('selected-check-hours');
-          this.policy.data[inout][fromto] = Number(value);
+          this.policy.data[inout][fromto.toLowerCase()] = Number(value);
         } else {
-          element.classList.remove('selected-check-hours');
         }
       }
-      if (fromto === 'from') {
+      if (fromto === 'From') {
         for (let i = 1; i <= 3; i++) {
-          const element = document.getElementById(inout + 'to' + i) as HTMLInputElement;
+          const element = document.getElementById(inout + 'To' + i) as HTMLInputElement;
           element.removeAttribute('disabled');
-          element.classList.remove('selected-check-hours');
-          const selectedHour = inout === 'checkIn' ? this.policy.data.checkIn[fromto] : this.policy.data.checkOut[fromto];
+          const selectedHour = inout === 'checkIn' ?
+              this.policy.data.checkIn[fromto.toLowerCase()] :
+              this.policy.data.checkOut[fromto.toLowerCase()];
           if (((selectedHour + i - 1) % 24) < 6) {
             element.value = null;
             element.innerText = '--:--';
@@ -390,7 +451,7 @@ export class HotelComponent implements OnInit, OnDestroy {
     }
   }
 
-  // TAB7 payment managment ============================================================================================================== >
+  /** TAB7 payment managment =======================================================================================> */
   creditCard_selected(stat, Id) {
     const CCardIndex = this.payment.data.creditCards.indexOf(Id);
     if (stat) {
@@ -405,7 +466,7 @@ export class HotelComponent implements OnInit, OnDestroy {
   }
 
 
-  // Send DATA =========================================================================================================================== >
+  /** Send DATA ====================================================================================================> */
   send_Data(index: number) {
     this.savingInfo = true;
     switch (index) {
@@ -475,6 +536,7 @@ export class HotelComponent implements OnInit, OnDestroy {
       }
       case 5: {
         if (this.equipment.is_ready()) {
+          this.equipment.data.extraBedCount = this.selectedExtraBed;
           this.loaderS.send_equipment(this.equipment.data).subscribe(() => {
             this.savingInfo = false;
             this.tabProgress++;
@@ -535,6 +597,9 @@ export class HotelComponent implements OnInit, OnDestroy {
             this.savingInfo = false;
             console.log(data);
             this.toast.success('Le processus d\'enregistrement de l\'hôtel s\'est terminé avec succès', '', { positionClass: 'toast-top-center', timeOut: 5000 });
+            setTimeout(_ => {
+              this.router.navigate(['/profile', {new: this.loaderS.hotelId}]);
+            }, 2000);
           }, err => {
             console.log(err.error);
             this.savingInfo = false;

@@ -12,7 +12,7 @@ export class HotelLoaderService {
   hotelOptionsUrl = 'http://51.91.79.72:3001/hotel/options/';
   hotelUrl = 'http://51.91.79.72:3003/hotel';
   hotelId: string;
-
+  hotelProfile = 'http://51.91.79.72:3001/hotel/profil';
   /** options loading */
   load_bedSize() {
     return this.http.get<{}[]>(this.hotelOptionsUrl + this.lang + '/bedSize');
@@ -49,6 +49,11 @@ export class HotelLoaderService {
   }
   load_creditCard() {
     return this.http.get<{}[]>(this.hotelOptionsUrl + 'creditCard');
+  }
+
+  /** load hotel profile */
+  load_hotel_profile(id) {
+    return this.http.get(this.hotelProfile + `/${id}`);
   }
 
   /** phone number confirmation then hotel creation */

@@ -114,4 +114,4 @@ export class SurveyDialogComponent implements OnDestroy {
         this.selectedSurvey = this.survey.find(_ => _.title === this.selectedSurveyTitle);
     }
 }
-export const AllDialogsComponents = [SurveyDialogComponent];
+export const HomeDialogsComponents = [SurveyDialogComponent];

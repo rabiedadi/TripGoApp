@@ -44,7 +44,7 @@
   font-weight: 500;
   align-items: center;
   border-bottom: 1px solid #E9E9E9;
-  padding: 15px 10px;
+  padding: 15px 0;
 }
 
 .hidden-nav-item-select {
@@ -66,7 +66,7 @@
   position: relative;
   height: 40px;
   width: 40px;
-  margin: 10px 16px;
+  margin: 10px;
 }
 
 .menu-button.active ~ .hidden-nav-closer {

@@ -8,13 +8,13 @@ import {SharedModule} from '../mdl-shared/shared.module';
 
 
 @NgModule({
-  declarations: [AllDialogsComponents, ProfileRoutingComponents],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ProfileRoutingModule,
-    MatSlideToggleModule,
-    MatDialogModule,
-  ]
+    declarations: [AllDialogsComponents, ProfileRoutingComponents],
+    imports: [
+        CommonModule,
+        SharedModule,
+        ProfileRoutingModule,
+        MatSlideToggleModule,
+        MatDialogModule,
+    ]
 })
 export class ProfileModule { }

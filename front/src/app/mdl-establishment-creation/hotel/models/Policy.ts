@@ -1,4 +1,5 @@
 export class Policy {
+
   data = {
     policy    : {cancelingDays  : Number(), paymentTime : ''},
     checkIn   : {from : Number(), to : Number()},
