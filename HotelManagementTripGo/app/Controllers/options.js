@@ -619,6 +619,9 @@ module.exports = {
         creditCardModel.create({name: "Master Card"}, function (err, result) {if (err) console.log(err)});
         creditCardModel.create({name: "Diners club"}, function (err, result) {if (err) console.log(err)});
         creditCardModel.create({name: "American express"}, function (err, result) {if (err) console.log(err)});
+        creditCardModel.create({name: "Carte EDHAHABIA"}, function (err, result) {if (err) console.log(err)});
+        creditCardModel.create({name: "Carte CIB" +
+                ""}, function (err, result) {if (err) console.log(err)});
 
 
 

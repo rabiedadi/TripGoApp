@@ -8,7 +8,7 @@ const userModel = mongoose.model('User');
 const path = require('path');
 const fs = require('fs');
 const extract = require('extract-zip');
-let resError = {};;;;;
+let resError = {};
 
 module.exports = {
     createUserIfNotExists:function (req, res, next){
