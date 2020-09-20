@@ -9,6 +9,7 @@ import {HomeDialogsComponents} from './dialogs/dialogs.components';
 import {Actions, ofType} from '@ngrx/effects';
 import {AuthActionTypes} from '../store/actions/auth.actions';
 import {takeUntil, tap} from 'rxjs/operators';
+import {SwUpdate} from '@angular/service-worker';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +34,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private sharedS: SharedService,
               private store: Store<AppState>,
               private dialog: MatDialog,
-              private updates$: Actions
+              private updates$: Actions,
+              private updates: SwUpdate
   ) {
     this.authState$ = store.select(state => state.auth);
     this.authState$.pipe(takeUntil(this.destroyed$)).subscribe(
@@ -50,6 +52,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         })
     ).subscribe(); // TODO use authState messages instead
+    this.updates.available.subscribe(event => { // service worker reload if updates are available
+      this.updates.activateUpdate().then(_ => document.location.reload());
+    });
   }
   ngOnInit(): void {
     if (window.screen.width < 768) { // phones and small tabs
