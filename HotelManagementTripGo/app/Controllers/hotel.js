@@ -82,7 +82,7 @@ module.exports = {
     },
 
     getAllForUser:function (req, res, next) {
-        hotelModel.find({userGroup_id: mongoose.Types.ObjectId(req.params.userGroup_id)}, {name: 1, province: 1, starsNumber: 1, globalNote: 1, offersNumber: 1, roomsNumber: 1}, function (err, hotels) {
+        hotelModel.find({userGroup_id: mongoose.Types.ObjectId(req.params.userGroup_id)}, {name: 1, province: 1, starsNumber: 1, globalNote: 1, offersNumber: 1, roomsNumber: 1, creationStep: 1}, function (err, hotels) {
             if(err){
                 resError.status = 500; resError.message = 'Unexpected ERROR'; resError.code = 1;
                 resError.path = 'hotelAPI, hotel, getAllForUser'; resError.err = err;
