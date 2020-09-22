@@ -32,7 +32,7 @@ router.post('/hotel/:realEstate_id', authController.verifyToken, middleFunctions
 router.post('/hotel/room/:realEstate_id', authController.verifyToken, middleFunctionsController.sendRequest);
 router.put('/hotel/instSer/:realEstate_id', authController.verifyToken, middleFunctionsController.sendRequest);
 router.put('/hotel/Equipment/:realEstate_id', authController.verifyToken, middleFunctionsController.sendRequest);
-router.put('/hotel/images/:realEstate_id', authController.verifyToken, upload.single('images'), middleFunctionsControllecdr.sendImagesAdding);
+router.put('/hotel/images/:realEstate_id', authController.verifyToken, upload.single('images'), middleFunctionsController.sendImagesAdding);
 router.put('/hotel/policy/:realEstate_id', authController.verifyToken, middleFunctionsController.sendRequest);
 router.put('/hotel/payment/:realEstate_id', authController.verifyToken, middleFunctionsController.sendRequest);
 
