@@ -141,5 +141,9 @@
 		"trip_go_vip": "TripGo VIP",
 		"verify_email": "Votre email n’a pas été vérifier, <span>vérifiez votre email</span>"
 	},
-	"slogan": "Votre prochain séjours, <span>en quelques clics !</span>"
+	"home" : {
+		"slogan": "Votre prochain séjours, <span>en quelques clics !</span>",
+		"sub-header-1": "Trouvez l'inspiration pour votre prochain séjour",
+		"sub-header-2": "Nos suggestions pour votre prochain séjour"
+	}
 }

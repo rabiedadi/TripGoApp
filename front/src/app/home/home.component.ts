@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     {text: 'Que diriez-vous de nuits tranquilles à Tamanrasset', img: 'https://i.pinimg.com/originals/f9/99/b0/f999b0adc1f1cd9e83f9a5c0efb5f717.jpg'},
     {text: 'Profitez de vos vacances à Oran', img: 'https://www.entv.dz/wp-content/uploads/2019/07/Oran_-de_Santa-Cruz.jpg'},
   ];
+  hotels = ['Hôtel Horloge', 'Hôtel Mira', 'Hôtel Roayal', 'Hôtel Maroit', 'Hôtel Ibis', 'Hôtel Madina', 'Hôtel Assala'];
 
   constructor(private sharedS: SharedService,
               private store: Store<AppState>,
@@ -60,7 +61,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (window.screen.width < 768) { // phones and small tabs
       this.smallScreen = true;
     }
-    this.distance = (document.getElementsByClassName('hotel-card-wrapper')[0] as HTMLElement).offsetWidth;
   }
 
   ngAfterViewInit() {
@@ -85,6 +85,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   sideScroll(element, direction, speed, distance, step){
+    this.distance = (document.getElementsByClassName('hotel-card-wrapper')[0] as HTMLElement).offsetWidth;
     let scrollAmount = 0;
     const slideTimer = setInterval(() => {
       if (direction === 'left'){

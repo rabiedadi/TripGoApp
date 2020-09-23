@@ -102,11 +102,41 @@
 #slideNext {
   right: 3rem;
 }
-
 #slideBack  {
   left: 3rem;
 
 }
+
+/*lightbox gallery*/
+::ng-deep lightbox{
+  max-width: unset !important; max-height: unset !important;
+  height: 100vh !important; width: 100vw !important;
+  box-shadow: unset !important;
+}
+::ng-deep lightbox gallery{
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+::ng-deep .g-counter {
+  background-color: #0000 !important;
+  font-weight: 500;
+  letter-spacing: 3px;
+  padding: 5px !important;
+}
+::ng-deep .g-box {
+  justify-content: center;
+}
+::ng-deep .g-box gallery-slider {
+  height: 90% !important;
+  flex: unset !important;
+}
+::ng-deep gallery-thumbs gallery-thumb {
+  padding: 0 5px 10px 5px !important;
+}
+::ng-deep gallery-thumbs gallery-image {
+  border: 2px solid white;
+  border-radius: 3px;
+}
+
 /* media queries */
 @media (max-width: 480px) { /*xs*/
   .service-note {

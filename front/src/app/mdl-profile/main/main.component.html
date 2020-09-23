@@ -70,9 +70,7 @@
             </div>
         </div>
         <span (click)="tab_menu.classList.toggle('expanded-tabs-menu')"
-              class="tab-label mt-16 font-bold text-sm pl-3 text-my-blue-2">
-      <=>
-    </span>
+              class="tab-label flex-grow font-bold text-sm pl-3 text-my-blue-2"></span>
     </div>
     <!-- Tab0 ======================================================================================================== -->
     <div class="tab-0 col-span-3 sm:col-span-2 pt-4 sm:pt-6 md:pt-10 pl-12 sm:pl-8 md:pl-12">
@@ -91,16 +89,19 @@
                           routerLink="/detail/hotel/{{establishment._id}}">{{ establishment.name }}</span>
                     <fa-icon *ngFor="let x of (establishment.starsNumber) | ngForCount"
                              [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
-                    <fa-icon [icon]="['fal', 'edit']"
-                             [routerLink]="['/creation/hotel', {id: establishment._id}]" class="mx-3 cursor-pointer"
-                             size="sm" style="color: rgba(91, 99, 109, 0.7);"></fa-icon>
+                    <span class="text-xs font-semibold cursor-pointer ml-2" style="color: #494D51"
+                          [routerLink]="['/creation/hotel', {id: establishment._id}]">ِEdit</span>
                 </span>
                 <span class="text-xs leading-none mt-3">{{ establishment.province }} - {{ establishment.roomsNumber }}
                     chambres</span>
                 <span (click)="openAddOfferDialog()" class="text-xs leading-none mt-2">
-          <span class="font-medium">Offres :</span> {{ establishment.offersNumber }} -
-          <span class="font-bold text-my-blue-2 cursor-pointer">{{'profile.offer_creation' | translate}}</span>
-        </span>
+                    <span class="font-medium">Offres :</span> {{ establishment.offersNumber }} -
+                    <span class="font-bold text-my-blue-2 cursor-pointer">{{'profile.offer_creation' | translate}}</span>
+                </span>
+                <span *ngIf="establishment.creationStep < 7"
+                      [routerLink]="['/creation/hotel', {id: establishment._id}]"
+                      class="text-xs font-semibold cursor-pointer mt-2"
+                      style="color: #FF8A00">ِCompletez l'ajout de votre Hôtel</span>
             </div>
             <div class="note-badge bg-my-blue-1" routerLink="/detail/hotel  ">
                 <span class="font-bold text-sm leading-none">8.9</span>
@@ -119,7 +120,10 @@
                     </div>
                 </div>
                 <div class="ml-5 flex flex-col">
-                    <span class="text-lg font-bold">ibis Oran les Falaises</span>
+                    <span class="text-lg font-bold">
+                        Ibis Oran
+                        <span class="text-sm"> - les Falaises</span>
+                    </span>
                     <div class="flex items-center mt-2">
                         <fa-icon [fixedWidth]="true" [icon]="['fal', 'map-marker-alt']" size="1x"
                                  style="color: #0C568B"></fa-icon>
@@ -129,8 +133,8 @@
                         <fa-icon [fixedWidth]="true" [icon]="['fal', 'calendar-alt']" size="1x"
                                  style="color: #0C568B"></fa-icon>
                         <span class="text-xs ml-2">
-                            de <span class="font-semibold mx-2">Mon 7 Sept 2020</span>
-                            à <span class="font-semibold mx-2">Thu 17 Sept 2020</span>
+                            de <span class="font-semibold mx-2">Lun 7 Sept 2020</span>
+                            à <span class="font-semibold mx-2">Jeu 17 Sept 2020</span>
                         </span>
                     </div>
                     <div class="flex items-center mt-2">
@@ -165,33 +169,33 @@
                     </div>
                     <div class="ml-5">
                         <div class="flex items-center text-xs h-6">
-                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[0].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray2[0].val | ngForCount; let i = index" [icon]="['fas', 'star']"
                                      size="1x" style="color: #FF8A00"></fa-icon>
-                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[0].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
-                                     size="1x" style="color: #FF8A00"></fa-icon>
-                        </div>
-                        <div class="flex items-center text-xs h-6">
-                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[1].val | ngForCount; let i = index" [icon]="['fas', 'star']"
-                                     size="1x" style="color: #FF8A00"></fa-icon>
-                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[1].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray2[0].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
                                      size="1x" style="color: #FF8A00"></fa-icon>
                         </div>
                         <div class="flex items-center text-xs h-6">
-                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[2].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray2[1].val | ngForCount; let i = index" [icon]="['fas', 'star']"
                                      size="1x" style="color: #FF8A00"></fa-icon>
-                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[2].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
-                                     size="1x" style="color: #FF8A00"></fa-icon>
-                        </div>
-                        <div class="flex items-center text-xs h-6">
-                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[3].val | ngForCount; let i = index" [icon]="['fas', 'star']"
-                                     size="1x" style="color: #FF8A00"></fa-icon>
-                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[3].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray2[1].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
                                      size="1x" style="color: #FF8A00"></fa-icon>
                         </div>
                         <div class="flex items-center text-xs h-6">
-                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray[4].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray2[2].val | ngForCount; let i = index" [icon]="['fas', 'star']"
                                      size="1x" style="color: #FF8A00"></fa-icon>
-                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray[4].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray2[2].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                        </div>
+                        <div class="flex items-center text-xs h-6">
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray2[3].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray2[3].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                        </div>
+                        <div class="flex items-center text-xs h-6">
+                            <fa-icon class="mr-1" *ngFor="let x of evaluationArray2[4].val | ngForCount; let i = index" [icon]="['fas', 'star']"
+                                     size="1x" style="color: #FF8A00"></fa-icon>
+                            <fa-icon class="mr-1" *ngFor="let x of (5 - evaluationArray2[4].val) | ngForCount; let i = index" [icon]="['fal', 'star']"
                                      size="1x" style="color: #FF8A00"></fa-icon>
                         </div>
                     </div>
@@ -213,18 +217,21 @@
                         </div>
                     </div>
                     <div class="ml-5 flex flex-col">
-                        <span class="text-lg font-bold">royal Oran ree da la sommame</span>
+                        <span class="text-lg font-bold">
+                            Royal Oran
+                            <span class="text-sm"> - avenue de la soummam</span>
+                        </span>
                         <div class="flex items-center mt-2">
                             <fa-icon [fixedWidth]="true" [icon]="['fal', 'map-marker-alt']" size="1x"
                                      style="color: #0C568B"></fa-icon>
-                            <span class="text-xs ml-2">Avenue De Canastel Route Des Falaises 31000 , 31000 Oran Algeria</span>
+                            <span class="text-xs ml-2">avenue de la soummam 31000 , 31000 Oran Algeria</span>
                         </div>
                         <div class="flex items-center mt-2">
                             <fa-icon [fixedWidth]="true" [icon]="['fal', 'calendar-alt']" size="1x"
                                      style="color: #0C568B"></fa-icon>
                             <span class="text-xs ml-2">
-                            de <span class="font-semibold mx-2">Mon 7 Sept 2020</span>
-                            à <span class="font-semibold mx-2">Thu 17 Sept 2020</span>
+                            de <span class="font-semibold mx-2">Sam 26 Sept 2020</span>
+                            à <span class="font-semibold mx-2">Mer 30 Sept 2020</span>
                         </span>
                         </div>
                         <div class="flex items-center mt-2">

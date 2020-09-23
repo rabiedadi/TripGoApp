@@ -13,18 +13,27 @@
         <!-- Process bar =========================================================================================== -->
         <div class="flex items-center">
             <div class="progress-step">
-                <div>1</div>
-                <span class="font-medium text-my-blue-2 text-sm ml-2">Your room</span>
+                <div>
+                    <span style="font-size: 1.1rem">
+                        <fa-icon [icon]="['fal', 'check-circle']" size="lg" style="color: white; margin-top: 2px"></fa-icon>
+                    </span>
+                </div>
+                <span class="font-medium text-my-blue-2 text-sm ml-2">Votre chambre</span>
             </div>
             <span class="flex-grow bg-my-blue-2 mx-3" style="height: 1px"></span>
             <div class="progress-step active">
-                <div>2</div>
-                <span class="font-bold text-my-blue-2 text-sm ml-2">Enter your details</span>
+                <div>
+                    <span *ngIf="step < 3">2</span>
+                    <span *ngIf="step === 3"  style="font-size: 1.1rem">
+                        <fa-icon [icon]="['fal', 'check-circle']" size="lg" style="color: white; margin-top: 2px"></fa-icon>
+                    </span>
+                </div>
+                <span class="font-bold text-my-blue-2 text-sm ml-2">Entrez vos coordonnées</span>
             </div>
             <span class="flex-grow bg-my-gray-3 mx-3" style="height: 1px"></span>
             <div class="progress-step inactive">
-                <div>3</div>
-                <span class="font-medium text-my-gray-3 text-sm ml-2">Final details</span>
+                <div><span>3</span></div>
+                <span class="font-medium text-my-gray-3 text-sm ml-2">Détails finaux</span>
             </div>
         </div>
         <!-- Process bar end ======================================================================================= -->
@@ -33,36 +42,36 @@
 
                 <!-- Booking detail ================================================================================ -->
                 <div class="border border-gray-border-2 rounded p-2 my-2">
-                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Your booking detail</p>
+                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Détails de votre réservation</p>
                     <div class="flex">
                         <div class="flex flex-col flex-grow">
                             <span class="text-xs font-semibold mt-2">Check-in</span>
-                            <span class="text-xs font-bold mt-2">Mon 7 Sept 2020</span>
+                            <span class="text-xs font-bold mt-2">{{ sharedS.Date1 | date:'fullDate'}}</span>
                             <span class="text-xs mt-2">13:00 – 18:30</span>
                         </div>
                         <div class="flex flex-col flex-grow">
                             <span class="text-xs font-semibold mt-2">Check-out</span>
-                            <span class="text-xs font-bold mt-2">Thu 17 Sept 2020</span>
+                            <span class="text-xs font-bold mt-2">{{ sharedS.Date2 |date:'fullDate' }}</span>
                             <span class="text-xs mt-2">08:00 – 12:00</span>
                         </div>
                     </div>
                     <div class="flex items-center mt-2">
                         <fa-icon [icon]="['fal', 'exclamation-circle']" size="lg" style="color: #0C568B"></fa-icon>
-                        <span class="text-xs font-semibold ml-2">Just <span class="font-bold">2</span> days away!</span>
+                        <span class="text-xs font-semibold ml-2">Après seulement <span class="font-bold">{{ daysAway }}</span> jours!</span>
                     </div>
                     <div class="flex items-center mt-2">
                         <fa-icon [icon]="['fal', 'check-circle']" size="lg" style="color: #0C568B"></fa-icon>
-                        <span class="text-xs font-semibold ml-2">Total length of stay : <span class="font-bold">10 nights</span></span>
+                        <span class="text-xs font-semibold ml-2">Durée totale du séjour : <span class="font-bold">{{ totalNights }} nuits</span></span>
                     </div>
-                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full mt-4">You selected</p>
+                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full mt-4">Vous avez séléctionné</p>
                     <div class="text-xs font-semibold mt-2">
                         <span>Standard Twin Room</span>
-                        <span class="text-my-blue-2 cursor-pointer ml-2">Change your selection ?</span>
+                        <span class="text-my-blue-2 cursor-pointer ml-2">Changer votre sélection?</span>
                     </div>
 
                 </div>
                 <div class="border border-gray-border-2 rounded p-2 my-2">
-                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Your price summary</p>
+                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Votre récapitulatif de prix</p>
                     <div class="flex flex-col">
                         <div class="flex justify-between">
                             <span class="text-xs mt-2">Standard Twin Room</span>
@@ -73,7 +82,7 @@
                             <span class="text-xs mt-2">DZD 4,334.86</span>
                         </div>
                         <div class="flex justify-between font-semibold">
-                            <span class="mt-3">Price</span>
+                            <span class="mt-3">Prix</span>
                             <span class="mt-3 text-my-blue-2">DZD 52,500</span>
                         </div>
                     </div>
@@ -83,25 +92,25 @@
                 <!-- Ask a question ================================================================================ -->
                 <div class="flex flex-col border border-gray-border-2 rounded p-2 my-2 step2-section">
                     <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Ask a question</p>
-                    <textarea class="text-xs w-full border border-gray-border-1 p-2 mt-2" rows="4" spellcheck="false" style="resize: vertical"
-                              placeholder="Your requests cannot be guaranteed–but the property will do its best to meet your needs. You can always make a special request after your booking is complete!"></textarea>
+                    <textarea class="text-xs w-full border border-gray-border-1 p-2 mt-2" rows="6" spellcheck="false" style="resize: vertical"
+                              placeholder="Vos demandes ne peuvent être garanties, mais l'établissement fera de son mieux pour répondre à vos besoins. Vous pouvez toujours faire une demande spéciale une fois votre réservation terminée!"></textarea>
                     <div class="mt-2">
-                        <mat-checkbox disableRipple><span class="text-xs"> I'd like rooms close to each other (if available)</span></mat-checkbox>
+                        <mat-checkbox disableRipple></mat-checkbox><span class="text-xs ml-1"> J'aimerais des chambres proches les unes des autres (si disponible)</span>
                     </div>
                     <div class="mt-2">
-                        <mat-checkbox disableRipple><span class="text-xs"> I would like quiet rooms</span></mat-checkbox>
+                        <mat-checkbox disableRipple></mat-checkbox><span class="text-xs ml-1"> Je voudrais des chambres calmes</span>
                     </div>
                     <div class="mt-2">
-                        <mat-checkbox disableRipple><span class="text-xs"> I would like free private parking on site</span></mat-checkbox>
+                        <mat-checkbox disableRipple></mat-checkbox><span class="text-xs ml-1"> Je souhaite un parking privé gratuit sur place</span>
                     </div>
                 </div>
                 <!-- Ask a question end ============================================================================ -->
 
                 <!-- Promo code ==================================================================================== -->
                 <div class="flex flex-col border border-gray-border-2 rounded p-2 my-2 step3-section">
-                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Do you have a promo code ?</p>
+                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Avez-vous un code de promotion ?</p>
                     <div class="input_container mt-2">
-                        <label class="input-label mb-2" for="promo-code" >Promo code</label>
+                        <label class="input-label mb-2" for="promo-code" >Code promo</label>
                         <div class="input-wrapper w-full">
                             <input type="text" id="promo-code" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)">
                         </div>
@@ -121,7 +130,7 @@
                             </div>
                         </div>
                         <div class="ml-5 flex flex-col">
-                            <span class="text-lg font-bold">ibis Oran les Falaises</span>
+                            <span class="text-lg font-bold">Royal Hôtel Oran les Falaises</span>
                             <div class="flex items-center mt-2">
                                 <fa-icon [icon]="['fal', 'map-marker-alt']" size="lg" style="color: #0C568B"></fa-icon>
                                 <span class="text-xs ml-2">Avenue De Canastel Route Des Falaises 31000 , 31000 Oran Algeria</span>
@@ -133,16 +142,16 @@
 
                 <!-- User infos ==================================================================================== -->
                 <div class="flex flex-col border border-gray-border-2 rounded p-2 my-2 step2-section">
-                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Your Infos</p>
+                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Vos informations</p>
                     <div class="grid grid-cols-3 gap-2 mt-2">
                         <div class="input_container col-span-1">
-                            <label class="input-label mb-2" for="first-name" >First name</label>
+                            <label class="input-label mb-2" for="first-name" >Prénom</label>
                             <div class="input-wrapper w-full">
                                 <input type="text" id="first-name" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)" [(ngModel)]="firstName">
                             </div>
                         </div>
                         <div class="input_container col-span-1">
-                            <label class="input-label mb-2" for="last-name">Last name</label>
+                            <label class="input-label mb-2" for="last-name">Nom</label>
                             <div class="input-wrapper w-full">
                                 <input type="text" id="last-name" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)" [(ngModel)]="lastName">
                             </div>
@@ -159,17 +168,17 @@
 
                 <!-- User additional infos ========================================================================= -->
                     <div class="flex flex-col border border-gray-border-2 rounded p-2 my-2 step3-section">
-                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Additional Infos</p>
+                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">infos supplémentaires</p>
                     <div class="grid grid-cols-3 gap-2 mt-2">
                         <div class="col-span-1">
                             <div class="input_container">
-                                <label class="input-label mb-2" for="address" >Address</label>
+                                <label class="input-label mb-2" for="address" >Adresse</label>
                                 <div class="input-wrapper w-full">
                                     <input type="text" id="address" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)">
                                 </div>
                             </div>
                             <div class="input_container mt-2">
-                                <label class="input-label mb-2" for="phone" >Phone number</label>
+                                <label class="input-label mb-2" for="phone" >Numero de téléphone</label>
                                 <div class="input-wrapper w-full">
                                     <input type="tel" id="phone" class="my-input"
                                            [ngModel]="phone | phone" (ngModelChange)="phone = $event"
@@ -183,7 +192,7 @@
 
                 <!-- Rooms section ================================================================================= -->
                 <div class="flex flex-col border border-gray-border-2 rounded p-2 my-2 step2-section">
-                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">selected rooms</p>
+                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Chambres séléctionnées</p>
                     <div *ngFor="let x of ' '.repeat(roomsNb - 1).split(' '); let i = index"
                          class="mt-3 w-full border border-gray-border-2 rounded p-2">
                         <p class="font-medium">Standard Double Room</p>
@@ -195,22 +204,22 @@
                         </div>
                         <div *ngIf="!forSomeOneElse.checked" class="text-sm mt-3">Reserved for : <span class="font-semibold">{{ firstName + ' ' + lastName }}</span> </div>
                         <div class="mt-3">
-                            <mat-checkbox class="mt-3" disableRipple #forSomeOneElse>Booking is for someone else ?</mat-checkbox>
+                            <mat-checkbox class="mt-3" disableRipple #forSomeOneElse>La réservation est pour quelqu'un d'autre?</mat-checkbox>
                         </div>
                         <div *ngIf="forSomeOneElse.checked" class="grid grid-cols-3 gap-2 mt-2">
                             <div class="input_container col-span-1">
-                                <label class="input-label mb-2" for="full-guest-name" >Full guest name</label>
+                                <label class="input-label mb-2" for="full-guest-name" >Nom complet de l'invité</label>
                                 <div class="input-wrapper w-full">
                                     <input type="text" id="full-guest-name" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)" [(ngModel)]="guestsInfos[i].fullName">
                                 </div>
                             </div>
                             <div class="input_container col-span-1">
-                                <label class="input-label mb-2" for="guest-email" >Guest email</label>
+                                <label class="input-label mb-2" for="guest-email" >Email de l'invité</label>
                                 <div class="input-wrapper w-full">
                                     <input type="text" id="guest-email" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)" [(ngModel)]="guestsInfos[i].email">
                                 </div>
                             </div>
-                            <div class="text-sm col-span-3">Reserved for : <span class="font-semibold">{{ guestsInfos[i].fullName}}</span> </div>
+                            <div class="text-sm col-span-3">Reservé pour : <span class="font-semibold">{{ guestsInfos[i].fullName}}</span> </div>
                         </div>
                     </div>
                 </div>
@@ -218,23 +227,23 @@
 
                 <!-- Payment ======================================================================================= -->
                 <div class="flex flex-col border border-gray-border-2 rounded p-2 my-2 step3-section">
-                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Payment details</p>
+                    <p class="font-semibold border-b border-gray-border-1 h-6 w-full">Détails de peyment</p>
                     <div class="grid grid-cols-3 gap-2 mt-2">
                         <div class="col-span-1">
                             <div class="input_container">
-                                <label class="input-label mb-2" for="cardHolderName" >Card holder's name</label>
+                                <label class="input-label mb-2" for="cardHolderName" >Nom du titulaire de la carte</label>
                                 <div class="input-wrapper w-full">
                                     <input type="text" id="cardHolderName" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)">
                                 </div>
                             </div>
                             <div class="input_container mt-2">
-                                <label class="input-label mb-2" for="cardType" >Card type</label>
+                                <label class="input-label mb-2" for="cardType" >Type de la carte</label>
                                 <div class="input-wrapper w-full">
                                     <input type="text" id="cardType" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)">
                                 </div>
                             </div>
                             <div class="input_container mt-2">
-                                <label class="input-label mb-2" for="cardNumber" >Card number</label>
+                                <label class="input-label mb-2" for="cardNumber" >Numéro de la carte</label>
                                 <div class="input-wrapper w-full">
                                     <input type="number" id="cardNumber" class="my-input" (focus)="inputFocusedBlurred($event, true)" (blur)="inputFocusedBlurred($event, false)">
                                 </div>
@@ -247,8 +256,8 @@
             </div>
         </div>
         <div class="flex">
-            <button class="h-10 text-white text-sm bg-my-blue-2 px-12 ml-auto rounded step2-section" (click)="passToStep3()">Next : Final detail</button>
-            <button class="h-10 text-white text-sm bg-my-blue-2 px-12 ml-auto rounded step3-section items-center">Complete booking</button>
+            <button class="h-10 text-white text-sm bg-my-blue-2 px-12 ml-auto rounded step2-section" (click)="passToStep3()">Suivant: Dernier détail</button>
+            <button class="h-10 text-white text-sm bg-my-blue-2 px-12 ml-auto rounded step3-section items-center" (click)="completeBooking()">Compléter la résérvation</button>
         </div>
     </div>
 </div>

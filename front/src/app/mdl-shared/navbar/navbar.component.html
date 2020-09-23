@@ -95,7 +95,7 @@
                     matRipple>EN</span>
             </div>
             <span (click)="openDialog2(); toggleHiddenNav()" *ngIf="!(this.authState$ | async).isAuthenticated"
-                  class="text-xs border border-gray-border-1 rounded-sm px-4 py-2 cursor-pointer ml-2 mt-4"
+                  class="text-xs border border-gray-border-1 rounded-sm px-4 py-2 cursor-pointer mt-4"
                   matRipple style="width: fit-content">Créer un compte
             </span>
             <span (click)="onLogoutSubmit(); toggleHiddenNav()" *ngIf="(this.authState$ | async).isAuthenticated"

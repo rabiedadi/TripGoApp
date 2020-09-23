@@ -57,7 +57,7 @@
     display: flex;
     align-items: center;
 }
-.progress-step div {
+.progress-step div span{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,16 +72,16 @@
     color: #0C568B;
     margin-left: 0.5rem;
 }
-.progress-step.active div {
+.progress-step.active div span {
     height: 35px;
     width: 35px;
     font-weight: 500;
 }
 .progress-step.active span {
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
 }
-.progress-step.inactive div {
+.progress-step.inactive div span {
     background-color: #5B636D;
 }
 .progress-step.inactive span {

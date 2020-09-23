@@ -30,26 +30,32 @@
                    [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
         </div>
         <div class="input-wrapper col-span-3 sm:col-span-2 lg:col-span-1">
-          <mat-select disableOptionCentering panelClass="my-mat-select" placeholder="Etoiles">
-            <mat-option [value]=1>one</mat-option>
-            <mat-option [value]=2>two</mat-option>
-            <mat-option [value]=3>three</mat-option>
+          <mat-select (selectionChange)="filterStars($event.value)" disableOptionCentering panelClass="my-mat-select" placeholder="Etoiles">
+            <mat-option>default</mat-option>
+            <mat-option [value]=3>
+              3 Ètoils <fa-icon *ngFor="let x of 3 | ngForCount" class="ml-1" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00"></fa-icon>
+            </mat-option>
+            <mat-option [value]=4>
+              4 Ètoils <fa-icon *ngFor="let x of 4 | ngForCount" class="ml-1" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00"></fa-icon>
+            </mat-option>
+            <mat-option [value]=5>
+              5 Ètoils <fa-icon *ngFor="let x of 5 | ngForCount" class="ml-1" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00"></fa-icon>
+            </mat-option>
           </mat-select>
           <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
                    [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
         </div>
         <div class="input-wrapper col-span-3 sm:col-span-2 lg:col-span-1">
-          <mat-select disableOptionCentering panelClass="my-mat-select" placeholder="Localisation">
-            <mat-option [value]=1>one</mat-option>
-            <mat-option [value]=2>two</mat-option>
-            <mat-option [value]=3>three</mat-option>
+          <mat-select (selectionChange)="filterDestination($event.value)" disableOptionCentering panelClass="my-mat-select" placeholder="Localisation">
+            <mat-option>default</mat-option>
+            <mat-option *ngFor="let city of sharedS.states" [value]=city>{{ city }}</mat-option>
           </mat-select>
           <fa-icon class="absolute right-0 mx-3 mt-1 pointer-events-none cursor-pointer"
                    [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D"></fa-icon>
         </div>
         <div class="hidden lg:flex col-span-1"></div>
         <div class="input-wrapper col-span-6 sm:col-span-4 lg:col-span-2">
-          <input class="my-input" placeholder="Rechercher votre hotel" type="search">
+          <input class="my-input" placeholder="Rechercher votre hotel" type="search" (input)="searchHotels($event.target.value)">
         </div>
       </div>
     </div>
@@ -92,12 +98,12 @@
       <div class="flex items-center bg-white sm:bg-my-gray-1 border-0 sm:border border-gray-border-2 rounded ">
         <span class="text-sm sm:text-xs font-bold ml-3 sm:ml-5 mr-5">Trier</span>
         <div class="hidden sm:flex">
-          <div class="label-wrapper active" matRipple>
-            <span class="text-xs">Meilleure correspondance</span>
+          <div class="label-wrapper" (click)="sortHotels('note', $event)" matRipple>
+            <span class="text-xs pointer-events-none">Meilleure correspondance</span>
             <div class="label-indicator"></div>
           </div>
-          <div class="label-wrapper" matRipple>
-            <span class="text-xs">Le moins cher</span>
+          <div class="label-wrapper" (click)="sortHotels('prix', $event)" matRipple>
+            <span class="text-xs pointer-events-none">Le moins cher</span>
             <div class="label-indicator"></div>
           </div>
           <div class="label-wrapper" matRipple>
@@ -119,7 +125,7 @@
       <div class="info-card sm:flex sm:h-56 mt-4" *ngFor="let hotel of hotels">
         <div class="flex flex-col flex-grow p-2 sm:pl-1 sm:pb-3 sm:pt-6">
           <span class="flex items-center text-sm">
-            <span [routerLink]="['/detail/hotel', '5f134a1158960000125bffa8']"
+            <span [routerLink]="['/detail/hotel', '5f134a1158960000125bffa8', {info: true, name: hotel.name, note: hotel.note, stars: hotel.stars}]"
                   class="font-bold leading-none mr-2 text-my-gray-4 cursor-pointer">{{ hotel.name }}</span>
             <fa-icon *ngFor="let x of hotel.stars | ngForCount" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00; margin-right: 1px"></fa-icon>
           </span>
@@ -161,10 +167,9 @@
             </div>
           </div>
           <div class="flex flex-col sm:hidden mt-3 pt-2 border-t border-gray-border-">
-            <span class="text-xs text-red-500">Reste une chambre</span>
             <div class="flex justify-between">
               <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-              <span class="text-sm text-my-gray-4">14 450<span class="font-semibold"> DZD</span></span>
+              <span class="text-sm text-my-gray-4">{{ hotel.prix }}<span class="font-semibold"> DZD</span></span>
             </div>
           </div>
         </div>
@@ -184,11 +189,11 @@
             </div>
           </div>
         </div>
-        <div class="sm:h-full w-full sm:w-40 ml-auto hidden sm:flex flex-col items-end justify-between p-2 pt-16 pb-5">
-          <span class="text-xs text-red-500">Reste une chambre</span>
+        <div class="sm:h-full w-full sm:w-40 ml-auto hidden sm:flex flex-col items-end justify-end p-2 pt-16 pb-5">
+<!--          <span class="text-xs text-red-500">Reste une chambre</span>-->
           <div class="flex flex-col justify-between w-2/3 items-end ml-auto">
             <span class="text-xs text-my-gray-4">Prix par nuitee, a partir de:</span>
-            <span class="text-sm text-my-gray-4 mt-1">14 450<span class="font-semibold"> DZD</span></span>
+            <span class="text-sm text-my-gray-4 mt-1">{{ hotel.prix }}<span class="font-semibold"> DZD</span></span>
           </div>
         </div>
         <div class="note-badge bg-my-blue-1 ">

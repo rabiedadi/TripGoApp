@@ -110,7 +110,7 @@
   .tabs-menu {
     position: absolute;
     top: 0; left: 0;
-    width: 50px;
+    width: 48px;
     overflow: hidden;
     z-index: 30;
     transition: width 0.1s cubic-bezier(0, 0, 1, 0);

@@ -1,12 +1,13 @@
 <div
   class="grid grid-cols-8 gap-2 row-gap-2 text-my-gray-3 w-full">
   <!-- Destination ==== -->
-  <div class="col-span-8 md:col-span-4 lg:col-span-2 h-10 flex items-center bg-white" (click)="destination.open()"
+  <div class="col-span-8 md:col-span-4 lg:col-span-2 h-10 flex items-center bg-white" (click)="destinationSelect.open()"
        id="destination">
       <fa-icon class="mx-3" [icon]="['fal', 'bed-alt']" style="font-size: 1.33em; color: rgba(91, 99, 109, 0.7);"></fa-icon><br>
-      <mat-select (selectionChange)="picker1.open()" #destination disableOptionCentering panelClass="mat-select-options mat-select-extra-options"
-                  placeholder="Destination">
-        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+      <mat-select (selectionChange)="picker1.open()" [(ngModel)]="sharedS.destination"
+                  panelClass="mat-select-options mat-select-extra-options"
+                  placeholder="Destination" disableOptionCentering #destinationSelect>
+        <mat-option *ngFor="let state of sharedS.states" [value]="state">{{state}}</mat-option>
       </mat-select>
   </div>
   <!-- Date ==== -->
@@ -15,14 +16,20 @@
       <fa-icon class="mx-3" [icon]="['fal', 'calendar-alt']" size="lg" style="color: rgba(91, 99, 109, 0.7);"></fa-icon>
       <div class="grid grid-cols-2 gap-0">
         <label class="col-span-1 h-full  flex items-center  border-r">
-          <input (dateChange)="date1Selected($event); picker2.open()" (focus)="picker1.open()"
-                 [matDatepicker]="picker1" [min]="minDate1" class="text-center outline-none w-full" matInput
+          <input (dateChange)="date1Selected($event); picker2.open()"
+                 (focus)="picker1.open()"
+                 [matDatepicker]="picker1" [min]="sharedS.minDate1"
+                 [(ngModel)]="sharedS.Date1"
+                 class="text-center outline-none w-full" matInput
                  placeholder="{{ 'other.checkin' | translate }}">
           <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
           <mat-datepicker #picker1 [touchUi]="xsScreen ? true : null" panelClass="my-mat-datepicker"></mat-datepicker>
         </label>
         <label class="col-span-1 h-full flex items-center">
-          <input (dateChange)="date2Selected($event);" (focus)="picker2.open()" [matDatepicker]="picker2" [min]="minDate2"
+          <input (dateChange)="date2Selected($event); persInfoPanel.classList.remove('hidden')"
+                 (focus)="picker2.open()"
+                 [matDatepicker]="picker2" [min]="sharedS.minDate2"
+                 [(ngModel)]="sharedS.Date2"
                  class="text-center outline-none w-full"
                  matInput placeholder="{{ 'other.checkout' | translate }}">
 
@@ -39,9 +46,9 @@
     <div class="flex items-center h-10">
       <fa-icon class="mx-3" [icon]="['fal', 'users']" size="1x" style="color: rgba(91, 99, 109, 0.7);"></fa-icon><br>
       <div class="flex flex-grow">
-        <span class="text-sm font-medium flex-grow text-center">{{ personalInfo.adults }} {{'other.adult' | translate | plural:personalInfo.adults }}</span>
-        <span class="text-sm font-medium flex-grow text-center">{{ personalInfo.children }} {{'other.child' | translate | plural:personalInfo.children }}</span>
-        <span class="text-sm font-medium flex-grow text-center">{{ personalInfo.rooms }} {{'other.room' | translate | plural:personalInfo.rooms }}</span>
+        <span class="text-sm font-medium flex-grow text-center">{{ sharedS.personalInfo.adults }} {{'other.adult' | translate | plural:sharedS.personalInfo.adults }}</span>
+        <span class="text-sm font-medium flex-grow text-center">{{ sharedS.personalInfo.children }} {{'other.child' | translate | plural:sharedS.personalInfo.children }}</span>
+        <span class="text-sm font-medium flex-grow text-center">{{ sharedS.personalInfo.rooms }} {{'other.room' | translate | plural:sharedS.personalInfo.rooms }}</span>
       </div>
       <fa-icon class="mx-4" [icon]="['fal', 'chevron-down']" size="sm" style="color: #5B636D;"></fa-icon><br>
     </div>
@@ -50,40 +57,40 @@
         <div class="flex justify-between pt-1 pb-2 items-center">
           <span class="text-sm">{{'other.adult' | translate | plural:2 }}</span>
           <div class="flex items-center">
-            <span (click)="personalInfo.adults = personalInfo.adults + 1"
+            <span (click)="sharedS.personalInfo.adults = sharedS.personalInfo.adults + 1"
                   matRipple class="h-8 w-8 rounded-sm flex items-center justify-center border border-my-blue-1 text-my-blue-1">+</span>
-            <span class="h-8 w-8 rounded-sm flex items-center justify-center mx-1 text-sm font-medium">{{ personalInfo.adults }}</span>
-            <span (click)="personalInfo.adults = personalInfo.adults > 0 ? personalInfo.adults - 1 : 0;"
-                  [class.disbled-btn] = "personalInfo.adults === 0"
+            <span class="h-8 w-8 rounded-sm flex items-center justify-center mx-1 text-sm font-medium">{{ sharedS.personalInfo.adults }}</span>
+            <span (click)="sharedS.personalInfo.adults = sharedS.personalInfo.adults > 0 ? sharedS.personalInfo.adults - 1 : 0;"
+                  [class.disbled-btn] = "sharedS.personalInfo.adults === 0"
                   matRipple class="h-8 w-8 rounded-sm flex items-center justify-center border border-my-blue-1 text-my-blue-1">-</span>
           </div>
         </div>
         <div class="flex justify-between pt-1 pb-2 items-center">
           <span class="text-sm">{{'other.child' | translate | plural:2 }}</span>
           <div class="flex items-center">
-            <span (click)="personalInfo.children = personalInfo.children + 1"
+            <span (click)="sharedS.personalInfo.children = sharedS.personalInfo.children + 1"
                   matRipple class="h-8 w-8 rounded-sm flex items-center justify-center border border-my-blue-1 text-my-blue-1">+</span>
-            <span class="h-8 w-8 rounded-sm flex items-center justify-center mx-1 text-sm font-medium">{{ personalInfo.children }}</span>
-            <span (click)="personalInfo.children = personalInfo.children > 0 ? personalInfo.children - 1 : 0;"
-                  [class.disbled-btn] = "personalInfo.children === 0"
+            <span class="h-8 w-8 rounded-sm flex items-center justify-center mx-1 text-sm font-medium">{{ sharedS.personalInfo.children }}</span>
+            <span (click)="sharedS.personalInfo.children = sharedS.personalInfo.children > 0 ? sharedS.personalInfo.children - 1 : 0;"
+                  [class.disbled-btn] = "sharedS.personalInfo.children === 0"
                   matRipple class="h-8 w-8 rounded-sm flex items-center justify-center border border-my-blue-1 text-my-blue-1">-</span>
           </div>
         </div>
         <div class="flex justify-between pt-1 pb-2 items-center">
           <span class="text-sm">{{'other.room' | translate | plural:2 }}</span>
           <div class="flex items-center">
-            <span (click)="personalInfo.rooms = personalInfo.rooms + 1"
+            <span (click)="sharedS.personalInfo.rooms = sharedS.personalInfo.rooms + 1"
                   matRipple class="h-8 w-8 rounded-sm flex items-center justify-center border border-my-blue-1 text-my-blue-1">+</span>
-            <span class="h-8 w-8 rounded-sm flex items-center justify-center mx-1 text-sm font-medium">{{ personalInfo.rooms }}</span>
-            <span (click)="personalInfo.rooms = personalInfo.rooms > 0 ? personalInfo.rooms - 1 : 0;"
-                  [class.disbled-btn] = "personalInfo.rooms === 0"
+            <span class="h-8 w-8 rounded-sm flex items-center justify-center mx-1 text-sm font-medium">{{ sharedS.personalInfo.rooms }}</span>
+            <span (click)="sharedS.personalInfo.rooms = sharedS.personalInfo.rooms > 0 ? sharedS.personalInfo.rooms - 1 : 0;"
+                  [class.disbled-btn] = "sharedS.personalInfo.rooms === 0"
                   matRipple class="h-8 w-8 rounded-sm flex items-center justify-center border border-my-blue-1 text-my-blue-1">-</span>
           </div>
         </div>
-        <div class="flex border-t border-gray-border-1 justify-between" *ngIf="personalInfo.children > 0">
+        <div class="flex border-t border-gray-border-1 justify-between" *ngIf="sharedS.personalInfo.children > 0">
           <span class="text-sm mt-2 mb-1">{{'main_search.children_age' | translate}}?</span>
           <div class="flex flex-col">
-            <div class="w-32 ml-auto" *ngFor="let x of ' '.repeat(personalInfo.children - 1).split(' '); let i = index ">
+            <div class="w-32 ml-auto" *ngFor="let x of ' '.repeat(sharedS.personalInfo.children - 1).split(' '); let i = index ">
               <select class="w-full text-sm py-1 my-1 border border-gray-border-1 rounded-sm">
                 <option *ngFor="let x of ' '.repeat(18).split(' '); let j = index " value="j"
                         class="text-xs">{{ j }} {{'other.year' | translate | plural:j }}</option>
@@ -96,9 +103,8 @@
   </div>
   <div class="menu-panel-overlay" [class.hidden] = "persInfoPanel.classList.contains('hidden')" (click)="persInfoPanel.classList.toggle('hidden')"></div>
   <!-- search ==== -->
-  <button
-    class="col-span-8 md:col-span-2 lg:col-span-1 h-10 bg-my-blue-1 hover:bg-blue-500 font-medium text-white text-center text-base"
-    routerLink="/result">
+  <button class="col-span-8 md:col-span-2 lg:col-span-1 h-10 bg-my-blue-1 hover:bg-blue-500 font-medium text-white text-center text-base"
+  (click)="search()">
     {{'other.search' | translate}}
   </button>
 </div>

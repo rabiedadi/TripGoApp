@@ -25,6 +25,13 @@ export class MainComponent implements OnInit, OnDestroy {
   establishments$: Observable<any>;
   profilePicSrc = '';
   private smallScreen = false;
+  evaluationArray2: {eval: string, val: number}[] = [
+    {eval: 'global', val: 4},
+    {eval: 'place', val: 4},
+    {eval: 'services', val: 5},
+    {eval: 'reception', val: 4},
+    {eval: 'response', val: 3}
+  ];
   evaluationArray: {eval: string, val: number}[] = [
     {eval: 'global', val: 0},
     {eval: 'place', val: 0},
@@ -42,7 +49,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.openSurveyDialog();
     document.getElementsByClassName('tab-label')[0].classList.add('active-tab-label');
     this.store.dispatch(new UserInfo());
     this.authState$.pipe(takeUntil(this.destroyed$)).subscribe(state => {

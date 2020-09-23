@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar #navbarComponent></app-navbar>
 <div class="flex items-center justify-center w-full bg-my-blue-2">
   <div class="w-full xl:w-3/4 2xl:w-3/5 py-6 px-4 md:px-12 lg:px-24 xl:px-0">
     <app-main-search></app-main-search>
@@ -9,18 +9,18 @@
     <div class="col-span-4 md:col-span-3 rounded bg-my-gray-1 flex items-center justify-between px-6 py-4">
       <!-- basic hotel Info -------------------------------->
       <div class="flex flex-col justify-between items-start">
-        <span class="p-1 px-2 text-white text-xs bg-my-blue-2 rounded-md hidden md:flex">Hotel 4 étoiles</span>
+        <span class="p-1 px-2 text-white text-xs bg-my-blue-2 rounded-md hidden md:flex">Hotel {{ (establishment$ | async)?.starsNumber || establishment.stars }} étoiles</span>
         <div class="flex items-center">
           <span class="font-bold text-lg mt-2 md:flex items-center">
-            <span class="leading-none">Hotel Lamaraz Art Hotel</span>
-            <span class="flex md:ml-2">
-              <div *ngFor="let x of ' '.repeat(3).split(' ')" style="font-size: 0.9rem">
+            <span class="leading-none">{{ (establishment$ | async)?.name || establishment.name }}</span>
+            <span *ngIf="establishment$" class="flex md:ml-2">
+              <div *ngFor="let x of ( (establishment$ | async)?.starsNumber || establishment.stars ) | ngForCount" style="font-size: 0.9rem">
                 <fa-icon class="mr-1" [icon]="['fas', 'star']" size="xs" style="color: #FF8A00"></fa-icon>
               </div>
             </span>
           </span>
         </div>
-        <span class="font-thin text-sm mt-1">Algerie - Alger - Rue du calver 15</span>
+        <span class="font-thin text-sm mt-1">Algeria - {{ (establishment$ | async)?.city || 'avenue de la soummam' }} - {{ (establishment$ | async)?.address || 'Oran 31000 ' }}</span>
       </div>
       <!-- basic hotel Info end ---------------------------->
 
@@ -46,7 +46,7 @@
           <fa-icon [fixedWidth]="true" rotate="270" [icon]="['fas', 'bookmark']"
                    size="3x" style="color: #0C568B; margin-left: -6px"></fa-icon>
           <span class="absolute text-sm text-white font-bold leading-none"
-              style="top: 50%; left: 0; transform: translate(40%, -50%)">9.7</span>
+              style="top: 50%; left: 0; transform: translate(40%, -50%)">{{ (establishment$ | async)?.note || establishment.note }}</span>
         </div>
         <div class="ml-4 flex flex-col">
           <span class="font-thin text-sm leading-none mb-1">Exelent</span>
@@ -75,16 +75,16 @@
   <!-- Galery =============================================================================================================================== -->
   <div class="w-full relative" style="padding-bottom: 33%;">
     <div class="grid grid-rows-2 grid-cols-6 grid-flow-col-dense gap-2 absolute w-full h-full">
-      <div class="bg-gray-300 row-span-2 col-span-4 "><img class="h-full w-full object-cover"
-                                                           src="assets/images/wallpaper1.png"></div>
-      <div class="bg-gray-300 row-span-1 col-span-1 "><img class="h-full w-full object-cover"
-                                                           src="assets/images/wallpaper2.png"></div>
-      <div class="bg-gray-300 row-span-1 col-span-1 "><img class="h-full w-full object-cover"
-                                                           src="assets/images/wallpaper2.png"></div>
-      <div class="bg-gray-300 row-span-1 col-span-1 "><img class="h-full w-full object-cover"
-                                                           src="assets/images/wallpaper2.png"></div>
+      <div class="bg-gray-300 row-span-2 col-span-4 ">
+        <img class="h-full w-full object-cover" [lightbox]="0" [src]="imagesItems[0].data.thumb"></div>
+      <div class="bg-gray-300 row-span-1 col-span-1 ">
+        <img class="h-full w-full object-cover" [lightbox]="2" [src]="imagesItems[2].data.thumb"></div>
+      <div class="bg-gray-300 row-span-1 col-span-1 ">
+        <img class="h-full w-full object-cover" [lightbox]="3" [src]="imagesItems[3].data.thumb"></div>
+      <div class="bg-gray-300 row-span-1 col-span-1 ">
+        <img class="h-full w-full object-cover" [lightbox]="4" [src]="imagesItems[4].data.thumb"></div>
       <div class="bg-gray-300 row-span-1 col-span-1 relative">
-        <img class="h-full w-full object-cover" src="assets/images/wallpaper2.png">
+        <img class="h-full w-full object-cover" [lightbox]="5" [src]="imagesItems[5].data.thumb">
         <div class="absolute w-full h-full top-0 flex flex-col items-center justify-center"
              style="background-color: rgba(91, 99, 109, 0.7);">
           <span class="text-lg text-white font-bold leading-none">+12</span>
@@ -241,13 +241,13 @@
         <div class="relative w-full" style="padding-bottom: 120%">
           <div class="absolute w-full h-full grid grid-cols-2 gap-2">
             <div class="relative col-span-2 bg-my-gray-3" style="padding-bottom: 65%">
-              <img class="absolute h-full w-full object-cover" src="assets/images/wallpaper1.png">
+              <img class="absolute h-full w-full object-cover" src="https://www.dolphorceglobal.ng/wp-content/uploads/2018/06/Hotel-Bookings.jpg">
             </div>
             <div class="relative col-span-1 bg-my-gray-3" style="padding-bottom: 100%">
-              <img class="absolute h-full w-full object-cover" src="assets/images/wallpaper2.png">
+              <img class="absolute h-full w-full object-cover" src="https://www.myboutiquehotel.com/photos/9327/room-181984473-1024x683.jpg">
             </div>
             <div class="relative col-span-1 bg-my-gray-3" style="padding-bottom: 100%">
-              <img class="absolute h-full w-full object-cover" src="assets/images/wallpaper2.png">
+              <img class="absolute h-full w-full object-cover" src="https://i.pinimg.com/originals/e8/f1/6c/e8f16c883bc93ecb211b6c8539f746f8.jpg">
             </div>
           </div>
         </div>
@@ -299,10 +299,10 @@
             <div class="py-6 px-3 w-full flex flex-col items-end flex-grow bg-white border border-gray-border-1 border-r-0">
                 <span class="relative text-my-gray-2 text-xs font-bold">
                   <span class="absolute slash border-b border-my-gray-3"></span>
-                  DZD <span class="font-thin text-sm">28 150</span>
+                  DZD <span class="font-thin text-sm">17 000</span>
                 </span>
               <span class="text-sm font-thin">DZD <span
-                      class="text-my-blue-2 font-bold text-base">26 000</span></span>
+                      class="text-my-blue-2 font-bold text-base">15 500</span></span>
             </div>
           </div>
           <div class="col-span-1 flex flex-col self-stretch">
@@ -319,7 +319,7 @@
           </div>
           <div class="col-span-2 flex flex-col self-stretch">
             <div class="py-6 px-3 w-full flex flex-col flex-grow bg-white border border-gray-border-1">
-              <button class="w-full bg-my-blue-2 text-xs text-white h-10" [routerLink]="['/booking']">
+              <button class="w-full bg-my-blue-2 text-xs text-white h-10" (click)="reserveNow()">
                 Réserver ici
               </button>
             </div>

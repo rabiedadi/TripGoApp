@@ -16,7 +16,7 @@ const initialState: AuthState = {
 };
 
 export function authReducer(state: AuthState, action: AUTH_ACTIONS) {
-    console.log(action);
+    // console.log(action);
     switch (action.type) {
         case AuthActionTypes.INIT_STATE: {
             return action.payload;

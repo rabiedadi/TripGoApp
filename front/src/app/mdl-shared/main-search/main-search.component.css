@@ -1,7 +1,6 @@
 ::ng-deep app-main-search .mat-select-value-text > span,
 ::ng-deep app-main-search .mat-select-placeholder,
 ::ng-deep app-main-search .mat-input-element,
-::ng-deep app-main-search #pers-info span,
 ::ng-deep app-main-search .mat-input-element::placeholder {
   font-size: 12px;
   font-weight: 500 !important;
@@ -74,7 +73,6 @@
   ::ng-deep app-main-search .mat-select-value-text > span,
   ::ng-deep app-main-search .mat-select-placeholder,
   ::ng-deep app-main-search .mat-input-element,
-  ::ng-deep app-main-search #pers-info span,
   ::ng-deep app-main-search .mat-input-element::placeholder {
     font-size: 14px;
     font-weight: 500 !important;
