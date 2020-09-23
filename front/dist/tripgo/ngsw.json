@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1600870329541,
+  "timestamp": 1600884306818,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -78,7 +78,9 @@
         "/assets/images/wallpaper-wide.jpg",
         "/assets/images/wallpaper-wide.webp",
         "/assets/images/wallpaper1.png",
-        "/assets/images/wallpaper2.png"
+        "/assets/images/wallpaper2.png",
+        "/assets/svg/tripgo-logo-white.svg",
+        "/assets/svg/tripgo-logo.svg"
       ],
       "patterns": []
     }
@@ -135,6 +137,8 @@
     "/assets/images/wallpaper-wide.webp": "991224af000cac901e9f645cb37213e2eb290257",
     "/assets/images/wallpaper1.png": "9abc254116828ea0ae25c2105df3f1ac4e1bb58a",
     "/assets/images/wallpaper2.png": "b2b6abbd48cc2cb98869bf625b57ca45196e4641",
+    "/assets/svg/tripgo-logo-white.svg": "b7c340abb5c1056dc7d54f5cfb92a1d0e9a0f4e0",
+    "/assets/svg/tripgo-logo.svg": "5f4b3d6b701acaf18cd14a18b4090fdc2b6ebe1c",
     "/common-es2015.550699609a50a6ad9fd9.js": "1c7d89e358446419b261cc1e0611906bb8f3efd4",
     "/common-es5.550699609a50a6ad9fd9.js": "c4c0be14df7765c7554e1850cd866f369cfb3e71",
     "/index.html": "0081d23a874565be7328654577209b9c49a8ab49",
